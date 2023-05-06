@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import LOGIN_INPUT_FIELDS from "../../constants/InputFields/login";
 import logo from "../../assets/sisters_furniture_logo.jpeg";
@@ -9,10 +9,11 @@ import InputField from "../../components/core/InputField/InputField";
 import { loginFormValidationSchema } from "../../constants/InputValidation/loginValidation";
 import { LoginData } from "./types";
 import { loginUser } from "../../redux/actions/auth/loginAction";
-import { AppDispatch } from "../../redux/redux";
+import { AppDispatch, StateType } from "../../redux/redux";
 import "./login.scss";
 
 const Login = () => {
+  const { loggedIn } = useSelector((state: StateType) => state.user);
   const dispatch = useDispatch<AppDispatch>();
   const {
     register,
@@ -22,9 +23,13 @@ const Login = () => {
     resolver: yupResolver(loginFormValidationSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginData> = (data: LoginData) => {
-    dispatch(loginUser(data));
+  const onSubmit: SubmitHandler<LoginData> = async (data: LoginData) => {
+    await dispatch(loginUser(data));
   };
+
+  if (loggedIn) {
+    window.location.href = "/";
+  }
 
   return (
     <div className="login">

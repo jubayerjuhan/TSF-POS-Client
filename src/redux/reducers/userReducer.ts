@@ -16,6 +16,7 @@ const userReducer = (state = {}, action: ReduxAction) => {
       return {
         ...state,
         loading: false,
+        loggedIn: true,
         user: action.payload,
       };
     case LOGIN_ERROR:

@@ -1,9 +1,10 @@
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { Action, AnyAction } from "redux";
 import { RootState } from "./store/configureStore";
+import { User } from "../types/userTypes";
 
 export interface ReduxAction extends Action {
-  payload: any;
+  payload: object | string | Array;
 }
 
 export type RootThunk = ThunkAction<
@@ -14,3 +15,12 @@ export type RootThunk = ThunkAction<
 >;
 
 export type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
+
+interface StateType {
+  user: {
+    loading: boolean;
+    error: string;
+    loggedIn: boolean;
+    user: User;
+  };
+}
