@@ -1,8 +1,12 @@
 import "./button.scss";
 
-const Button = ({ title }: ButtonProps) => {
+const Button = ({ title, onClick, type = "button" }: ButtonProps) => {
   return (
-    <button type="button" className="btn btn-primary core__button">
+    <button
+      type={type}
+      className="btn btn-primary core__button"
+      onClick={onClick}
+    >
       {title}
     </button>
   );
