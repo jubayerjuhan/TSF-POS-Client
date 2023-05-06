@@ -12,4 +12,5 @@ const store = configureStore({
   middleware: (gDM) => gDM().concat(logger),
 });
 
+export type RootState = ReturnType<typeof reducers>;
 export default store;

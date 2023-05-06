@@ -1,15 +1,19 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch } from "react-redux";
 
+import LOGIN_INPUT_FIELDS from "../../constants/InputFields/login";
 import logo from "../../assets/sisters_furniture_logo.jpeg";
 import Button from "../../components/core/Button/Button";
 import InputField from "../../components/core/InputField/InputField";
 import { loginFormValidationSchema } from "../../constants/InputValidation/loginValidation";
-import LOGIN_INPUT_FIELDS from "../../constants/InputFields/login";
-import "./login.scss";
 import { LoginData } from "./types";
+import { loginUser } from "../../redux/actions/auth/loginAction";
+import { AppDispatch } from "../../redux/redux";
+import "./login.scss";
 
 const Login = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const {
     register,
     handleSubmit,
@@ -18,9 +22,10 @@ const Login = () => {
     resolver: yupResolver(loginFormValidationSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginData> = (data) => {
-    console.log(data, "data...");
+  const onSubmit: SubmitHandler<LoginData> = (data: LoginData) => {
+    dispatch(loginUser(data));
   };
+
   return (
     <div className="login">
       <img src={logo} alt="" className="logo" />
