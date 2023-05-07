@@ -8,13 +8,7 @@ const Button = ({ title, onClick, loading, type = "button" }: ButtonProps) => {
       className="btn btn-primary core__button"
       onClick={onClick}
     >
-      {loading ? (
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      ) : (
-        title
-      )}
+      {loading ? <Spinner animation="border" role="status" size="sm" /> : title}
     </button>
   );
 };

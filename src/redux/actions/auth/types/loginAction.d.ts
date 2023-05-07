@@ -1,4 +1,4 @@
-import { User } from "./../../../types/userTypes.d";
+import { User } from "../../../../types/userTypes";
 
 export interface LoginResponse {
   success: boolean;

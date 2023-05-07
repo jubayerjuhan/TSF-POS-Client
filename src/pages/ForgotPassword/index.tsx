@@ -1,21 +1,39 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
+import "./forgotPassword.scss";
 import logo from "../../assets/sisters_furniture_logo.jpeg";
 import Button from "../../components/core/Button/Button";
 import InputField from "../../components/core/InputField/InputField";
 import FORGOT_PASSWORD_FIELDS from "../../constants/InputFields/forgotPassword";
-import { ForgotPasswordData } from "./types";
-import "./forgotPassword.scss";
+import { ForgotPasswordFormTypes } from "./types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { forgotPasswordValidation } from "../../constants/InputValidation/forgotPasswordValidation";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, StateType } from "../../redux/redux";
+import { toast } from "react-hot-toast";
+import { forgotPassword } from "../../redux/actions/auth/passwordAction";
+import { useEffect } from "react";
 
 const ForgotPassword = () => {
+  const { error, message } = useSelector((state: StateType) => state.promise);
+  const dispatch: AppDispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({});
+  } = useForm<ForgotPasswordFormTypes>({
+    resolver: yupResolver(forgotPasswordValidation),
+  });
 
-  const onSubmit = () => {
-    console.log("submit");
+  useEffect(() => {
+    if (error) toast.error(error);
+    if (message) toast.success(message);
+  }, [error, message, dispatch]);
+
+  const onSubmit: SubmitHandler<ForgotPasswordFormTypes> = (
+    data: ForgotPasswordFormTypes
+  ) => {
+    dispatch(forgotPassword(data.email));
   };
 
   return (
@@ -34,7 +52,9 @@ const ForgotPassword = () => {
               type={field.type}
               placeholder={field.placeholder}
               name={field.name}
-              error={errors[field.name as keyof ForgotPasswordData]?.message}
+              error={
+                errors[field.name as keyof ForgotPasswordFormTypes]?.message
+              }
             />
           ))}
           <Button

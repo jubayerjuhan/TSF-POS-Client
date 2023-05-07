@@ -23,4 +23,10 @@ interface StateType {
     loggedIn: boolean;
     user: User;
   };
+  promise: {
+    loading: boolean;
+    success: boolean;
+    message: string | null;
+    error: string | null;
+  };
 }

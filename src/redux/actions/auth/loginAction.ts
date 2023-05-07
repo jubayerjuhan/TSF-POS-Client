@@ -1,4 +1,4 @@
-import { LoginResponse } from "./loginAction.d";
+import { LoginResponse } from "./types/loginAction";
 import {
   LOGIN_ERROR,
   LOGIN_PENDING,
