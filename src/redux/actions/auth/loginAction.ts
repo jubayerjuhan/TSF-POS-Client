@@ -1,12 +1,12 @@
 import { LoginResponse } from "./loginAction.d";
 import {
+  LOGIN_ERROR,
   LOGIN_PENDING,
   LOGIN_SUCCESS,
 } from "../../../constants/reduxActionsNames/user";
 import { AppDispatch, RootThunk } from "../../redux";
 import { LoginData } from "../../../pages/Login/types";
 import client from "../../../client/axiosInstance";
-import { toast } from "react-hot-toast";
 
 export const loginUser =
   (loginData: LoginData): RootThunk =>
@@ -28,7 +28,12 @@ export const loginUser =
       }
     } catch (error: any) {
       console.log(error);
-      if (error.response) return toast.error(error.response.data.message);
-      toast.error(error.message);
+      if (error.response) {
+        return dispatch({
+          type: LOGIN_ERROR,
+          payload: error.response.data.message,
+        });
+      }
+      dispatch({ type: LOGIN_ERROR, payload: error.message });
     }
   };

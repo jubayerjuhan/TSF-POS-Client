@@ -11,9 +11,14 @@ import { LoginData } from "./types";
 import { loginUser } from "../../redux/actions/auth/loginAction";
 import { AppDispatch, StateType } from "../../redux/redux";
 import "./login.scss";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
+import { CLEAR_ERROR } from "../../constants/reduxActionsNames/user";
 
 const Login = () => {
-  const { loggedIn } = useSelector((state: StateType) => state.user);
+  const { loggedIn, loading, error } = useSelector(
+    (state: StateType) => state.user
+  );
   const dispatch = useDispatch<AppDispatch>();
   const {
     register,
@@ -30,6 +35,11 @@ const Login = () => {
   if (loggedIn) {
     window.location.href = "/";
   }
+
+  useEffect(() => {
+    if (error) toast.error(error);
+    dispatch({ type: CLEAR_ERROR });
+  }, [error, dispatch]);
 
   return (
     <div className="login">
@@ -48,6 +58,7 @@ const Login = () => {
             />
           ))}
           <Button
+            loading={loading}
             title="Login"
             onClick={handleSubmit(onSubmit)}
             type="submit"

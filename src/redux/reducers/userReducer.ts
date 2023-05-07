@@ -1,4 +1,5 @@
 import {
+  CLEAR_ERROR,
   LOGIN_ERROR,
   LOGIN_PENDING,
   LOGIN_SUCCESS,
@@ -22,7 +23,13 @@ const userReducer = (state = {}, action: ReduxAction) => {
     case LOGIN_ERROR:
       return {
         ...state,
+        loading: false,
         error: action.payload,
+      };
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
       };
 
     default:

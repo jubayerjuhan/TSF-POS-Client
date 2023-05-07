@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
+
 import logo from "../../assets/sisters_furniture_logo.jpeg";
-import FORGOT_PASSWORD_FIELDS from "../../constants/InputFields/forgotPassword";
-import InputField from "../../components/core/InputField/InputField";
-import { ForgotPasswordData } from "./types";
 import Button from "../../components/core/Button/Button";
+import InputField from "../../components/core/InputField/InputField";
+import FORGOT_PASSWORD_FIELDS from "../../constants/InputFields/forgotPassword";
+import { ForgotPasswordData } from "./types";
 import "./forgotPassword.scss";
 
 const ForgotPassword = () => {
@@ -11,11 +12,12 @@ const ForgotPassword = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({});
 
   const onSubmit = () => {
     console.log("submit");
   };
+
   return (
     <div className="forgot-password">
       <img src={logo} alt="" className="logo" />
