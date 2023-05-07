@@ -1,4 +1,5 @@
 import { InputFieldType } from "./types";
+import Form from "react-bootstrap/Form";
 import "./inputField.scss";
 
 const InputField = ({
@@ -10,7 +11,7 @@ const InputField = ({
 }: InputFieldType) => {
   return (
     <div className="input__wrapper">
-      <input
+      <Form.Control
         type={type}
         className="form-control core__inputField"
         aria-describedby="emailHelp"
@@ -18,7 +19,7 @@ const InputField = ({
         name={name}
         {...register(name)}
       />
-      <p className="error__message">{error}</p>
+      {error && <p className="error__message">{error}</p>}
     </div>
   );
 };

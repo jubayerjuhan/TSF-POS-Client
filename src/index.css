@@ -1,8 +1,13 @@
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: unset;
+  padding: unset;
   box-sizing: border-box;
   font-size: 12px;
+}
+
+p,
+a {
+  all: unset;
 }
 
 body {

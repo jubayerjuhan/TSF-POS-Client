@@ -53,6 +53,9 @@ const Login = () => {
             type="submit"
           />
         </form>
+        <a href="/forgot-password" className="forgot__password">
+          Forgot Password
+        </a>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 // conponent for routes
 import Dashboard from "../pages/Dashboard";
+import ForgotPassword from "../pages/ForgotPassword";
 import Login from "../pages/Login";
 
 // types of route object
@@ -14,6 +15,10 @@ const routes: Route[] = [
   {
     path: "/login",
     component: Login,
+  },
+  {
+    path: "/forgot-password",
+    component: ForgotPassword,
   },
 ];
 

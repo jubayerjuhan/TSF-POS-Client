@@ -2,6 +2,11 @@
   height: 40px;
 }
 
+.input__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .error__message {
   margin-top: 5px;
   color: red;
