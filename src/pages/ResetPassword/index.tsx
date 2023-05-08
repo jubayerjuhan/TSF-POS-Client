@@ -2,20 +2,43 @@ import logo from "../../assets/sisters_furniture_logo.jpeg";
 import InputField from "../../components/core/InputField/InputField";
 import Button from "../../components/core/Button/Button";
 import RESET_PASSWORD_FIELDS from "../../constants/InputFields/resetPassword";
-import { useForm } from "react-hook-form";
-import { ResetPasswordFormTypes } from "./types";
 import "./resetPassword.scss";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ResetPasswordFormTypes } from "./types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { resetPasswordValidation } from "../../constants/InputValidation/resetPasswordValidation";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, StateType } from "../../redux/redux";
+import { resetPassword } from "../../redux/actions/auth/passwordAction";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 const ResetPassword = () => {
+  const { token } = useParams();
+  const dispatch: AppDispatch = useDispatch();
+  const { message, error, loading } = useSelector(
+    (state: StateType) => state.promise
+  );
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<ResetPasswordFormTypes>({
+    resolver: yupResolver(resetPasswordValidation),
+  });
 
-  const onSubmit = () => {
-    console.log("submit");
+  const onSubmit: SubmitHandler<ResetPasswordFormTypes> = (
+    data: ResetPasswordFormTypes
+  ) => {
+    dispatch(resetPassword(token, data));
   };
+
+  useEffect(() => {
+    if (error) toast.error(error);
+    if (message) toast.success(message);
+  }, [message, error]);
+
   return (
     <div className="reset-password">
       <img src={logo} alt="" className="logo" />
@@ -35,6 +58,7 @@ const ResetPassword = () => {
             />
           ))}
           <Button
+            loading={loading}
             title="Reset Password"
             onClick={handleSubmit(onSubmit)}
             type="submit"

@@ -22,7 +22,7 @@ const routes: Route[] = [
     component: ForgotPassword,
   },
   {
-    path: "/reset-password",
+    path: "/reset-password/:token",
     component: ResetPassword,
   },
 ];

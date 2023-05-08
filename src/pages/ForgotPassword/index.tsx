@@ -15,7 +15,9 @@ import { forgotPassword } from "../../redux/actions/auth/passwordAction";
 import { useEffect } from "react";
 
 const ForgotPassword = () => {
-  const { error, message } = useSelector((state: StateType) => state.promise);
+  const { error, message, loading } = useSelector(
+    (state: StateType) => state.promise
+  );
   const dispatch: AppDispatch = useDispatch();
   const {
     register,
@@ -58,6 +60,7 @@ const ForgotPassword = () => {
             />
           ))}
           <Button
+            loading={loading}
             title="Forgot Password"
             onClick={handleSubmit(onSubmit)}
             type="submit"
