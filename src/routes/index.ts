@@ -3,6 +3,7 @@ import Dashboard from "../pages/Dashboard";
 import ForgotPassword from "../pages/ForgotPassword";
 import Login from "../pages/Login";
 import ResetPassword from "../pages/ResetPassword";
+import Users from "../pages/Users";
 
 // types of route object
 import { Route } from "./types";
@@ -24,6 +25,11 @@ const routes: Route[] = [
   {
     path: "/reset-password/:token",
     component: ResetPassword,
+  },
+  {
+    path: "/users",
+    component: Users,
+    secured: true,
   },
 ];
 
