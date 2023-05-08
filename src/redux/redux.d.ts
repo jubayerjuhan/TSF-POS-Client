@@ -23,6 +23,11 @@ interface StateType {
     loggedIn: boolean;
     user: User;
   };
+  users: {
+    loading: boolean;
+    users: User[];
+    error: error;
+  };
   promise: {
     loading: boolean;
     success: boolean;
