@@ -6,7 +6,7 @@ import {
 } from "../../constants/reduxActionsNames/users";
 import { ReduxAction } from "../redux";
 
-const userReducer = (state = {}, action: ReduxAction) => {
+const usersReducer = (state = {}, action: ReduxAction) => {
   switch (action.type) {
     case USERS_PENDING:
       return {
@@ -36,4 +36,4 @@ const userReducer = (state = {}, action: ReduxAction) => {
   }
 };
 
-export default userReducer;
+export default usersReducer;
