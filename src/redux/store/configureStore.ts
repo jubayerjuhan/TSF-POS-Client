@@ -1,8 +1,18 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userReducer from "../reducers/userReducer";
 import logger from "redux-logger";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+
+import userReducer from "../reducers/userReducer";
 import promiseReducer from "../reducers/promiseReducer";
 import usersReducer from "../reducers/usersReducer";
+
+//persist config for persistor
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["user"], // only navigation will be persisted
+};
 
 // conbine reducers here
 const reducers = combineReducers({
@@ -11,10 +21,14 @@ const reducers = combineReducers({
   promise: promiseReducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, reducers);
+
 const store = configureStore({
-  reducer: reducers,
+  reducer: persistedReducer,
   middleware: (gDM) => gDM().concat(logger),
 });
 
+const persistor = persistStore(store);
+
 export type RootState = ReturnType<typeof reducers>;
-export default store;
+export { store, persistor };
