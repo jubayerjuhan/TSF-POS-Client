@@ -2,6 +2,7 @@
   margin: unset;
   padding: unset;
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* Override Bootstrap default margins */
@@ -17,5 +18,9 @@ p {
 }
 
 body {
-  font-family: "Poppins", sans-serif !important;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --font-family: "Montserrat", sans-serif;
 }
