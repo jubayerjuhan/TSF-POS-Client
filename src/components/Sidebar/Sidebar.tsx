@@ -130,9 +130,11 @@ export default function Sidebar(props: Props) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
-          pt: 10,
+          m: 3,
+          mt: 10,
           fontSize: 16,
+          position: "relative",
+          height: "100vh",
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
