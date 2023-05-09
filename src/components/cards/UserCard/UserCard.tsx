@@ -1,15 +1,18 @@
 import Card from "react-bootstrap/Card";
 import { UserCardTypes } from "../../../pages/Users/types";
-import "./userCard.scss";
 import Button from "../../core/Button/Button";
 import { useSelector } from "react-redux";
 import { StateType } from "../../../redux/redux";
+import "./userCard.scss";
 
 const UserCard = ({ user }: UserCardTypes) => {
   const { user: loggedInUser } = useSelector((state: StateType) => state.user);
   return (
-    <Card style={{ maxWidth: 250, width: "100%" }}>
-      <Card.Body className="user__card">
+    <Card
+      className="mw-100 user__card"
+      style={{ minWidth: 250, maxWidth: "100%" }}
+    >
+      <Card.Body>
         <Card.Title className="font-weight-bold title ">
           {user.firstName} {user.lastName}
         </Card.Title>
