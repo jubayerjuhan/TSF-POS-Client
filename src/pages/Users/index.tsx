@@ -10,6 +10,7 @@ import { deleteUser } from "../../redux/actions/user/userAction";
 import { toast } from "react-hot-toast";
 import Button from "../../components/core/Button/Button";
 import FormModal from "../../components/Modals/FormModal/FormModal";
+import Adduser from "../../components/Adduser/Adduser";
 // import UserCard from "../../components/cards/UserCard/UserCard";
 
 const Users = () => {
@@ -40,13 +41,7 @@ const Users = () => {
 
   return (
     <Pagewrapper>
-      <Button
-        title="Add User"
-        className="mb-4"
-        data-toggle="modal"
-        data-target="#exampleModal"
-      />
-      <FormModal />
+      <Adduser />
       <AppModal
         loading={deletionLoading}
         open={deletionModelOpen}
