@@ -39,6 +39,7 @@ const Users = () => {
   return (
     <Pagewrapper>
       <AppModal
+        loading={deletionLoading}
         open={deletionModelOpen}
         setOpen={setDeletionModelOpen}
         handleCancel={cancelDeletion}

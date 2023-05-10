@@ -5,6 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { AppModalTypes } from "./types";
+import { CircularProgress } from "@mui/material";
 
 export default function AppModal({
   open,
@@ -12,6 +13,7 @@ export default function AppModal({
   title,
   description,
   handleConfirm,
+  loading,
 }: AppModalTypes) {
   const handleClose = () => {
     setOpen(false);
@@ -31,11 +33,17 @@ export default function AppModal({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleClose}>
+          <Button variant="contained" onClick={handleClose} disabled={loading}>
             No
           </Button>
-          <Button color="error" variant="contained" onClick={handleConfirm}>
+          <Button
+            color="error"
+            variant="contained"
+            onClick={handleConfirm}
+            disabled={loading}
+          >
             Yes
+            {loading && <CircularProgress size={20} sx={{ ml: 2 }} />}
           </Button>
         </DialogActions>
       </Dialog>
