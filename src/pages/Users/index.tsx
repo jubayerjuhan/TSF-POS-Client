@@ -5,9 +5,11 @@ import { fetchUsers } from "../../redux/actions/users/usersAction";
 import { AppDispatch, StateType } from "../../redux/redux";
 import UserCard from "../../components/cards/UserCard/UserCard";
 import { Skeleton } from "@mui/material";
-import AppModal from "../../components/AppModal/AppModal";
+import AppModal from "../../components/Modals/AppModal/AppModal";
 import { deleteUser } from "../../redux/actions/user/userAction";
 import { toast } from "react-hot-toast";
+import Button from "../../components/core/Button/Button";
+import FormModal from "../../components/Modals/FormModal/FormModal";
 // import UserCard from "../../components/cards/UserCard/UserCard";
 
 const Users = () => {
@@ -38,6 +40,13 @@ const Users = () => {
 
   return (
     <Pagewrapper>
+      <Button
+        title="Add User"
+        className="mb-4"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      />
+      <FormModal />
       <AppModal
         loading={deletionLoading}
         open={deletionModelOpen}
