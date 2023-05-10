@@ -1,5 +1,6 @@
 import Button from "../../core/Button/Button";
 import InputField from "../../core/InputField/InputField";
+import SelectField from "../../core/SelectField/SelectField";
 import { FormModalTypes } from "./types";
 
 const FormModal = ({
@@ -36,22 +37,11 @@ const FormModal = ({
             {fields.map((field, index) => {
               if (field.type === "select") {
                 return (
-                  <div>
-                    <p className="m-1" style={{ fontSize: 12 }}>
-                      {field.label}
-                    </p>
-                    <select
-                      className="form-select"
-                      id=""
-                      {...register(field.name)}
-                    >
-                      {field.options?.map((option, index) => (
-                        <option value={option.value} key={index}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <SelectField
+                    field={field}
+                    register={register}
+                    error={errors[field.name]?.message}
+                  />
                 );
               }
               console.log(errors[field.name]?.message);
