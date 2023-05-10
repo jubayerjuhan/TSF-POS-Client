@@ -7,7 +7,7 @@ const FormModal = ({
   title,
   fields,
   register,
-  preselectOption,
+  errors,
 }: FormModalTypes) => {
   return (
     <div
@@ -36,30 +36,34 @@ const FormModal = ({
             {fields.map((field, index) => {
               if (field.type === "select") {
                 return (
-                  <select
-                    className="form-select"
-                    id=""
-                    {...register(field.name)}
-                  >
-                    {field.options?.map((option, index) => (
-                      <option
-                        value={option.value}
-                        key={index}
-                        selected={option.value === preselectOption}
-                      >
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
+                  <div>
+                    <p className="m-1" style={{ fontSize: 12 }}>
+                      {field.label}
+                    </p>
+                    <select
+                      className="form-select"
+                      id=""
+                      {...register(field.name)}
+                    >
+                      {field.options?.map((option, index) => (
+                        <option value={option.value} key={index}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 );
               }
+              console.log(errors[field.name]?.message);
               return (
                 <InputField
+                  error={errors[field.name]?.message}
                   key={index}
                   placeholder={field.placeholder}
                   name={field.name}
                   type={field.type}
                   register={register}
+                  label={field.label}
                 />
               );
             })}
@@ -74,7 +78,7 @@ const FormModal = ({
               <Button
                 onClick={submitFields}
                 title="Submit"
-                type="button"
+                type="submit"
                 className="btn btn-primary"
               />
             </div>

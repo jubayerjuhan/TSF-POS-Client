@@ -1,10 +1,10 @@
-import { FieldValues, UseFormHandleSubmit } from "react-hook-form";
-import { AddUserFieldTypes } from "../../../constants/InputFields/AddUser/types";
+import { FieldErrors, FieldValues } from "react-hook-form";
+import { AddUserFieldTypes } from "../../../constants/InputFields/user/types";
 
 export interface FormModalTypes {
   submitFields: () => void;
   title: string;
   fields: AddUserFieldTypes[];
-  preselectOption?: string;
+  errors: FieldErrors<FieldValues>;
   register: (rules?: RegisterOptions) => RefReturn;
 }

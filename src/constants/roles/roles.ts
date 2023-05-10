@@ -1,6 +1,6 @@
 const roles = [
-  { label: "Admin", value: "admin" },
   { label: "Moderator", value: "moderator" },
+  { label: "Admin", value: "admin" },
 ];
 
 export default roles;

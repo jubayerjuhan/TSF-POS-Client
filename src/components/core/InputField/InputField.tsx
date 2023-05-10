@@ -8,9 +8,11 @@ const InputField = ({
   name,
   error,
   register,
+  label,
 }: InputFieldType) => {
   return (
     <div className="input__wrapper">
+      <p className="top__label mb-2">{label}</p>
       <Form.Control
         type={type}
         className="form-control core__inputField"

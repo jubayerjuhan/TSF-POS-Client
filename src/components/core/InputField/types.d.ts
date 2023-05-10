@@ -6,4 +6,5 @@ export type InputFieldType = {
   name?: string;
   error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
   placeholder: string;
+  label: string;
 };

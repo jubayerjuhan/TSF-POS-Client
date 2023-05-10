@@ -6,7 +6,6 @@ import LOGIN_INPUT_FIELDS from "../../constants/InputFields/login";
 import logo from "../../assets/sisters_furniture_logo.jpeg";
 import Button from "../../components/core/Button/Button";
 import InputField from "../../components/core/InputField/InputField";
-import { loginFormValidationSchema } from "../../constants/InputValidation/loginValidation";
 import { LoginData } from "./types";
 import { loginUser } from "../../redux/actions/auth/loginAction";
 import { AppDispatch, StateType } from "../../redux/redux";
@@ -14,6 +13,7 @@ import "./login.scss";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { CLEAR_ERROR } from "../../constants/reduxActionsNames/user";
+import { loginFormValidationSchema } from "../../constants/InputValidation/Auth/loginValidation";
 
 const Login = () => {
   const { loggedIn, loading, error } = useSelector(
@@ -49,6 +49,7 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="login_form">
           {LOGIN_INPUT_FIELDS.map((field, index) => (
             <InputField
+              label={field.label}
               register={register}
               key={index}
               type={field.type}

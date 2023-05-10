@@ -32,6 +32,14 @@ interface StateType {
     users: User[];
     error: error;
   };
+  branches: {
+    loading: boolean;
+    branches: Array<{
+      _id: string;
+      name: string;
+      address: string;
+    }>;
+  };
   promise: {
     loading: boolean;
     success: boolean;

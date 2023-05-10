@@ -39,7 +39,7 @@ const ADD_USER_FIELDS_WITH_BRANCH: AddUserFieldTypes[] = [
   ...ADD_USER_FIELDS,
   {
     name: "branch",
-    label: "branch",
+    label: "Branch",
     type: "select",
     options: [],
     placeholder: "Enter user role",

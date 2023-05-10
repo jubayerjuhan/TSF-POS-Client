@@ -7,7 +7,7 @@ import InputField from "../../components/core/InputField/InputField";
 import FORGOT_PASSWORD_FIELDS from "../../constants/InputFields/forgotPassword";
 import { ForgotPasswordFormTypes } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { forgotPasswordValidation } from "../../constants/InputValidation/forgotPasswordValidation";
+import { forgotPasswordValidation } from "../../constants/InputValidation/Auth/forgotPasswordValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, StateType } from "../../redux/redux";
 import { toast } from "react-hot-toast";
@@ -49,6 +49,7 @@ const ForgotPassword = () => {
         >
           {FORGOT_PASSWORD_FIELDS.map((field, index) => (
             <InputField
+              label={field.label}
               register={register}
               key={index}
               type={field.type}

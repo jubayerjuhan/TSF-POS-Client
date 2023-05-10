@@ -4,9 +4,17 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // importing from custom made
 import routes from "./routes";
 import "./App.css";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getBranchList } from "./redux/actions/branches/branchesAction";
 
 function App() {
-  console.log();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBranchList());
+  }, [dispatch]);
+
   return (
     <Router>
       <Routes>

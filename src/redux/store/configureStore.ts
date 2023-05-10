@@ -6,18 +6,20 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 import userReducer from "../reducers/userReducer";
 import promiseReducer from "../reducers/promiseReducer";
 import usersReducer from "../reducers/usersReducer";
+import branchReducer from "../reducers/branchListReducer";
 
 //persist config for persistor
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user"], // only navigation will be persisted
+  whitelist: ["user", "branch"], // only navigation will be persisted
 };
 
 // conbine reducers here
 const reducers = combineReducers({
   user: userReducer,
   users: usersReducer,
+  branches: branchReducer,
   promise: promiseReducer,
 });
 

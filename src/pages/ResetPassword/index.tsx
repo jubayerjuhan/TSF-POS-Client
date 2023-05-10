@@ -6,13 +6,13 @@ import "./resetPassword.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ResetPasswordFormTypes } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { resetPasswordValidation } from "../../constants/InputValidation/resetPasswordValidation";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, StateType } from "../../redux/redux";
 import { resetPassword } from "../../redux/actions/auth/passwordAction";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
+import { resetPasswordValidation } from "../../constants/InputValidation/Auth/resetPasswordValidation";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -47,6 +47,7 @@ const ResetPassword = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="reset-password_form">
           {RESET_PASSWORD_FIELDS.map((field, index) => (
             <InputField
+              label={field.label}
               register={register}
               key={index}
               type={field.type}
