@@ -15,6 +15,10 @@ export type RootThunk = ThunkAction<
 >;
 
 export type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
+export interface PromiseSuccessType {
+  success: boolean;
+  message: string;
+}
 
 interface StateType {
   user: {

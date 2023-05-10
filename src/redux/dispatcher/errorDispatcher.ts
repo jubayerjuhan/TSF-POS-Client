@@ -13,7 +13,7 @@ export const errorDispatcher = (
   type: string,
   dispatch: AppDispatch
 ) => {
-  if (error.response) {
+  if (error.response.data.message) {
     dispatch({ type, payload: error.response.data.message });
   } else {
     dispatch({ type, payload: error.message });

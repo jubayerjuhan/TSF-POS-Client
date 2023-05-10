@@ -6,20 +6,30 @@ import { AppDispatch, StateType } from "../../redux/redux";
 import UserCard from "../../components/cards/UserCard/UserCard";
 import { Skeleton } from "@mui/material";
 import AppModal from "../../components/AppModal/AppModal";
+import { deleteUser } from "../../redux/actions/user/userAction";
+import { toast } from "react-hot-toast";
 // import UserCard from "../../components/cards/UserCard/UserCard";
 
 const Users = () => {
   const { users, loading } = useSelector((state: StateType) => state.users);
+  const {
+    loading: deletionLoading,
+    message,
+    error,
+  } = useSelector((state: StateType) => state.promise);
   const [deleteingUserId, setDeletingUserId] = useState<string>("");
   const [deletionModelOpen, setDeletionModelOpen] = useState<boolean>(false);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, [dispatch]);
+    if (message) toast.success(message);
+    if (error) toast.error(error);
+  }, [dispatch, message, error]);
 
-  const deleteUser = () => {
-    console.log(deleteingUserId, "object...");
+  const handleDeleteUser = async () => {
+    await dispatch(deleteUser(deleteingUserId));
+    setDeletionModelOpen(false);
   };
 
   const cancelDeletion = () => {
@@ -32,7 +42,7 @@ const Users = () => {
         open={deletionModelOpen}
         setOpen={setDeletionModelOpen}
         handleCancel={cancelDeletion}
-        handleConfirm={deleteUser}
+        handleConfirm={handleDeleteUser}
         title="Confirm Deletion"
         description="Do you want to delete this user"
       />

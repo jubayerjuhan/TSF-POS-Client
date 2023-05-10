@@ -1,5 +1,4 @@
 import React from "react";
-import { boolean } from "yup";
 
 export interface AppModalTypes {
   title: string;
