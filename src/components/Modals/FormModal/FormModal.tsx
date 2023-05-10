@@ -1,38 +1,33 @@
+import { CircularProgress } from "@mui/material";
 import Button from "../../core/Button/Button";
 import InputField from "../../core/InputField/InputField";
 import SelectField from "../../core/SelectField/SelectField";
 import { FormModalTypes } from "./types";
+import Modal from "react-bootstrap/Modal";
 
 const FormModal = ({
+  open,
+  setOpen,
+  loading,
   submitFields,
   title,
   fields,
   register,
   errors,
 }: FormModalTypes) => {
+  const handleClose = () => setOpen(false);
+
   return (
-    <div
-      className="modal fade "
-      id="exampleModal"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog " role="document">
-        <div className="modal-content p-3" style={{ marginTop: 90 }}>
-          <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
-              {title}
-            </h5>
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+    <Modal show={open} onHide={handleClose} style={{ paddingTop: 80 }}>
+      <Modal.Header closeButton>
+        <Modal.Title>{title}</Modal.Title>
+      </Modal.Header>
+      {loading ? (
+        <div className="d-flex justify-content-center py-5">
+          <CircularProgress />
+        </div>
+      ) : (
+        <Modal.Body>
           <form className="d-flex flex-column gap-4 my-4">
             {fields.map((field, index) => {
               if (field.type === "select") {
@@ -57,25 +52,26 @@ const FormModal = ({
                 />
               );
             })}
-
-            <div className="modal-footer">
-              <Button
-                title="Cancel"
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              />
-              <Button
-                onClick={submitFields}
-                title="Submit"
-                type="submit"
-                className="btn btn-primary"
-              />
-            </div>
           </form>
-        </div>
-      </div>
-    </div>
+        </Modal.Body>
+      )}
+      <Modal.Footer>
+        <Button
+          disabled={loading}
+          title="Cancel"
+          type="button"
+          className="btn btn-secondary"
+          data-dismiss="modal"
+        />
+        <Button
+          disabled={loading}
+          onClick={submitFields}
+          title="Submit"
+          type="submit"
+          className="btn btn-primary"
+        />
+      </Modal.Footer>
+    </Modal>
   );
 };
 

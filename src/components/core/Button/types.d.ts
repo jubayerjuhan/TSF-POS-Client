@@ -4,4 +4,5 @@ type ButtonProps = {
   onClick?: () => void;
   loading?: boolean;
   className?: string;
+  disabled?: boolean;
 };

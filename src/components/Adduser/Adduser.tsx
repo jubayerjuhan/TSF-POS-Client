@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import addUserValidationSchema from "../../constants/InputValidation/User/AddUserValidation";
 
 const Adduser = () => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [forceRender, setForceRender] = useState(0);
   const [userRole, setUserRole] = useState<string>("moderator");
   const { branches, loading } = useSelector(
@@ -51,7 +52,7 @@ const Adduser = () => {
   }, [role]);
 
   const onSubmit = (value: any) => {
-    console.log("value", value);
+    setModalOpen(false);
   };
 
   return (
@@ -61,8 +62,12 @@ const Adduser = () => {
         className="mb-4"
         data-toggle="modal"
         data-target="#exampleModal"
+        onClick={() => setModalOpen(true)}
       />
       <FormModal
+        loading={false}
+        open={modalOpen}
+        setOpen={setModalOpen}
         errors={errors}
         key={forceRender}
         submitFields={handleSubmit(onSubmit)}
