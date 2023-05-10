@@ -1,4 +1,5 @@
 // conponent for routes
+import Branches from "../pages/Branches/Branches";
 import Dashboard from "../pages/Dashboard";
 import ForgotPassword from "../pages/ForgotPassword";
 import Login from "../pages/Login";
@@ -29,6 +30,11 @@ const routes: Route[] = [
   {
     path: "/users",
     component: Users,
+    secured: true,
+  },
+  {
+    path: "/branches",
+    component: Branches,
     secured: true,
   },
 ];
