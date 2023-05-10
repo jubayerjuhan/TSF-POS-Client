@@ -29,7 +29,8 @@ const UserCard = ({
           <Card.Subtitle className="mb-2 text-muted role">
             {user.role.toUpperCase()}
           </Card.Subtitle>
-          <Card.Text className="manage">Manages: {user.branch}</Card.Text>
+          <Card.Text className="manage mb-1">Manages: {user.branch}</Card.Text>
+          <Card.Text className="manage">Email: {user.email}</Card.Text>
           {user?._id !== loggedInUser?._id && (
             <div className="d-flex mt-3 gap-2">
               <Button

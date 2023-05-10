@@ -1,20 +1,26 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import {
   ADD_USER_FIELDS,
   ADD_USER_FIELDS_WITH_BRANCH,
 } from "../../constants/InputFields/user/addUser";
 import Button from "../core/Button/Button";
 import FormModal from "../Modals/FormModal/FormModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StateType } from "../../redux/redux";
 import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import addUserValidationSchema from "../../constants/InputValidation/User/AddUserValidation";
+import { User } from "../../types/userTypes";
+import { addUserToSystem } from "../../redux/actions/user/userAction";
 
 const Adduser = () => {
+  const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [forceRender, setForceRender] = useState(0);
   const [userRole, setUserRole] = useState<string>("moderator");
+  const { loading: userLoading } = useSelector(
+    (state: StateType) => state.promise
+  );
   const { branches, loading } = useSelector(
     (state: StateType) => state.branches
   );
@@ -23,7 +29,7 @@ const Adduser = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<User>({
     resolver: yupResolver(addUserValidationSchema(userRole)),
   });
 
@@ -46,12 +52,15 @@ const Adduser = () => {
     }
   }, [branches, forceRender]);
 
+  // if role change change the user role to picktup right schema
   const role = watch("role");
   useEffect(() => {
     setUserRole(role);
   }, [role]);
 
-  const onSubmit = (value: any) => {
+  // onsubmit function to dispatch the action
+  const onSubmit: SubmitHandler<User> = async (value: User) => {
+    await dispatch(addUserToSystem(value));
     setModalOpen(false);
   };
 
@@ -65,7 +74,7 @@ const Adduser = () => {
         onClick={() => setModalOpen(true)}
       />
       <FormModal
-        loading={false}
+        loading={loading || userLoading}
         open={modalOpen}
         setOpen={setModalOpen}
         errors={errors}

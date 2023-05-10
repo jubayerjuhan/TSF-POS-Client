@@ -28,7 +28,7 @@ const FormModal = ({
         </div>
       ) : (
         <Modal.Body>
-          <form className="d-flex flex-column gap-4 my-4">
+          <form className="d-flex flex-column gap-4 my-2">
             {fields.map((field, index) => {
               if (field.type === "select") {
                 return (
