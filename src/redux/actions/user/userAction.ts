@@ -1,4 +1,4 @@
-import { User } from "./../../../types/userTypes.d";
+import { User } from "../../../types/User/userTypes";
 import client from "../../../client/axiosInstance";
 import {
   PROMISE_DESTROY,

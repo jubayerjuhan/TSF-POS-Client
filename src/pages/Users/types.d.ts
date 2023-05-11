@@ -1,5 +1,5 @@
 import React, { SetStateAction } from "react";
-import { User } from "../../types/userTypes";
+import { User } from "../../types/User/userTypes";
 
 export interface UserCardTypes {
   setDeletingUserId: React.Dispatch<SetStateAction<string>>;

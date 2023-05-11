@@ -1,4 +1,4 @@
-import { User } from "./../../../types/userTypes.d";
+import { User } from "../../../types/User/userTypes";
 interface UserCardTypes {
   user: User;
 }

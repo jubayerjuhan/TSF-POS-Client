@@ -10,7 +10,7 @@ import { StateType } from "../../redux/redux";
 import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import addUserValidationSchema from "../../constants/InputValidation/User/AddUserValidation";
-import { User } from "../../types/userTypes";
+import { User } from "../../types/User/userTypes";
 import { addUserToSystem } from "../../redux/actions/user/userAction";
 
 const Adduser = () => {

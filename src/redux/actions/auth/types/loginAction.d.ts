@@ -1,4 +1,4 @@
-import { User } from "../../../../types/userTypes";
+import { User } from "../../../../types/User/userTypes";
 
 export interface LoginResponse {
   success: boolean;

@@ -1,7 +1,7 @@
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { Action, AnyAction } from "redux";
 import { RootState } from "./store/configureStore";
-import { User } from "../types/userTypes";
+import { User } from "../types/User/userTypes";
 
 export interface ReduxAction extends Action {
   payload: object | string | Array;
