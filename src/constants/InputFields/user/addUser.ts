@@ -1,7 +1,7 @@
+import { FieldTypes } from "../../../types/FieldTypes/FieldTypes";
 import roles from "../../roles/roles";
-import { AddUserFieldTypes } from "./types";
 
-const ADD_USER_FIELDS: AddUserFieldTypes[] = [
+const ADD_USER_FIELDS: FieldTypes[] = [
   {
     name: "firstName",
     label: "First Name",
@@ -35,7 +35,7 @@ const ADD_USER_FIELDS: AddUserFieldTypes[] = [
   },
 ];
 
-const ADD_USER_FIELDS_WITH_BRANCH: AddUserFieldTypes[] = [
+const ADD_USER_FIELDS_WITH_BRANCH: FieldTypes[] = [
   ...ADD_USER_FIELDS,
   {
     name: "branch",

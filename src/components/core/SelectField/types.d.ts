@@ -1,8 +1,8 @@
 import { FieldError, FieldErrorsImpl } from "react-hook-form";
-import { AddUserFieldTypes } from "../../../constants/InputFields/user/types";
+import { FieldTypes } from "../../../types/FieldTypes/FieldTypes";
 
 interface SelectFieldTypes {
   register: (rules?: RegisterOptions) => RefReturn;
-  field: AddUserFieldTypes;
+  field: FieldTypes;
   error: FieldError | Merge<FieldError, FieldErrorsImpl<>>;
 }

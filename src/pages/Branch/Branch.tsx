@@ -19,7 +19,6 @@ const Branch = () => {
 
   useEffect(() => {
     dispatch({ type: CLEAR_ERROR });
-
     if (id) {
       dispatch(getBranch(id));
     }
