@@ -13,6 +13,7 @@ const Branch = () => {
   const { branch, error, loading } = useSelector(
     (state: StateType) => state.branch
   );
+  const { success } = useSelector((state: StateType) => state.promise);
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Branch = () => {
     if (id) {
       dispatch(getBranch(id));
     }
-  }, [dispatch, id]);
+  }, [dispatch, id, success]);
 
   if (error) {
     return (

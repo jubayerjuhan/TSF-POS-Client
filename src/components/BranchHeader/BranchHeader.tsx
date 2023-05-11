@@ -12,7 +12,6 @@ import { removeEmptyFields } from "../../utils/object/removeEmptyField";
 import {
   deleteBranch,
   editBranch,
-  getBranch,
 } from "../../redux/actions/branch/branchAction";
 import AppModal from "../Modals/AppModal/AppModal";
 
@@ -39,9 +38,6 @@ const BranchHeader = ({ branch }: { branch: Branch }) => {
     const cleanedData = removeEmptyFields(data);
     await dispatch(editBranch(cleanedData, branch._id));
     setEditModalOpen(false);
-    setTimeout(() => {
-      dispatch(getBranch(branch._id));
-    }, 300);
   };
 
   const handleDeleteBranch = async () => {
