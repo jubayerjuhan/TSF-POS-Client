@@ -6,7 +6,8 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 import userReducer from "../reducers/userReducer";
 import promiseReducer from "../reducers/promiseReducer";
 import usersReducer from "../reducers/usersReducer";
-import branchReducer from "../reducers/branchListReducer";
+import branchesReducer from "../reducers/branchListReducer";
+import branchReducer from "../reducers/branchReducer";
 
 //persist config for persistor
 const persistConfig = {
@@ -19,7 +20,8 @@ const persistConfig = {
 const reducers = combineReducers({
   user: userReducer,
   users: usersReducer,
-  branches: branchReducer,
+  branch: branchReducer,
+  branches: branchesReducer,
   promise: promiseReducer,
 });
 

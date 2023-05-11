@@ -1,0 +1,3 @@
+export const BRANCH_PENDING = "BRANCH_PENDING";
+export const BRANCH_SUCCESS = "BRANCH_SUCCESS";
+export const BRANCH_ERROR = "BRANCH_ERROR";
