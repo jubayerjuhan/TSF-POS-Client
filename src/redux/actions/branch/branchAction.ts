@@ -50,3 +50,24 @@ export const editBranch =
       }, 300);
     }
   };
+
+// delete branch
+export const deleteBranch =
+  (branchId: string): RootThunk =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: PROMISE_PENDING });
+      const { data }: { data: BranchEditResponse } = await client.delete(
+        `/branch/action/${branchId}`
+      );
+
+      if (data.success)
+        dispatch({ type: PROMISE_SUCCESS, payload: data.message });
+    } catch (error: any) {
+      errorDispatcher(error, PROMISE_ERROR, dispatch);
+    } finally {
+      setTimeout(() => {
+        dispatch({ type: PROMISE_DESTROY });
+      }, 300);
+    }
+  };
