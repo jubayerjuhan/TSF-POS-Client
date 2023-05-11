@@ -1,9 +1,18 @@
 import Pagewrapper from "../../components/Pagewrapper/Pagewrapper";
+import BranchCard from "../../components/cards/BranchCard/BranchCard";
+import "./branches.scss";
 
 const Branches = () => {
   return (
     <Pagewrapper>
-      <h2>Hello</h2>
+      <div className="branches">
+        <BranchCard />
+        <BranchCard />
+        <BranchCard />
+        <BranchCard />
+        <BranchCard />
+        <BranchCard />
+      </div>
     </Pagewrapper>
   );
 };
