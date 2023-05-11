@@ -2,6 +2,7 @@ import { ThunkDispatch } from "@reduxjs/toolkit";
 import { Action, AnyAction } from "redux";
 import { RootState } from "./store/configureStore";
 import { User } from "../types/User/userTypes";
+import { Branch } from "../types/Branch/branchTypes";
 
 export interface ReduxAction extends Action {
   payload: object | string | Array;
@@ -39,6 +40,11 @@ interface StateType {
       name: string;
       address: string;
     }>;
+  };
+  branch: {
+    loading: boolean;
+    error: string | null;
+    branch: Branch;
   };
   promise: {
     loading: boolean;

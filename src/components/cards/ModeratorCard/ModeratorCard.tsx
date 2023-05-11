@@ -7,9 +7,9 @@ const ModeratorCard = ({ moderator }: { moderator?: User }) => {
     <Card style={{ width: "18rem" }}>
       <Card.Body>
         <Card.Title className="fs-5 fw-bold text-secondary">
-          {moderator?.firstName} Jubayer Hossain
+          {moderator?.firstName}
         </Card.Title>
-        <Card.Text style={{ fontSize: 14 }}>davidjuhan23@gmail.com</Card.Text>
+        <Card.Text style={{ fontSize: 14 }}>{moderator?.email}</Card.Text>
         <Button title="Delete Moderator " className="mt-3 btn-danger" />
       </Card.Body>
     </Card>

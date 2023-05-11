@@ -13,7 +13,7 @@ import branchReducer from "../reducers/branchReducer";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "branch"], // only navigation will be persisted
+  whitelist: ["user", "branches"], // only navigation will be persisted
 };
 
 // conbine reducers here
