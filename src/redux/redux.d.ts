@@ -45,6 +45,7 @@ interface StateType {
     loading: boolean;
     error: string | null;
     branch: Branch;
+    message: string;
   };
   promise: {
     loading: boolean;

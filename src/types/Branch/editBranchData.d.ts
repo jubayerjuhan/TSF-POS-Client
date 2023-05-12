@@ -1,1 +1,1 @@
-type BranchEditData = { [key: string]: string };
+type BranchData = { [key: string]: string };

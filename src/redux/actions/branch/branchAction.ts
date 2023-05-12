@@ -31,7 +31,7 @@ export const getBranch =
 
 // edit branch
 export const editBranch =
-  (branchData: BranchEditData, branchId: string): RootThunk =>
+  (branchData: BranchData, branchId: string): RootThunk =>
   async (dispatch: AppDispatch) => {
     try {
       dispatch({ type: PROMISE_PENDING });

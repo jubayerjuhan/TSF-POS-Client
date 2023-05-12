@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import EDIT_BRANCH_FIELDS from "../../constants/InputFields/branch/editBranch";
+import BRANCH_FIELDS from "../../constants/InputFields/branch/branch";
 import { Branch } from "../../types/Branch/branchTypes";
 import FormModal from "../Modals/FormModal/FormModal";
 import Button from "../core/Button/Button";
@@ -32,9 +32,9 @@ const BranchHeader = ({ branch }: { branch: Branch }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BranchEditData>();
+  } = useForm<BranchData>();
 
-  const editFormSubmit = async (data: BranchEditData) => {
+  const editFormSubmit = async (data: BranchData) => {
     const cleanedData = removeEmptyFields(data);
     await dispatch(editBranch(cleanedData, branch._id));
     setEditModalOpen(false);
@@ -53,7 +53,7 @@ const BranchHeader = ({ branch }: { branch: Branch }) => {
         register={register}
         submitFields={handleSubmit(editFormSubmit)}
         errors={errors}
-        fields={EDIT_BRANCH_FIELDS}
+        fields={BRANCH_FIELDS}
         open={editModalOpen}
         setOpen={setEditModalOpen}
       />

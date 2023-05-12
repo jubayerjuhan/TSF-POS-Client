@@ -1,6 +1,6 @@
 import { FieldTypes } from "../../../types/FieldTypes/FieldTypes";
 
-const EDIT_BRANCH_FIELDS: FieldTypes[] = [
+const BRANCH_FIELDS: FieldTypes[] = [
   {
     name: "name",
     label: "Name",
@@ -15,4 +15,4 @@ const EDIT_BRANCH_FIELDS: FieldTypes[] = [
   },
 ];
 
-export default EDIT_BRANCH_FIELDS;
+export default BRANCH_FIELDS;
