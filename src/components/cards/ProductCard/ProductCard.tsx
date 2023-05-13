@@ -9,10 +9,17 @@ const ProductCard = ({
   quantity,
   setDeletingProductId,
   setDeletionModelOpen,
+  setEditingModelOpen,
+  setEditingProductId,
 }: ProductCardTypes) => {
   const onDeleteClick = () => {
     setDeletingProductId(product._id);
     setDeletionModelOpen(true);
+  };
+
+  const onEditClick = () => {
+    setEditingModelOpen(true);
+    setEditingProductId(product._id);
   };
   return (
     <Card className="product__card">
@@ -41,7 +48,7 @@ const ProductCard = ({
             className="btn-danger"
             onClick={onDeleteClick}
           />
-          <Button title="Edit" className="btn-primary" />
+          <Button title="Edit" className="btn-primary" onClick={onEditClick} />
         </div>
       </Card.Body>
     </Card>

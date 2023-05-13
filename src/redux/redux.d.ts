@@ -26,7 +26,7 @@ interface StateType {
     loading: boolean;
     error: string;
     loggedIn: boolean;
-    message: string;
+    message: string | null;
     user: User;
   };
   users: {
@@ -46,7 +46,12 @@ interface StateType {
     loading: boolean;
     error: string | null;
     branch: Branch;
-    message: string;
+    message: string | null;
+  };
+  product: {
+    loading: boolean;
+    error: string | null;
+    message: string | null;
   };
   promise: {
     loading: boolean;

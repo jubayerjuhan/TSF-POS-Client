@@ -8,6 +8,7 @@ import promiseReducer from "../reducers/promiseReducer";
 import usersReducer from "../reducers/usersReducer";
 import branchesReducer from "../reducers/branchListReducer";
 import branchReducer from "../reducers/branchReducer";
+import productReducer from "../reducers/productReducer";
 
 //persist config for persistor
 const persistConfig = {
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   users: usersReducer,
   branch: branchReducer,
   branches: branchesReducer,
+  product: productReducer,
   promise: promiseReducer,
 });
 

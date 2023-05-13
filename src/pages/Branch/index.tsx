@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import Pagewrapper from "../../components/Pagewrapper/Pagewrapper";
-import BranchModerators from "../../components/sections/BranchModerators/BranchModerators";
+import BranchModerators from "../../components/sections/Branch/BranchModerators/BranchModerators";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBranch } from "../../redux/actions/branch/branchAction";
@@ -8,8 +8,8 @@ import { StateType } from "../../redux/redux";
 import BigSpaceLoader from "../../components/loader/BigSpaceLoder/BigSpaceLoader";
 import AlertPopup from "../../components/AlertPopup/AlertPopup";
 import { CLEAR_ERROR } from "../../constants/reduxActionsNames/user";
-import BranchHeader from "../../components/BranchHeader/BranchHeader";
-import BranchProducts from "../../components/sections/BranchProducts/BranchProducts";
+import BranchHeader from "../../components/sections/Branch/BranchHeader/BranchHeader";
+import BranchProducts from "../../components/sections/Branch/BranchProducts/BranchProducts";
 const Branch = () => {
   const { branch, error, loading } = useSelector(
     (state: StateType) => state.branch

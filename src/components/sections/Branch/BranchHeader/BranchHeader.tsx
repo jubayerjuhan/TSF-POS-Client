@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import BRANCH_FIELDS from "../../constants/InputFields/branch/branch";
-import { Branch } from "../../types/Branch/branchTypes";
-import FormModal from "../Modals/FormModal/FormModal";
-import Button from "../core/Button/Button";
+import BRANCH_FIELDS from "../../../../constants/InputFields/branch/branch";
+import { Branch } from "../../../../types/Branch/branchTypes";
+import FormModal from "../../../Modals/FormModal/FormModal";
+import Button from "../../../core/Button/Button";
 import "./branchHeader.scss";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, StateType } from "../../redux/redux";
+import { AppDispatch, StateType } from "../../../../redux/redux";
 import { toast } from "react-hot-toast";
-import { removeEmptyFields } from "../../utils/object/removeEmptyField";
+import { removeEmptyFields } from "../../../../utils/object/removeEmptyField";
 import {
   deleteBranch,
   editBranch,
-} from "../../redux/actions/branch/branchAction";
-import AppModal from "../Modals/AppModal/AppModal";
+} from "../../../../redux/actions/branch/branchAction";
+import AppModal from "../../../Modals/AppModal/AppModal";
 
 const BranchHeader = ({ branch }: { branch: Branch }) => {
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { User } from "../../../types/User/userTypes";
-import ModeratorCard from "../../cards/ModeratorCard/ModeratorCard";
+import { User } from "../../../../types/User/userTypes";
+import ModeratorCard from "../../../cards/ModeratorCard/ModeratorCard";
 import { useDispatch, useSelector } from "react-redux";
-import { StateType } from "../../../redux/redux";
+import { StateType } from "../../../../redux/redux";
 import { toast } from "react-hot-toast";
-import { errorAndSuccessRemover } from "../../../redux/actions/remover/removerAction";
+import { errorAndSuccessRemover } from "../../../../redux/actions/remover/removerAction";
 
 const BranchModerators = ({
   moderators,
