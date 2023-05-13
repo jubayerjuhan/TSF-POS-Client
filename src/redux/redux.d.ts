@@ -26,6 +26,7 @@ interface StateType {
     loading: boolean;
     error: string;
     loggedIn: boolean;
+    message: string;
     user: User;
   };
   users: {

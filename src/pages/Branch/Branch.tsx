@@ -9,10 +9,12 @@ import BigSpaceLoader from "../../components/loader/BigSpaceLoder/BigSpaceLoader
 import AlertPopup from "../../components/AlertPopup/AlertPopup";
 import { CLEAR_ERROR } from "../../constants/reduxActionsNames/user";
 import BranchHeader from "../../components/BranchHeader/BranchHeader";
+import BranchProducts from "../../components/sections/BranchProducts/BranchProducts";
 const Branch = () => {
   const { branch, error, loading } = useSelector(
     (state: StateType) => state.branch
   );
+  const { message } = useSelector((state: StateType) => state.user);
   const { success } = useSelector((state: StateType) => state.promise);
 
   const { id } = useParams();
@@ -23,7 +25,7 @@ const Branch = () => {
     if (id) {
       dispatch(getBranch(id));
     }
-  }, [dispatch, id, success]);
+  }, [dispatch, id, success, message]);
 
   if (error) {
     return (
@@ -32,6 +34,8 @@ const Branch = () => {
       </Pagewrapper>
     );
   }
+
+  console.log("render Branch");
   return (
     <Pagewrapper>
       {loading ? (
@@ -39,7 +43,11 @@ const Branch = () => {
       ) : (
         <div>
           <BranchHeader branch={branch} />
-          <BranchModerators moderators={branch?.moderators} />
+          <BranchModerators
+            moderators={branch?.moderators}
+            branchId={branch?._id}
+          />
+          <BranchProducts products={branch?.products} />
         </div>
       )}
     </Pagewrapper>

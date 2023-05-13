@@ -9,7 +9,7 @@ interface ErrorTypes extends AxiosError {
 }
 
 export const errorDispatcher = (
-  error: ErrorTypes,
+  error: ErrorTypes | any,
   type: string,
   dispatch: AppDispatch
 ) => {

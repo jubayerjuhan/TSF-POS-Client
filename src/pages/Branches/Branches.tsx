@@ -9,15 +9,21 @@ import Button from "../../components/core/Button/Button";
 import FormModal from "../../components/Modals/FormModal/FormModal";
 import BRANCH_FIELDS from "../../constants/InputFields/branch/branch";
 import { useForm } from "react-hook-form";
+import { addBranch } from "../../redux/actions/branch/branchAction";
+import { toast } from "react-hot-toast";
+import { errorAndSuccessRemover } from "../../redux/actions/remover/removerAction";
 
 const Branches = () => {
   const dispatch: AppDispatch = useDispatch();
   const [addBranchModalOpen, setAddBranchModalOpen] = useState<boolean>(false);
   const { branches } = useSelector((state: StateType) => state.branches);
+  const { loading, error, message } = useSelector(
+    (state: StateType) => state.branch
+  );
 
   useEffect(() => {
     dispatch(getBranchList());
-  }, [dispatch]);
+  }, [dispatch, message]);
 
   const {
     register,
@@ -25,9 +31,17 @@ const Branches = () => {
     formState: { errors },
   } = useForm();
 
-  const onAddBranchSubmit = (data: BranchData) => {
-    console.log();
+  const onAddBranchSubmit = async (data: BranchData) => {
+    await dispatch(addBranch(data));
+    setAddBranchModalOpen(false);
   };
+
+  useEffect(() => {
+    if (message) toast.success(message);
+    if (error) toast.error(error);
+    dispatch(errorAndSuccessRemover());
+  }, [error, message, dispatch]);
+
   return (
     <Pagewrapper>
       <Button
@@ -36,6 +50,7 @@ const Branches = () => {
         onClick={() => setAddBranchModalOpen(true)}
       />
       <FormModal
+        loading={loading}
         title="Add Branch"
         fields={BRANCH_FIELDS}
         errors={errors}

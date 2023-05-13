@@ -9,3 +9,13 @@ export interface BranchEditResponse {
   success: boolean;
   message: string;
 }
+
+export interface BranchAddResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface DeleteModeratorResponse {
+  success: boolean;
+  message: string;
+}

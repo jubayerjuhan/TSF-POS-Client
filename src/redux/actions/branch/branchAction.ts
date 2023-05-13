@@ -1,5 +1,8 @@
 import client from "../../../client/axiosInstance";
 import {
+  BRANCH_ADD_ERROR,
+  BRANCH_ADD_PENDING,
+  BRANCH_ADD_SUCCESS,
   BRANCH_ERROR,
   BRANCH_PENDING,
   BRANCH_SUCCESS,
@@ -12,7 +15,23 @@ import {
 } from "../../../constants/reduxActionsNames/promise";
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk } from "../../redux";
-import { BranchEditResponse, BranchResponse } from "./types";
+import { BranchAddResponse, BranchEditResponse, BranchResponse } from "./types";
+
+export const addBranch =
+  (branchData: BranchData): RootThunk =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: BRANCH_ADD_PENDING });
+      const { data }: { data: BranchAddResponse } = await client.post(
+        `/branch/create`,
+        branchData
+      );
+      if (data.success)
+        dispatch({ type: BRANCH_ADD_SUCCESS, payload: data.message });
+    } catch (error) {
+      errorDispatcher(error, BRANCH_ADD_ERROR, dispatch);
+    }
+  };
 
 export const getBranch =
   (branchId: string): RootThunk =>

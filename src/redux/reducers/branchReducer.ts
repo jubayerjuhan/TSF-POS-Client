@@ -7,7 +7,10 @@ import {
   BRANCH_ADD_ERROR,
 } from "./../../constants/reduxActionsNames/branch/index";
 
-import { CLEAR_ERROR } from "../../constants/reduxActionsNames/user";
+import {
+  CLEAR_ERROR,
+  CLEAR_SUCCESS,
+} from "../../constants/reduxActionsNames/user";
 import { ReduxAction } from "../redux";
 
 const branchReducer = (state = {}, action: ReduxAction) => {
@@ -53,6 +56,11 @@ const branchReducer = (state = {}, action: ReduxAction) => {
       return {
         ...state,
         error: null,
+      };
+    case CLEAR_SUCCESS:
+      return {
+        ...state,
+        message: null,
       };
 
     default:

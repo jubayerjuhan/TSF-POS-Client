@@ -1,5 +1,11 @@
 import {
+  DELETE_MODERATOR_ERROR,
+  DELETE_MODERATOR_PENDING,
+  DELETE_MODERATOR_SUCCESS,
+} from "../../constants/reduxActionsNames/moderator";
+import {
   CLEAR_ERROR,
+  CLEAR_SUCCESS,
   LOGIN_ERROR,
   LOGIN_PENDING,
   LOGIN_SUCCESS,
@@ -13,6 +19,11 @@ const userReducer = (state = {}, action: ReduxAction) => {
         ...state,
         loading: true,
       };
+    case DELETE_MODERATOR_PENDING:
+      return {
+        ...state,
+        loading: true,
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -20,7 +31,19 @@ const userReducer = (state = {}, action: ReduxAction) => {
         loggedIn: true,
         user: action.payload,
       };
+    case DELETE_MODERATOR_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
     case LOGIN_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case DELETE_MODERATOR_ERROR:
       return {
         ...state,
         loading: false,
@@ -30,6 +53,11 @@ const userReducer = (state = {}, action: ReduxAction) => {
       return {
         ...state,
         error: null,
+      };
+    case CLEAR_SUCCESS:
+      return {
+        ...state,
+        message: null,
       };
 
     default:
