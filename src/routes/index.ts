@@ -1,5 +1,5 @@
 // conponent for routes
-import Branch from "../pages/Branch/Branch";
+import Branch from "../pages/Branch";
 import Branches from "../pages/Branches/Branches";
 import Dashboard from "../pages/Dashboard";
 import ForgotPassword from "../pages/ForgotPassword";

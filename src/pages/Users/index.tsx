@@ -35,10 +35,6 @@ const Users = () => {
     setDeletionModelOpen(false);
   };
 
-  const cancelDeletion = () => {
-    console.log("object");
-  };
-
   return (
     <Pagewrapper>
       <Adduser />
@@ -46,7 +42,6 @@ const Users = () => {
         loading={deletionLoading}
         open={deletionModelOpen}
         setOpen={setDeletionModelOpen}
-        handleCancel={cancelDeletion}
         handleConfirm={handleDeleteUser}
         title="Confirm Deletion"
         description="Do you want to delete this user"

@@ -37,6 +37,7 @@ export const getBranch =
   (branchId: string): RootThunk =>
   async (dispatch: AppDispatch) => {
     try {
+      dispatch({ type: "CLEAR_BRANCH" });
       dispatch({ type: BRANCH_PENDING });
       const { data }: { data: BranchResponse } = await client.get(
         `/branch/action/${branchId}`

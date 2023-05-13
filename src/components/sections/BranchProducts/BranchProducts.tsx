@@ -1,12 +1,115 @@
-const BranchProducts = ({ products }: { products: any }) => {
-  console.log(products);
+import { Product } from "../../../types/Product/ProductTypes";
+import ProductCard from "../../cards/ProductCard/ProductCard";
+import "./branchProducts.scss";
+
+interface BranchProductProps {
+  products: { id: Product; quantity: number; _id: string }[];
+}
+const BranchProducts = ({ products }: BranchProductProps) => {
+  console.log(products, "pds");
   return (
     <div className="">
-      <p className="fs-4 fw-bold text-muted">Products</p>
-      <div className="mt-4 d-flex flex-wrap gap-4">
-        {/* {moderators?.map((moderator, key) => {
-          return <ModeratorCard key={key} moderator={moderator} />;
-        })} */}
+      <p className="fs-4 fw-bold text-muted">Products ({products?.length})</p>
+      <div className="product__list">
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
+        {products?.map((product, key) => {
+          return (
+            <ProductCard
+              product={product.id}
+              quantity={product.quantity}
+              key={key}
+            />
+          );
+        })}
       </div>
     </div>
   );

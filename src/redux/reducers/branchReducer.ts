@@ -23,8 +23,8 @@ const branchReducer = (state = {}, action: ReduxAction) => {
     case BRANCH_SUCCESS:
       return {
         ...state,
-        loading: false,
         branch: action.payload,
+        loading: false,
       };
     case BRANCH_ERROR:
       return {
@@ -57,6 +57,8 @@ const branchReducer = (state = {}, action: ReduxAction) => {
         ...state,
         error: null,
       };
+    case "CLEAR_BRANCH":
+      return {};
     case CLEAR_SUCCESS:
       return {
         ...state,

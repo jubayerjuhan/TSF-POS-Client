@@ -17,14 +17,12 @@ const Branch = () => {
   const { message } = useSelector((state: StateType) => state.user);
   const { success } = useSelector((state: StateType) => state.promise);
 
-  const { id } = useParams();
+  const { id = "" } = useParams<string>();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: CLEAR_ERROR });
-    if (id) {
-      dispatch(getBranch(id));
-    }
+    dispatch(getBranch(id));
   }, [dispatch, id, success, message]);
 
   if (error) {
@@ -35,10 +33,11 @@ const Branch = () => {
     );
   }
 
-  console.log("render Branch");
+  console.log(branch, "branchinfo");
+
   return (
     <Pagewrapper>
-      {loading ? (
+      {loading && !branch ? (
         <BigSpaceLoader height={500} />
       ) : (
         <div>
