@@ -1,17 +1,19 @@
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Product } from "../../../types/Product/ProductTypes";
 import { IMAGE_URL } from "../../../constants/links/imageLink";
+import Button from "../../core/Button/Button";
 import "./productCard.scss";
+import { ProductCardTypes } from "./types";
 
 const ProductCard = ({
   product,
   quantity,
-}: {
-  product: Product;
-  quantity: number;
-}) => {
-  console.log(product);
+  setDeletingProductId,
+  setDeletionModelOpen,
+}: ProductCardTypes) => {
+  const onDeleteClick = () => {
+    setDeletingProductId(product._id);
+    setDeletionModelOpen(true);
+  };
   return (
     <Card className="product__card">
       <Card.Img
@@ -21,13 +23,26 @@ const ProductCard = ({
       />
       <Card.Body className="d-flex flex-column justify-content-between">
         <div>
-          <Card.Title className="fs-6">{product.name}</Card.Title>
+          <Card.Title className="fs-6 fw-semibold">{product.name}</Card.Title>
+          <Card.Text>
+            Id: <span className="fw-bold">{product.productId}</span>
+          </Card.Text>
+          <Card.Text>
+            Quantity: <span className="fw-bold">{quantity}</span>{" "}
+          </Card.Text>
           <Card.Text>Cost Price: {product.costPrice}</Card.Text>
           <Card.Text className="mb-3">
             Sell Price: {product.costPrice}
           </Card.Text>
         </div>
-        <Button variant="primary">Go somewhere</Button>
+        <div className="button__container">
+          <Button
+            title="Delete"
+            className="btn-danger"
+            onClick={onDeleteClick}
+          />
+          <Button title="Edit" className="btn-primary" />
+        </div>
       </Card.Body>
     </Card>
   );

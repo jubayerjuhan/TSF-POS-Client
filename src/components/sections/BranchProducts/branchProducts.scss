@@ -1,9 +1,11 @@
 .product__list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
   gap: 20px;
+}
 
-  .product__card {
-    width: 200px;
+@media (max-width: 768px) {
+  .product__list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
