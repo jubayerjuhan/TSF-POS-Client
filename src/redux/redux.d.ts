@@ -67,3 +67,8 @@ interface StateType {
     error: string | null;
   };
 }
+
+export interface SuccessMessageType {
+  success: true;
+  message: string;
+}

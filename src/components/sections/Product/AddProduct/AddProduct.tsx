@@ -6,9 +6,13 @@ import ADD_PRODUCT_FIELDS from "../../../../constants/InputFields/product/addPro
 import ADD_PRODUCT_SCHEMA from "../../../../constants/InputValidation/Product/addProductValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ProductFormData } from "./types";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, StateType } from "../../../../redux/redux";
+import { addProduct } from "../../../../redux/actions/product/productAction";
 
 const AddProduct = () => {
   const [addProductModalOpen, setAddProductModalOpen] = useState(false);
+  const { loading } = useSelector((state: StateType) => state.product);
   const {
     handleSubmit,
     register,
@@ -17,7 +21,9 @@ const AddProduct = () => {
     resolver: yupResolver(ADD_PRODUCT_SCHEMA),
   });
 
-  const onSubmit = (data: ProductFormData) => {
+  const dispatch: AppDispatch = useDispatch();
+
+  const onSubmit = async (data: ProductFormData) => {
     const formData = new FormData();
     for (const [key, value] of Object.entries(data)) {
       if (key === "photo") {
@@ -26,14 +32,15 @@ const AddProduct = () => {
         formData.append(key, value);
       }
     }
-    for (const [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
+
+    await dispatch(addProduct(formData));
+    setAddProductModalOpen(false);
   };
 
   return (
     <div className="mb-4">
       <FormModal
+        loading={loading}
         errors={errors}
         fields={ADD_PRODUCT_FIELDS}
         open={addProductModalOpen}

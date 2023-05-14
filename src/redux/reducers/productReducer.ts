@@ -3,6 +3,7 @@ import {
   ADD_PRODUCT_PENDING,
   ADD_PRODUCT_SUCCESS,
   CLEAR_PRODUCT,
+  CLEAR_PRODUCT_MESSAGE,
   DELETE_PRODUCT_ERROR,
   DELETE_PRODUCT_PENDING,
   DELETE_PRODUCT_SUCCESS,
@@ -67,6 +68,12 @@ const productReducer = (state = {}, action: ReduxAction) => {
       };
     case CLEAR_PRODUCT:
       return {};
+
+    case CLEAR_PRODUCT_MESSAGE:
+      return {
+        success: null,
+        message: null,
+      };
 
     default:
       return state;
