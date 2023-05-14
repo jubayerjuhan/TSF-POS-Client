@@ -9,11 +9,13 @@ const InputField = ({
   error,
   register,
   label,
+  defaultValue,
 }: InputFieldType) => {
   return (
     <div className="input__wrapper">
       <p className="top__label mb-2">{label}</p>
       <Form.Control
+        defaultValue={defaultValue}
         type={type}
         className="form-control core__inputField"
         aria-describedby="emailHelp"

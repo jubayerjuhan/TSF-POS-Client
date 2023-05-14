@@ -6,6 +6,7 @@ export interface FormModalTypes {
   setOpen: Dispatch<SetStateAction<boolean>>;
   submitFields: () => void;
   title: string;
+  watch?: any;
   fields: FieldTypes[];
   errors: FieldErrors<FieldValues>;
   register: (rules?: RegisterOptions) => RefReturn;

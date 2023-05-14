@@ -7,4 +7,5 @@ export type InputFieldType = {
   error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
   placeholder: string;
   label: string;
+  defaultValue?: string | number | object;
 };

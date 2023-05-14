@@ -1,4 +1,5 @@
 import { CircularProgress } from "@mui/material";
+import Form from "react-bootstrap/Form";
 import Button from "../../core/Button/Button";
 import InputField from "../../core/InputField/InputField";
 import SelectField from "../../core/SelectField/SelectField";
@@ -12,6 +13,7 @@ const FormModal = ({
   submitFields,
   title,
   fields,
+  watch,
   register,
   errors,
 }: FormModalTypes) => {
@@ -37,6 +39,19 @@ const FormModal = ({
                     register={register}
                     error={errors[field.name]?.message}
                   />
+                );
+              } else if (field.type === "file") {
+                return (
+                  <div key={index}>
+                    <Form.Group controlId="formFile" className="mb-3">
+                      <Form.Label>{field.label}</Form.Label>
+                      <Form.Control type="file" {...register(field.name)} />
+                    </Form.Group>
+
+                    <span className="text-danger">
+                      <> {errors[field.name]?.message}</>
+                    </span>
+                  </div>
                 );
               }
               return (

@@ -1,4 +1,7 @@
 import {
+  ADD_PRODUCT_ERROR,
+  ADD_PRODUCT_PENDING,
+  ADD_PRODUCT_SUCCESS,
   CLEAR_PRODUCT,
   DELETE_PRODUCT_ERROR,
   DELETE_PRODUCT_PENDING,
@@ -21,6 +24,11 @@ const productReducer = (state = {}, action: ReduxAction) => {
         ...state,
         loading: true,
       };
+    case ADD_PRODUCT_PENDING:
+      return {
+        ...state,
+        loading: true,
+      };
     case DELETE_PRODUCT_SUCCESS:
       return {
         ...state,
@@ -33,6 +41,12 @@ const productReducer = (state = {}, action: ReduxAction) => {
         loading: false,
         message: action.payload,
       };
+    case ADD_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
     case DELETE_PRODUCT_ERROR:
       return {
         ...state,
@@ -40,6 +54,12 @@ const productReducer = (state = {}, action: ReduxAction) => {
         error: action.payload,
       };
     case EDIT_PRODUCT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case ADD_PRODUCT_ERROR:
       return {
         ...state,
         loading: false,
