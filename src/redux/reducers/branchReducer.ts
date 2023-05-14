@@ -5,6 +5,10 @@ import {
   BRANCH_ADD_PENDING,
   BRANCH_ADD_SUCCESS,
   BRANCH_ADD_ERROR,
+  ADD_PRODUCT_TO_BRANCH_PENDING,
+  ADD_PRODUCT_TO_BRANCH_SUCCESS,
+  ADD_PRODUCT_TO_BRANCH_ERROR,
+  CLEAR_BRANCH_MESSAGES,
 } from "./../../constants/reduxActionsNames/branch/index";
 
 import {
@@ -52,13 +56,37 @@ const branchReducer = (state = {}, action: ReduxAction) => {
         error: action.payload,
       };
 
+    // add product to branch
+    case ADD_PRODUCT_TO_BRANCH_PENDING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ADD_PRODUCT_TO_BRANCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
+    case ADD_PRODUCT_TO_BRANCH_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
     case CLEAR_ERROR:
       return {
         ...state,
         error: null,
       };
-    case "CLEAR_BRANCH":
-      return {};
+    case CLEAR_BRANCH_MESSAGES:
+      return {
+        ...state,
+        message: null,
+        error: null,
+      };
+
     case CLEAR_SUCCESS:
       return {
         ...state,

@@ -1,5 +1,10 @@
 import client from "../../../../client/axiosInstance";
 import {
+  ADD_PRODUCT_TO_BRANCH_ERROR,
+  ADD_PRODUCT_TO_BRANCH_PENDING,
+  ADD_PRODUCT_TO_BRANCH_SUCCESS,
+} from "../../../../constants/reduxActionsNames/branch";
+import {
   DELETE_MODERATOR_PENDING,
   DELETE_MODERATOR_SUCCESS,
 } from "../../../../constants/reduxActionsNames/moderator";
@@ -41,5 +46,20 @@ export const changeBranchProductQuantity =
       dispatch({ type: EDIT_PRODUCT_SUCCESS, payload: data.message });
     } catch (error: any) {
       errorDispatcher(error, EDIT_PRODUCT_ERROR, dispatch);
+    }
+  };
+
+export const addProductToBranch =
+  (branchId: string, productId: string, quantity: string | number): RootThunk =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: ADD_PRODUCT_TO_BRANCH_PENDING });
+      const { data }: { data: DeleteProductFromBranchResponse } =
+        await client.post(`/branch/product/${branchId}`, {
+          product: { id: productId, quantity },
+        });
+      dispatch({ type: ADD_PRODUCT_TO_BRANCH_SUCCESS, payload: data.message });
+    } catch (error: any) {
+      errorDispatcher(error, ADD_PRODUCT_TO_BRANCH_ERROR, dispatch);
     }
   };

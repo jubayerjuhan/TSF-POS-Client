@@ -17,6 +17,13 @@ const ADD_PRODUCT_TO_BRANCH_FIELDS: FieldTypes[] = [
     label: "Product",
     type: "select",
     options: [],
+    placeholder: "Enter Product",
+  },
+
+  {
+    name: "quantity",
+    label: "Quantity",
+    type: "number",
     placeholder: "Enter Quantity",
   },
 ];

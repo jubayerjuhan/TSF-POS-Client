@@ -11,6 +11,7 @@ import { toast } from "react-hot-toast";
 import EditBranchProduct from "../EditBranchProduct/EditBranchProduct";
 import BranchAddProduct from "../BranchAddProduct/BranchAddProduct";
 import { CLEAR_PRODUCT } from "../../../../constants/reduxActionsNames/product";
+import { getBranch } from "../../../../redux/actions/branch/branchAction";
 
 interface BranchProductProps {
   products: { id: Product; quantity: number; _id: string }[];
@@ -31,6 +32,7 @@ const BranchProducts = ({ products }: BranchProductProps) => {
   const handleDeleteProductFromBranch = async () => {
     await dispatch(deleteProductFromBranch(branch._id, deletingProductId));
     setDeletingModalOpen(false);
+    dispatch(getBranch(branch._id));
   };
 
   useEffect(() => {

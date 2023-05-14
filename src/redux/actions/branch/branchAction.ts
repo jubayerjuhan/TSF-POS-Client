@@ -6,6 +6,7 @@ import {
   BRANCH_ERROR,
   BRANCH_PENDING,
   BRANCH_SUCCESS,
+  CLEAR_BRANCH_MESSAGES,
 } from "../../../constants/reduxActionsNames/branch";
 import {
   PROMISE_DESTROY,
@@ -37,7 +38,7 @@ export const getBranch =
   (branchId: string): RootThunk =>
   async (dispatch: AppDispatch) => {
     try {
-      dispatch({ type: "CLEAR_BRANCH" });
+      dispatch({ type: CLEAR_BRANCH_MESSAGES });
       dispatch({ type: BRANCH_PENDING });
       const { data }: { data: BranchResponse } = await client.get(
         `/branch/action/${branchId}`
