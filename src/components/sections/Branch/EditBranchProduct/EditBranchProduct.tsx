@@ -14,9 +14,7 @@ const EditBranchProduct = ({
   branchId,
 }: EditBranchProductTypes) => {
   const dispatch = useDispatch();
-  const { error, loading, message } = useSelector(
-    (state: StateType) => state.product
-  );
+  const { loading } = useSelector((state: StateType) => state.product);
   const {
     register,
     handleSubmit,

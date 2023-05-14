@@ -10,3 +10,15 @@ const EDIT_PRODUCT_QUANTITY: FieldTypes[] = [
 ];
 
 export default EDIT_PRODUCT_QUANTITY;
+
+const ADD_PRODUCT_TO_BRANCH_FIELDS: FieldTypes[] = [
+  {
+    name: "product",
+    label: "Product",
+    type: "select",
+    options: [],
+    placeholder: "Enter Quantity",
+  },
+];
+
+export { ADD_PRODUCT_TO_BRANCH_FIELDS };

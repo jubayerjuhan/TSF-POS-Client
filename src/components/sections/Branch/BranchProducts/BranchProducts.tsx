@@ -10,6 +10,7 @@ import { errorAndSuccessRemover } from "../../../../redux/actions/remover/remove
 import { toast } from "react-hot-toast";
 import EditBranchProduct from "../EditBranchProduct/EditBranchProduct";
 import BranchAddProduct from "../BranchAddProduct/BranchAddProduct";
+import { CLEAR_PRODUCT } from "../../../../constants/reduxActionsNames/product";
 
 interface BranchProductProps {
   products: { id: Product; quantity: number; _id: string }[];
@@ -35,7 +36,7 @@ const BranchProducts = ({ products }: BranchProductProps) => {
   useEffect(() => {
     if (error) toast.error(error);
     if (message) toast.success(message);
-    dispatch(errorAndSuccessRemover());
+    dispatch({ type: CLEAR_PRODUCT });
   }, [dispatch, error, message]);
 
   return (
@@ -54,7 +55,7 @@ const BranchProducts = ({ products }: BranchProductProps) => {
         loading={loading}
         handleConfirm={handleDeleteProductFromBranch}
       />
-      <div className="d-flex">
+      <div className="d-flex justify-content-between align-items-center">
         <p className="fs-4 fw-bold text-muted mb-3">
           Products ({products?.length})
         </p>
