@@ -4,6 +4,7 @@ import Branches from "../pages/Branches/Branches";
 import Dashboard from "../pages/Dashboard";
 import ForgotPassword from "../pages/ForgotPassword";
 import Login from "../pages/Login";
+import Products from "../pages/Products";
 import ResetPassword from "../pages/ResetPassword";
 import Users from "../pages/Users";
 
@@ -41,6 +42,11 @@ const routes: Route[] = [
   {
     path: "/branch/:id",
     component: Branch,
+    secured: true,
+  },
+  {
+    path: "/products",
+    component: Products,
     secured: true,
   },
 ];

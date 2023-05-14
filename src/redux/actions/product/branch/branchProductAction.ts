@@ -4,10 +4,7 @@ import {
   ADD_PRODUCT_TO_BRANCH_PENDING,
   ADD_PRODUCT_TO_BRANCH_SUCCESS,
 } from "../../../../constants/reduxActionsNames/branch";
-import {
-  DELETE_MODERATOR_PENDING,
-  DELETE_MODERATOR_SUCCESS,
-} from "../../../../constants/reduxActionsNames/moderator";
+
 import {
   DELETE_PRODUCT_ERROR,
   DELETE_PRODUCT_PENDING,
@@ -28,7 +25,7 @@ export const deleteProductFromBranch =
       const { data }: { data: DeleteProductFromBranchResponse } =
         await client.delete(`/branch/product/${branchId}?product=${productId}`);
       dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.message });
-    } catch (error: any) {
+    } catch (error) {
       errorDispatcher(error, DELETE_PRODUCT_ERROR, dispatch);
     }
   };
@@ -44,7 +41,7 @@ export const changeBranchProductQuantity =
           quantity,
         });
       dispatch({ type: EDIT_PRODUCT_SUCCESS, payload: data.message });
-    } catch (error: any) {
+    } catch (error) {
       errorDispatcher(error, EDIT_PRODUCT_ERROR, dispatch);
     }
   };
@@ -59,7 +56,7 @@ export const addProductToBranch =
           product: { id: productId, quantity },
         });
       dispatch({ type: ADD_PRODUCT_TO_BRANCH_SUCCESS, payload: data.message });
-    } catch (error: any) {
+    } catch (error) {
       errorDispatcher(error, ADD_PRODUCT_TO_BRANCH_ERROR, dispatch);
     }
   };

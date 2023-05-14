@@ -5,6 +5,7 @@ import { SidebarLinkType } from "./types";
 
 const sidebarLinks: SidebarLinkType[] = [
   { name: "Dashboard", icon: DashboardIcon, link: "/" },
+  { name: "All Products", icon: DashboardIcon, link: "/products" },
   { name: "Branches", icon: StorefrontIcon, link: "/branches" },
   { name: "Users", icon: GroupIcon, link: "/users" },
 ];

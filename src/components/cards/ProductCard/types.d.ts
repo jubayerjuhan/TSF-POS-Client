@@ -2,7 +2,7 @@ import { Product } from "../../../types/Product/ProductTypes";
 
 interface ProductCardTypes {
   product: Product;
-  quantity: number;
+  quantity?: number;
   setEditingModelOpen: React.Dispatch<SetStateAction<boolean>>;
   setEditingProductId: React.Dispatch<SetStateAction<string>>;
   setDeletingProductId: React.Dispatch<SetStateAction<string>>;

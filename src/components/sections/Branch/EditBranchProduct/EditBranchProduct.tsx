@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import FormModal from "../../../Modals/FormModal/FormModal";
 import { useForm } from "react-hook-form";
 import EDIT_PRODUCT_QUANTITY from "../../../../constants/InputFields/branch/product";
