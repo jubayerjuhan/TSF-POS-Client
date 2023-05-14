@@ -3,6 +3,7 @@ import { Action, AnyAction } from "redux";
 import { RootState } from "./store/configureStore";
 import { User } from "../types/User/userTypes";
 import { Branch } from "../types/Branch/branchTypes";
+import { Product } from "../types/Product/ProductTypes";
 
 export interface ReduxAction extends Action {
   payload: object | string | Array;
@@ -52,6 +53,12 @@ interface StateType {
     loading: boolean;
     error: string | null;
     message: string | null;
+  };
+  products: {
+    loading: boolean;
+    error: string | null;
+    message: string | null;
+    products: Product[];
   };
   promise: {
     loading: boolean;

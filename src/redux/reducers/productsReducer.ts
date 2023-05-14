@@ -6,7 +6,7 @@ import {
 } from "../../constants/reduxActionsNames/products";
 import { ReduxAction } from "../redux";
 
-const productReducer = (state = {}, action: ReduxAction) => {
+const productsReducer = (state = {}, action: ReduxAction) => {
   switch (action.type) {
     case GET_PRODUCTS_PENDING:
       return {
@@ -17,7 +17,7 @@ const productReducer = (state = {}, action: ReduxAction) => {
       return {
         ...state,
         loading: false,
-        product: action.payload,
+        products: action.payload,
       };
     case GET_PRODUCTS_ERROR:
       return {
@@ -37,4 +37,4 @@ const productReducer = (state = {}, action: ReduxAction) => {
   }
 };
 
-export default productReducer;
+export default productsReducer;
