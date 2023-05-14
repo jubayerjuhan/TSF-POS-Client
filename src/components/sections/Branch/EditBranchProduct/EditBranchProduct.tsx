@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import FormModal from "../../../Modals/FormModal/FormModal";
 import { useForm } from "react-hook-form";
 import EDIT_PRODUCT_QUANTITY from "../../../../constants/InputFields/branch/product";
@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeBranchProductQuantity } from "../../../../redux/actions/product/branch/branchProductAction";
 import { getBranch } from "../../../../redux/actions/branch/branchAction";
 import { StateType } from "../../../../redux/redux";
-import { toast } from "react-hot-toast";
-import { errorAndSuccessRemover } from "../../../../redux/actions/remover/removerAction";
 
 const EditBranchProduct = ({
   open,
@@ -32,12 +30,6 @@ const EditBranchProduct = ({
     setOpen(false);
     await dispatch(getBranch(branchId));
   };
-
-  useEffect(() => {
-    if (error) toast.error(error);
-    if (message) toast.success(message);
-    dispatch(errorAndSuccessRemover());
-  }, [error, message, dispatch]);
 
   return (
     <FormModal

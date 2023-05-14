@@ -9,6 +9,7 @@ import { AppDispatch, StateType } from "../../../../redux/redux";
 import { errorAndSuccessRemover } from "../../../../redux/actions/remover/removerAction";
 import { toast } from "react-hot-toast";
 import EditBranchProduct from "../EditBranchProduct/EditBranchProduct";
+import BranchAddProduct from "../BranchAddProduct/BranchAddProduct";
 
 interface BranchProductProps {
   products: { id: Product; quantity: number; _id: string }[];
@@ -53,9 +54,13 @@ const BranchProducts = ({ products }: BranchProductProps) => {
         loading={loading}
         handleConfirm={handleDeleteProductFromBranch}
       />
-      <p className="fs-4 fw-bold text-muted mb-3">
-        Products ({products?.length})
-      </p>
+      <div className="d-flex">
+        <p className="fs-4 fw-bold text-muted mb-3">
+          Products ({products?.length})
+        </p>
+        <BranchAddProduct />
+      </div>
+
       <div className="product__list">
         {products?.map((product, key) => {
           return (
