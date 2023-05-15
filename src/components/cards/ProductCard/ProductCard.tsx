@@ -34,9 +34,11 @@ const ProductCard = ({
           <Card.Text>
             Id: <span className="fw-bold">{product.productId}</span>
           </Card.Text>
-          <Card.Text>
-            Quantity: <span className="fw-bold">{quantity}</span>{" "}
-          </Card.Text>
+          {quantity && (
+            <Card.Text>
+              Quantity: <span className="fw-bold">{quantity}</span>{" "}
+            </Card.Text>
+          )}
           <Card.Text>Cost Price: {product.costPrice}</Card.Text>
           <Card.Text className="mb-3">
             Sell Price: {product.costPrice}

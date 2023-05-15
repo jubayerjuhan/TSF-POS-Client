@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "../../redux/actions/products/productsAction";
 import { StateType } from "../../redux/redux";
 import { toast } from "react-hot-toast";
-import { CLEAR_BRANCH_MESSAGES } from "../../constants/reduxActionsNames/branch";
+import { CLEAR_PRODUCT_MESSAGE } from "../../constants/reduxActionsNames/product";
 
 const Products = () => {
   const { products } = useSelector((state: StateType) => state.products);
@@ -16,7 +16,7 @@ const Products = () => {
     if (error) toast.error(error);
     if (message) toast.success(message);
     dispatch(fetchAllProducts());
-    dispatch({ type: CLEAR_BRANCH_MESSAGES });
+    dispatch({ type: CLEAR_PRODUCT_MESSAGE });
   }, [dispatch, message, error]);
 
   return (

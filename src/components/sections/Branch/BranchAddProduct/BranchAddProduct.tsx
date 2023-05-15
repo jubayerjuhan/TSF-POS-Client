@@ -11,6 +11,8 @@ import { addProductToBranch } from "../../../../redux/actions/product/branch/bra
 import { getBranch } from "../../../../redux/actions/branch/branchAction";
 import { CLEAR_BRANCH_MESSAGES } from "../../../../constants/reduxActionsNames/branch";
 import { toast } from "react-hot-toast";
+import { yupResolver } from "@hookform/resolvers/yup";
+import ADD_PRODUCT_TO_BRANCH_VALIDATION from "../../../../constants/InputValidation/Product/branchAddProduct";
 
 const BranchAddProduct = () => {
   const { branch, message } = useSelector((state: StateType) => state.branch);
@@ -23,7 +25,9 @@ const BranchAddProduct = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AddProductToBranchData>();
+  } = useForm<AddProductToBranchData>({
+    resolver: yupResolver(ADD_PRODUCT_TO_BRANCH_VALIDATION),
+  });
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -43,7 +47,7 @@ const BranchAddProduct = () => {
       if (productsField) {
         products.map((product) => {
           const option = {
-            label: `Id - ${product.productId}  ${product.name}`,
+            label: `${product.productId} - ${product.name}`,
             value: product._id,
           };
           if (!productsField.options?.some((o) => o.value === option.value)) {
