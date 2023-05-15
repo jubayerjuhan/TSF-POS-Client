@@ -1,5 +1,4 @@
 import client from "../../../client/axiosInstance";
-import { ProductFormData } from "../../../components/sections/Product/AddProduct/types";
 import {
   ADD_PRODUCT_ERROR,
   ADD_PRODUCT_PENDING,
@@ -10,9 +9,13 @@ import {
   EDIT_PRODUCT_ERROR,
   EDIT_PRODUCT_PENDING,
   EDIT_PRODUCT_SUCCESS,
+  GET_PRODUCT_ERROR,
+  GET_PRODUCT_PENDING,
+  GET_PRODUCT_SUCCESS,
 } from "../../../constants/reduxActionsNames/product";
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk, SuccessMessageType } from "../../redux";
+import { ProductSuccess } from "./types";
 
 export const addProduct =
   (product: FormData): RootThunk =>
@@ -58,5 +61,20 @@ export const editProduct =
         dispatch({ type: EDIT_PRODUCT_SUCCESS, payload: data.message });
     } catch (error) {
       errorDispatcher(error, EDIT_PRODUCT_ERROR, dispatch);
+    }
+  };
+
+export const getProduct =
+  (productId: string): RootThunk =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: GET_PRODUCT_PENDING });
+      const { data }: { data: ProductSuccess } = await client.get(
+        `/product/search?productId=${productId}`
+      );
+      if (data.success)
+        dispatch({ type: GET_PRODUCT_SUCCESS, payload: data.product });
+    } catch (error) {
+      errorDispatcher(error, GET_PRODUCT_ERROR, dispatch);
     }
   };

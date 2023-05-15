@@ -50,9 +50,10 @@ interface StateType {
     message: string | null;
   };
   product: {
-    loading: boolean;
-    error: string | null;
-    message: string | null;
+    loading?: boolean;
+    error?: string | null;
+    product?: Product;
+    message?: string | null;
   };
   products: {
     loading: boolean;

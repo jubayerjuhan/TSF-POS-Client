@@ -3,6 +3,7 @@ import { IMAGE_URL } from "../../../constants/links/imageLink";
 import Button from "../../core/Button/Button";
 import "./productCard.scss";
 import { ProductCardTypes } from "./types";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({
   product,
@@ -18,6 +19,8 @@ const ProductCard = ({
     setDeletionModelOpen(true);
   };
 
+  const navigate = useNavigate();
+
   const onEditClick = () => {
     setEditingModelOpen(true);
     setEditingProductId(product._id);
@@ -29,9 +32,10 @@ const ProductCard = ({
         className="product__image "
         variant="top"
         src={`${IMAGE_URL}${product.photo}`}
+        onClick={() => navigate(`/product/${product.productId}`)}
       />
       <Card.Body className="d-flex flex-column justify-content-between">
-        <div>
+        <div onClick={() => navigate(`/product/${product.productId}`)}>
           <Card.Title className="fs-6 fw-semibold">{product.name}</Card.Title>
           <Card.Text>
             Id: <span className="fw-bold">{product.productId}</span>
