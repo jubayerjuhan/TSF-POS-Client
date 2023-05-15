@@ -13,9 +13,9 @@ const FormModal = ({
   submitFields,
   title,
   fields,
-  watch,
   register,
   errors,
+  defaultValues,
 }: FormModalTypes) => {
   const handleClose = () => setOpen(false);
 
@@ -56,6 +56,11 @@ const FormModal = ({
               }
               return (
                 <InputField
+                  defaultValue={
+                    defaultValues
+                      ? defaultValues[field.name as keyof typeof defaultValues]
+                      : ""
+                  }
                   error={errors[field.name]?.message}
                   key={index}
                   placeholder={field.placeholder}

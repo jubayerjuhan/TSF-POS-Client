@@ -11,6 +11,7 @@ const ProductCard = ({
   setDeletionModelOpen,
   setEditingModelOpen,
   setEditingProductId,
+  setEditingProduct,
 }: ProductCardTypes) => {
   const onDeleteClick = () => {
     setDeletingProductId(product._id);
@@ -20,6 +21,7 @@ const ProductCard = ({
   const onEditClick = () => {
     setEditingModelOpen(true);
     setEditingProductId(product._id);
+    if (setEditingProduct) setEditingProduct(product);
   };
   return (
     <Card className="product__card">
