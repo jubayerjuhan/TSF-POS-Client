@@ -7,6 +7,7 @@ import AppModal from "../../../Modals/AppModal/AppModal";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, StateType } from "../../../../redux/redux";
 import { deleteProduct } from "../../../../redux/actions/product/productAction";
+import DeleteProduct from "../DeleteProduct/DeleteProduct";
 
 const ProductList = ({ products }: { products: Product[] }) => {
   const { loading } = useSelector((state: StateType) => state.product);
@@ -23,13 +24,11 @@ const ProductList = ({ products }: { products: Product[] }) => {
   return (
     <div>
       <AddProduct />
-      <AppModal
-        title="Confirm Product Deletion"
-        description="Are You Sure You Want To Delete This Product"
+      <DeleteProduct
+        deletingProductModal={deletingProductModal}
         loading={loading}
-        open={deletingProductModal}
-        setOpen={setDeletingProductModal}
-        handleConfirm={handleDeleteProduct}
+        handleDeleteProduct={handleDeleteProduct}
+        setDeletingProductModal={setDeletingProductModal}
       />
       <div className="product__list">
         {products?.map((product, index) => (
