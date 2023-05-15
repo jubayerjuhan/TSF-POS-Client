@@ -3,6 +3,8 @@ import ADD_PRODUCT_FIELDS from "../../../../constants/InputFields/product/addPro
 import FormModal from "../../../Modals/FormModal/FormModal";
 import { useForm } from "react-hook-form";
 import { Product } from "../../../../types/Product/ProductTypes";
+import { useDispatch } from "react-redux";
+import { editProduct } from "../../../../redux/actions/product/productAction";
 
 const EditProduct = ({
   open,
@@ -19,8 +21,21 @@ const EditProduct = ({
     register,
   } = useForm();
 
-  const handleEditProduct = (data: object) => {
-    console.log(editingProduct, "data");
+  const dispatch = useDispatch();
+  const handleEditProduct = async (data: object) => {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(data)) {
+      if (key === "photo") {
+        formData.append(key, value[0]);
+      } else {
+        formData.append(key, value);
+      }
+    }
+
+    if (editingProduct?._id)
+      await dispatch(editProduct(editingProduct?._id, formData));
+
+    setOpen(false);
   };
 
   return (

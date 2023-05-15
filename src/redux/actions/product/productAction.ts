@@ -7,6 +7,9 @@ import {
   DELETE_PRODUCT_ERROR,
   DELETE_PRODUCT_PENDING,
   DELETE_PRODUCT_SUCCESS,
+  EDIT_PRODUCT_ERROR,
+  EDIT_PRODUCT_PENDING,
+  EDIT_PRODUCT_SUCCESS,
 } from "../../../constants/reduxActionsNames/product";
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk, SuccessMessageType } from "../../redux";
@@ -39,5 +42,21 @@ export const deleteProduct =
         dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.message });
     } catch (error) {
       errorDispatcher(error, DELETE_PRODUCT_ERROR, dispatch);
+    }
+  };
+
+export const editProduct =
+  (productId: string, product: object): RootThunk =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: EDIT_PRODUCT_PENDING });
+      const { data }: { data: SuccessMessageType } = await client.put(
+        `/product/action/${productId}`,
+        product
+      );
+      if (data.success)
+        dispatch({ type: EDIT_PRODUCT_SUCCESS, payload: data.message });
+    } catch (error) {
+      errorDispatcher(error, EDIT_PRODUCT_ERROR, dispatch);
     }
   };
