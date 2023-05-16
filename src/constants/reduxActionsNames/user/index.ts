@@ -4,3 +4,4 @@ export const LOGIN_ERROR = "LOGIN_ERROR";
 
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const CLEAR_SUCCESS = "CLEAR_SUCCESS";
+export const CLEAR_BRANCH = "CLEAR_BRANCH";

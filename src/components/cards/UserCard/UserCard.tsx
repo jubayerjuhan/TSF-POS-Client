@@ -31,15 +31,15 @@ const UserCard = ({
           </Card.Subtitle>
           <Card.Text className="manage mb-1">Manages: {user.branch}</Card.Text>
           <Card.Text className="manage">Email: {user.email}</Card.Text>
-          {user?._id !== loggedInUser?._id && (
-            <div className="d-flex mt-3 gap-2">
-              <Button
-                title="Delete User"
-                className="btn-danger w-100"
-                onClick={onDeleteClick}
-              />
-            </div>
-          )}
+
+          <div className="d-flex mt-3 gap-2">
+            <Button
+              title="Delete User"
+              className="btn-danger w-100"
+              onClick={onDeleteClick}
+              disabled={user?._id === loggedInUser?._id}
+            />
+          </div>
         </Card.Body>
       </Card>
     </>

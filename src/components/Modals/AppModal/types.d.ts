@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface AppModalTypes {
-  loading: boolean;
+  loading?: boolean;
   title: string;
   description: string;
   handleConfirm: () => void;

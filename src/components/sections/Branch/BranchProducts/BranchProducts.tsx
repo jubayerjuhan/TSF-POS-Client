@@ -12,8 +12,14 @@ import BranchAddProduct from "../BranchAddProduct/BranchAddProduct";
 import { CLEAR_PRODUCT } from "../../../../constants/reduxActionsNames/product";
 import { getBranch } from "../../../../redux/actions/branch/branchAction";
 
-interface BranchProductProps {
-  products: { id: Product; quantity: number; _id: string }[];
+export interface BranchProduct {
+  id: Product;
+  quantity: number;
+  _id: string;
+}
+
+export interface BranchProductProps {
+  products: BranchProduct[];
 }
 const BranchProducts = ({ products }: BranchProductProps) => {
   const { branch } = useSelector((state: StateType) => state.branch);

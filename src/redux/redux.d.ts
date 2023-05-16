@@ -38,6 +38,7 @@ interface StateType {
   };
   branches: {
     loading: boolean;
+    loaded?: boolean;
     branches: Array<{
       _id: string;
       name: string;

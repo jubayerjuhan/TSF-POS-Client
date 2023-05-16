@@ -38,7 +38,7 @@ const ProductDetail = ({
           <p>Description : {`${product?.description}`}</p>
           {branchDetail && (
             <div>
-              <p className="fs- my-4 badge badge-pill badge-info">
+              <p className="fs- my-2 mb-3 badge badge-pill badge-info">
                 Available Branches:{" "}
               </p>
               <div className="gap-3 d-flex flex-column">

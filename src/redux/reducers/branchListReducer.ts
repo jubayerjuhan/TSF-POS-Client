@@ -18,6 +18,7 @@ const branchesReducer = (state = {}, action: ReduxAction) => {
         ...state,
         loading: false,
         branches: action.payload,
+        loaded: true,
       };
     case BRANCHES_ERROR:
       return {

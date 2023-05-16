@@ -15,7 +15,7 @@ import productsReducer from "../reducers/productsReducer";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "branches"], // only navigation will be persisted
+  whitelist: ["user", ""], // only navigation will be persisted
 };
 
 // conbine reducers here
