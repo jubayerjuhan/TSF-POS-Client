@@ -8,4 +8,5 @@ interface ProductCardTypes {
   setDeletingProductId: React.Dispatch<SetStateAction<string>>;
   setDeletionModelOpen: React.Dispatch<SetStateAction<boolean>>;
   setEditingProduct?: React.Dispatch<SetStateAction<Product>>;
+  hideQty?: true;
 }

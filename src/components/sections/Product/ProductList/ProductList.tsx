@@ -24,6 +24,8 @@ const ProductList = ({ products }: { products: Product[] }) => {
     setDeletingProductModal(false);
   };
 
+  console.log(editingProductId);
+
   return (
     <div>
       <AddProduct />
@@ -48,6 +50,7 @@ const ProductList = ({ products }: { products: Product[] }) => {
             setEditingProductId={setEditingProductId}
             setEditingProduct={setEditingProduct}
             key={index}
+            hideQty
           />
         ))}
       </div>

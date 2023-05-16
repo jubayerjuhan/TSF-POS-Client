@@ -52,7 +52,7 @@ interface StateType {
     message: string | null;
   };
   product: {
-    loading?: boolean;
+    loading: boolean;
     error?: string | null;
     product?: SearchedProduct;
     message?: string | null;

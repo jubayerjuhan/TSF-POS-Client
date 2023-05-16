@@ -13,6 +13,7 @@ const ProductCard = ({
   setEditingModelOpen,
   setEditingProductId,
   setEditingProduct,
+  hideQty,
 }: ProductCardTypes) => {
   const onDeleteClick = () => {
     setDeletingProductId(product._id);
@@ -40,9 +41,11 @@ const ProductCard = ({
           <Card.Text>
             Id: <span className="fw-bold">{product.productId}</span>
           </Card.Text>
-          {quantity && (
+          {hideQty ? (
+            <></>
+          ) : (
             <Card.Text>
-              Quantity: <span className="fw-bold">{quantity}</span>{" "}
+              Quantity: <span className="fw-bold">{quantity}</span>
             </Card.Text>
           )}
           <Card.Text>Cost Price: {product.costPrice}</Card.Text>
