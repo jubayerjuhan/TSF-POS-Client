@@ -12,6 +12,9 @@ import {
   GET_PRODUCT_ERROR,
   GET_PRODUCT_PENDING,
   GET_PRODUCT_SUCCESS,
+  MOVE_PRODUCT_ERROR,
+  MOVE_PRODUCT_PENDING,
+  MOVE_PRODUCT_SUCCESS,
 } from "../../../constants/reduxActionsNames/product";
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk, SuccessMessageType } from "../../redux";
@@ -76,5 +79,26 @@ export const getProduct =
         dispatch({ type: GET_PRODUCT_SUCCESS, payload: data.product });
     } catch (error) {
       errorDispatcher(error, GET_PRODUCT_ERROR, dispatch);
+    }
+  };
+
+export const moveProduct =
+  (
+    productId: string,
+    fromBranchId: string,
+    toBranchId: string,
+    quantity: number
+  ): RootThunk =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: MOVE_PRODUCT_PENDING });
+      const { data }: { data: SuccessMessageType } = await client.post(
+        `/branch/move-product/${productId}`,
+        { fromBranchId, toBranchId, quantity }
+      );
+      if (data.success)
+        dispatch({ type: MOVE_PRODUCT_SUCCESS, payload: data.message });
+    } catch (error) {
+      errorDispatcher(error, MOVE_PRODUCT_ERROR, dispatch);
     }
   };

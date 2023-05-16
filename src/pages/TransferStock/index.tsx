@@ -15,6 +15,10 @@ import Button from "../../components/core/Button/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TRANSFER_STOCK_VALIDATION from "../../constants/InputValidation/stock/transferStockValidation";
 import "./transferStock.scss";
+import { toast } from "react-hot-toast";
+import { CLEAR_PRODUCT_MESSAGE } from "../../constants/reduxActionsNames/product";
+import { moveProduct } from "../../redux/actions/product/productAction";
+import { TransferStockFields } from "./types";
 
 const TransferStock = () => {
   const [fields, setFields] = useState<FieldTypes[]>([]);
@@ -25,14 +29,19 @@ const TransferStock = () => {
   const { branch, loading: productsLoading } = useSelector(
     (state: StateType) => state.branch
   );
+
+  const { message, error } = useSelector((state: StateType) => state.product);
   const {
     handleSubmit,
     watch,
     setValue,
+    reset,
     register,
     resetField,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(TRANSFER_STOCK_VALIDATION) });
+  } = useForm<TransferStockFields>({
+    resolver: yupResolver(TRANSFER_STOCK_VALIDATION),
+  });
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -69,9 +78,21 @@ const TransferStock = () => {
     }
   }, [branches, fromBranch, branch]);
 
-  const onSubmit = (data: object) => {
-    console.log(data, "data.....");
+  const onSubmit = async (data: TransferStockFields) => {
+    await dispatch(
+      moveProduct(data.product, data.fromBranch, data.toBranch, data.quantity)
+    );
   };
+
+  useEffect(() => {
+    if (message) {
+      toast.success(message);
+      reset();
+    }
+    if (error) toast.error(error);
+    dispatch({ type: CLEAR_PRODUCT_MESSAGE });
+  }, [message, error, dispatch, reset]);
+
   return (
     <Pagewrapper>
       {loading || productsLoading ? (

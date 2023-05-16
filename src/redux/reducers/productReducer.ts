@@ -13,6 +13,9 @@ import {
   GET_PRODUCT_ERROR,
   GET_PRODUCT_PENDING,
   GET_PRODUCT_SUCCESS,
+  MOVE_PRODUCT_ERROR,
+  MOVE_PRODUCT_PENDING,
+  MOVE_PRODUCT_SUCCESS,
 } from "../../constants/reduxActionsNames/product";
 import { ReduxAction } from "../redux";
 
@@ -86,8 +89,22 @@ const productReducer = (state = {}, action: ReduxAction) => {
         loading: false,
         error: action.payload,
       };
-    case CLEAR_PRODUCT:
-      return {};
+
+    case MOVE_PRODUCT_PENDING:
+      return {
+        ...state,
+        loading: false,
+      };
+    case MOVE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case MOVE_PRODUCT_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
 
     case CLEAR_PRODUCT_MESSAGE:
       return {
