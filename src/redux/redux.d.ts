@@ -4,6 +4,7 @@ import { RootState } from "./store/configureStore";
 import { User } from "../types/User/userTypes";
 import { Branch } from "../types/Branch/branchTypes";
 import { Product } from "../types/Product/ProductTypes";
+import { SearchedProduct } from "../types/Product/searchProductTypes";
 
 export interface ReduxAction extends Action {
   payload: object | string | Array;
@@ -52,7 +53,7 @@ interface StateType {
   product: {
     loading?: boolean;
     error?: string | null;
-    product?: Product;
+    product?: SearchedProduct;
     message?: string | null;
   };
   products: {

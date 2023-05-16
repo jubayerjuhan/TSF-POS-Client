@@ -10,9 +10,10 @@ const InputField = ({
   register,
   label,
   defaultValue,
+  className,
 }: InputFieldType) => {
   return (
-    <div className="input__wrapper">
+    <div className={`input__wrapper ${className}`}>
       <p className="top__label mb-2">{label}</p>
       <Form.Control
         defaultValue={defaultValue}

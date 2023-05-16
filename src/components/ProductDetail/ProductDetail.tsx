@@ -1,8 +1,16 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { Product } from "../../types/Product/ProductTypes";
 import { IMAGE_URL } from "../../constants/links/imageLink";
+import { SearchedProduct } from "../../types/Product/searchProductTypes";
 
-const ProductDetail = ({ product }: { product: Product }) => {
+const ProductDetail = ({
+  product,
+  branchDetail,
+}: {
+  product: SearchedProduct;
+  branchDetail?: boolean;
+}) => {
+  console.log(product.branches);
   return (
     <Container>
       <Row style={{ gap: 15 }}>
@@ -15,7 +23,7 @@ const ProductDetail = ({ product }: { product: Product }) => {
         </Col>
         <Col lg={6} className="product__details">
           <p className="fs-4 fw-bold">{product?.name}</p>
-          <p className="fs-6 fw-semibold badge-pill badge badge-secondary">
+          <p className="fw-semibold badge-pill badge badge-secondary">
             Product Id: {product?.productId}
           </p>
           <p>Color : {product?.color}</p>
@@ -28,6 +36,25 @@ const ProductDetail = ({ product }: { product: Product }) => {
             Sell Price: {product?.sellPrice}
           </p>
           <p>Description : {`${product?.description}`}</p>
+          {branchDetail && (
+            <div>
+              <p className="fs- my-4 badge badge-pill badge-info">
+                Available Branches:{" "}
+              </p>
+              <div className="gap-3 d-flex flex-column">
+                {product.branches.map((branch, key) => (
+                  <div className="card" key={key}>
+                    <div className="card-body">
+                      <h5 className="fs-6 mb-3 w-100">{branch.name}</h5>
+                      <h6 className="card-subtitle mb-2 text-muted">
+                        Quantity : {branch.quantity}
+                      </h6>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </Col>
       </Row>
     </Container>

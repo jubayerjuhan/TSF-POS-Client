@@ -1,8 +1,7 @@
-import Product from "../../pages/Product";
 import { Product } from "./ProductTypes";
 
 export type SearchedProduct = Product & {
-  branch: {
+  branches: {
     name: string;
     quantity: number;
   }[];

@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import Product from "../pages/Product";
 import Products from "../pages/Products";
 import ResetPassword from "../pages/ResetPassword";
+import SearchProduct from "../pages/SearchProduct";
 import Users from "../pages/Users";
 
 // types of route object
@@ -53,6 +54,11 @@ const routes: Route[] = [
   {
     path: "/product/:id",
     component: Product,
+    secured: true,
+  },
+  {
+    path: "/search",
+    component: SearchProduct,
     secured: true,
   },
 ];
