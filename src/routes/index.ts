@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import Product from "../pages/Product";
 import Products from "../pages/Products";
 import ResetPassword from "../pages/ResetPassword";
+import Sale from "../pages/Sale";
 import SearchProduct from "../pages/SearchProduct";
 import TransferStock from "../pages/TransferStock";
 import Users from "../pages/Users";
@@ -65,6 +66,11 @@ const routes: Route[] = [
   {
     path: "/transfer-stock",
     component: TransferStock,
+    secured: true,
+  },
+  {
+    path: "/sale",
+    component: Sale,
     secured: true,
   },
 ];

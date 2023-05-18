@@ -4,11 +4,14 @@ import GroupIcon from "@mui/icons-material/Group";
 import ChairIcon from "@mui/icons-material/Chair";
 import SearchIcon from "@mui/icons-material/Search";
 import MoveUpIcon from "@mui/icons-material/MoveUp";
+import SellIcon from "@mui/icons-material/Sell";
+
 import { SidebarLinkType } from "./types";
 
 const sidebarLinks: SidebarLinkType[] = [
   { name: "Dashboard", icon: DashboardIcon, link: "/" },
   { name: "All Products", icon: ChairIcon, link: "/products" },
+  { name: "Sale", icon: SellIcon, link: "/sale" },
   { name: "Seacrch Product", icon: SearchIcon, link: "/search" },
   { name: "Transfer Stock", icon: MoveUpIcon, link: "/transfer-stock" },
   { name: "Branches", icon: StorefrontIcon, link: "/branches" },
