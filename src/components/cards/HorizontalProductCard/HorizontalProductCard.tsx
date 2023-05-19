@@ -11,7 +11,7 @@ const HorizontalProductCard = () => {
         />
       </div>
       <div className="product__info">
-        <p className="product__name mb-3">
+        <p className="product__name mb-3 fs-6 fw-semibold">
           Rain Shower Refreshing Bath and Shower Gel
         </p>
         <div className="product__cart d-flex justify-content-between">

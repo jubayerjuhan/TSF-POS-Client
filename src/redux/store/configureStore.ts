@@ -10,12 +10,13 @@ import branchesReducer from "../reducers/branchListReducer";
 import branchReducer from "../reducers/branchReducer";
 import productReducer from "../reducers/productReducer";
 import productsReducer from "../reducers/productsReducer";
+import cartReducer from "../reducers/cartReducer";
 
 //persist config for persistor
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", ""], // only navigation will be persisted
+  whitelist: ["user", "cart"], // only navigation will be persisted
 };
 
 // conbine reducers here
@@ -26,6 +27,7 @@ const reducers = combineReducers({
   branches: branchesReducer,
   product: productReducer,
   products: productsReducer,
+  cart: cartReducer,
   promise: promiseReducer,
 });
 

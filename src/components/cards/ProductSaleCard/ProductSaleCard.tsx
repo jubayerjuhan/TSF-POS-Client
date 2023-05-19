@@ -6,8 +6,10 @@ import "./productsalecard.scss";
 
 const ProductSaleCard = ({
   product,
+  onClick,
 }: {
   product: { id: Product; quantity: number };
+  onClick?: () => void;
 }) => {
   return (
     <Card className="sale-product__card">
@@ -34,7 +36,11 @@ const ProductSaleCard = ({
             Sell Price: {product.id.costPrice}
           </Card.Text> */}
         </div>
-        <Button title="Add +" className="btn-primary w-100 mt-3" />
+        <Button
+          title="Add +"
+          className="btn-primary w-100 mt-3"
+          onClick={onClick}
+        />
       </Card.Body>
     </Card>
   );

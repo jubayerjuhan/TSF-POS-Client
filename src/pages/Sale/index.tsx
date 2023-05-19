@@ -5,7 +5,6 @@ import ProductSection from "../../components/sections/Sale/ProductSection/Produc
 import { useSelector } from "react-redux";
 import { StateType } from "../../redux/redux";
 import "./sale.scss";
-import Button from "../../components/core/Button/Button";
 import HorizontalProductCard from "../../components/cards/HorizontalProductCard/HorizontalProductCard";
 
 const Sale = () => {
