@@ -17,8 +17,7 @@ const ProductSection = ({ branchId }: ProductSectionProps) => {
 
   if (!branch?.products || loading) return <>loading...</>;
   return (
-    <div className="product__section">
-      <div>{branchId}</div>
+    <div className="product__section py-4 px-2">
       <div className="sale-product__list">
         {branch.products.map((product, key) => (
           <>

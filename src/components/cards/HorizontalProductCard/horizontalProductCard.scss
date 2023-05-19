@@ -1,0 +1,23 @@
+.sale__list-product {
+  display: flex;
+  align-items: center;
+  background-color: white;
+
+  .product__image {
+    width: 120px;
+    height: 120px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .product__price {
+    display: flex;
+    gap: 10px;
+    input {
+      width: 60px;
+    }
+  }
+}

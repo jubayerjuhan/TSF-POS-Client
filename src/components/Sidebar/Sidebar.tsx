@@ -133,7 +133,7 @@ export default function Sidebar(props: Props) {
         component="main"
         sx={{
           flexGrow: 1,
-          m: 3,
+          m: props.hideBar ? 0 : 3,
           mt: props.hideBar ? 0 : 10,
           fontSize: 16,
           position: "relative",
