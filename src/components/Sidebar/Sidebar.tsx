@@ -23,6 +23,7 @@ interface Props {
   window?: () => Window;
   children: React.ReactNode;
   title?: string;
+  hideBar: boolean;
 }
 
 export default function Sidebar(props: Props) {
@@ -66,28 +67,30 @@ export default function Sidebar(props: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            {props.title ? props.title : "The Sisters Furniture"}
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      {!props.hideBar && (
+        <AppBar
+          position="fixed"
+          sx={{
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
+          }}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: "none" } }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              {props.title ? props.title : "The Sisters Furniture"}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      )}
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -131,10 +134,10 @@ export default function Sidebar(props: Props) {
         sx={{
           flexGrow: 1,
           m: 3,
-          mt: 10,
+          mt: props.hideBar ? 0 : 10,
           fontSize: 16,
           position: "relative",
-          height: "100vh",
+          height: "97vh",
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >

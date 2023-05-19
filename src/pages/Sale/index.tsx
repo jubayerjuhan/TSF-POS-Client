@@ -13,7 +13,7 @@ const Sale = () => {
   );
 
   return (
-    <Pagewrapper>
+    <Pagewrapper hideBar>
       <div className="sale-page" style={{ height: "80vh" }}>
         <div className="selector-side">
           {!user.branch && <BranchSelector setBranchId={setBranchId} />}
