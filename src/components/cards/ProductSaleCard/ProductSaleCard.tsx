@@ -34,9 +34,7 @@ const ProductSaleCard = ({
             Sell Price: {product.id.costPrice}
           </Card.Text> */}
         </div>
-        <div className="button__container mt-2">
-          <Button title="Edit" className="btn-primary" />
-        </div>
+        <Button title="Add +" className="btn-primary w-100 mt-3" />
       </Card.Body>
     </Card>
   );

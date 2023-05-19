@@ -3,3 +3,8 @@
   grid-template-columns: repeat(auto-fit, minmax(180px, 200px));
   gap: 20px;
 }
+
+.product__section {
+  height: 100vh;
+  overflow: scroll;
+}

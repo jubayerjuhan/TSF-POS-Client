@@ -14,7 +14,7 @@ const Sale = () => {
 
   return (
     <Pagewrapper>
-      <div className="sale-page">
+      <div className="sale-page" style={{ height: "80vh" }}>
         <div className="selector-side">
           {!user.branch && <BranchSelector setBranchId={setBranchId} />}
           <ProductSection branchId={branchId} />
