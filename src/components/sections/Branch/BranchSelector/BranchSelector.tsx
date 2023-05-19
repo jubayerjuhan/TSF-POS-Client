@@ -44,7 +44,7 @@ const BranchSelector = ({ setBranchId }: BranchSelectorProps) => {
             key={index}
           >
             {field.options?.map((option, index) => (
-              <option value={option.value} key={index}>
+              <option value={option.value} key={index} selected>
                 {option.label}
               </option>
             ))}

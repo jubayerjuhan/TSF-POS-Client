@@ -1,4 +1,5 @@
 .sale-page {
   display: grid;
   grid-template-columns: 60% 40%;
+  grid-auto-flow: row; /* Enable wrapping */
 }
