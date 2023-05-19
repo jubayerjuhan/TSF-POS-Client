@@ -1,24 +1,30 @@
 import { useEffect } from "react";
 import { ProductSectionProps } from "./types";
 import { useDispatch, useSelector } from "react-redux";
-import { getBranch } from "../../../../redux/actions/branch/branchAction";
 import { StateType } from "../../../../redux/redux";
 import ProductSaleCard from "../../../cards/ProductSaleCard/ProductSaleCard";
 import "./productSection.scss";
 import { ADD_TO_CART } from "../../../../constants/reduxActionsNames/cart";
-import { Product } from "../../../../types/Product/ProductTypes";
+import { toast } from "react-hot-toast";
+import { BranchProduct } from "../../Branch/BranchProducts/BranchProducts";
 
-const ProductSection = ({ branchId }: ProductSectionProps) => {
+const ProductSection = () => {
   const dispatch = useDispatch();
   const { branch, loading } = useSelector((state: StateType) => state.branch);
+  const { cart } = useSelector((state: StateType) => state.cart);
 
-  console.log(branch?.products?.length);
-  useEffect(() => {
-    if (branchId) dispatch(getBranch(branchId));
-  }, [dispatch, branchId]);
-
-  const handleAddToCart = (product: Product) => {
-    dispatch({ type: ADD_TO_CART, payload: product });
+  const handleAddToCart = (product: BranchProduct) => {
+    // checking if there is any duplicate product
+    const duplicate = cart.find((pd) => pd._id === product._id);
+    if (duplicate) return toast.error("Product already on cart");
+    dispatch({
+      type: ADD_TO_CART,
+      payload: {
+        ...product.id,
+        quantity: 1,
+        availableQuantity: product.quantity,
+      },
+    });
   };
 
   if (!branch?.products || loading) return <>loading...</>;
@@ -30,7 +36,7 @@ const ProductSection = ({ branchId }: ProductSectionProps) => {
           <ProductSaleCard
             product={product}
             key={key}
-            onClick={() => handleAddToCart(product.id)}
+            onClick={() => handleAddToCart(product)}
           />
         ))}
       </div>

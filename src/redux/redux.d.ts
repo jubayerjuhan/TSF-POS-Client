@@ -3,7 +3,7 @@ import { Action, AnyAction } from "redux";
 import { RootState } from "./store/configureStore";
 import { User } from "../types/User/userTypes";
 import { Branch } from "../types/Branch/branchTypes";
-import { Product } from "../types/Product/ProductTypes";
+import { CartProduct, Product } from "../types/Product/ProductTypes";
 import { SearchedProduct } from "../types/Product/searchProductTypes";
 
 export interface ReduxAction extends Action {
@@ -68,6 +68,10 @@ interface StateType {
     success: boolean;
     message: string | null;
     error: string | null;
+  };
+
+  cart: {
+    cart: CartProduct[];
   };
 }
 

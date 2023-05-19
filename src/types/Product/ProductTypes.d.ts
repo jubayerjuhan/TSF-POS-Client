@@ -12,3 +12,8 @@ export interface Product {
   updatedAt: string;
   __v: number;
 }
+
+export interface CartProduct extends Product {
+  quantity: number;
+  availableQuantity: number;
+}
