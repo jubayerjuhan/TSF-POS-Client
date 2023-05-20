@@ -7,6 +7,11 @@ import { StateType } from "../../redux/redux";
 import "./sale.scss";
 import HorizontalProductCard from "../../components/cards/HorizontalProductCard/HorizontalProductCard";
 import { getBranch } from "../../redux/actions/branch/branchAction";
+import { useForm } from "react-hook-form";
+import { rearrangeCart } from "../../utils/cart/rearrangeCart";
+import { ADD_SALE_FIELDS } from "../../constants/InputFields/sale/addSale";
+import InputField from "../../components/core/InputField/InputField";
+import Button from "../../components/core/Button/Button";
 
 const Sale = () => {
   // const { branch, loading } = useSelector((state: StateType) => state.branch);
@@ -17,15 +22,25 @@ const Sale = () => {
   );
 
   const dispatch = useDispatch();
+  const { handleSubmit, register, setValue } = useForm();
 
   useEffect(() => {
     if (branchId) dispatch(getBranch(branchId));
   }, [dispatch, branchId]);
 
+  useEffect(() => {
+    const newCart = rearrangeCart(cart);
+    setValue("items", newCart);
+  }, [cart, setValue]);
+
+  const submitSale = (data: object) => {
+    console.log(data);
+  };
+
   return (
     <Pagewrapper hideBar>
-      <div className="sale-page" style={{ height: "80vh" }}>
-        <div className="selector-side">
+      <div className="sale-page" style={{ height: "100vh" }}>
+        <div className="selector-side p-4">
           {!user.branch && <BranchSelector setBranchId={setBranchId} />}
           <ProductSection />
         </div>
@@ -35,6 +50,21 @@ const Sale = () => {
             {cart.map((product, key) => (
               <HorizontalProductCard key={key} product={product} />
             ))}
+          </div>
+          <div className="customer__details">
+            {/* <h6 className="fs-5 fw-semibold">Customer Info</h6> */}
+            <div className="customer__info d-flex flex-column gap-3 my-4">
+              {ADD_SALE_FIELDS.map((field, index) => (
+                <InputField
+                  label={field.label}
+                  name={field.label}
+                  register={register}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                />
+              ))}
+              <Button title="Submit" onClick={handleSubmit(submitSale)} />
+            </div>
           </div>
         </div>
       </div>

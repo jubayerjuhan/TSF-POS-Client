@@ -9,6 +9,15 @@
   background-color: #f5f5f6;
 }
 
+.selector-side {
+  height: 100vh;
+}
+
+.sale__info-side {
+  .sale__info {
+    overflow: scroll;
+  }
+}
 @media (max-width: 768px) {
   .sale-page {
     grid-template-columns: 1fr;
