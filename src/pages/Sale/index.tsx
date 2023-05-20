@@ -13,6 +13,7 @@ import { ADD_SALE_FIELDS } from "../../constants/InputFields/sale/addSale";
 import InputField from "../../components/core/InputField/InputField";
 import Button from "../../components/core/Button/Button";
 import Checkbox from "../../components/core/Checkbox/Checkbox";
+import SelectField from "../../components/core/SelectField/SelectField";
 
 const Sale = () => {
   // const { branch, loading } = useSelector((state: StateType) => state.branch);
@@ -23,11 +24,18 @@ const Sale = () => {
   );
 
   const dispatch = useDispatch();
-  const { handleSubmit, register, setValue, watch } = useForm();
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     if (branchId) dispatch(getBranch(branchId));
-  }, [dispatch, branchId]);
+    setValue("branch", branchId);
+  }, [dispatch, branchId, setValue]);
 
   useEffect(() => {
     const { rearrangedCart, totalPrice } = rearrangeCart(cart);
@@ -63,7 +71,7 @@ const Sale = () => {
               {ADD_SALE_FIELDS.map((field, index) => {
                 if (field.name === "partialPayment")
                   return (
-                    <>
+                    <div key={index}>
                       <Checkbox
                         label={field.label}
                         name={field.name}
@@ -71,6 +79,7 @@ const Sale = () => {
                       />
                       {watch("partialPayment") && (
                         <InputField
+                          className="mt-3"
                           label="Partial Payment Amount"
                           name="partialPaymentAmount"
                           placeholder="Enter Partial Payment Amount"
@@ -78,10 +87,21 @@ const Sale = () => {
                           type="number"
                         />
                       )}
-                    </>
+                    </div>
                   );
+
+                if (field.type === "select") {
+                  return (
+                    <SelectField
+                      error={errors[field.name]?.message}
+                      field={field}
+                      register={register}
+                    />
+                  );
+                }
                 return (
                   <InputField
+                    key={index}
                     label={field.label}
                     name={field.label}
                     register={register}

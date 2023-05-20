@@ -16,7 +16,12 @@ const ADD_SALE_FIELDS: FieldTypes[] = [
   {
     name: "paymentMethod",
     label: "Payment Method",
-    type: "text",
+    type: "select",
+    options: [
+      { label: "Cash", value: "Cash" },
+      { label: "bKash", value: "bKash" },
+      { label: "Credit Card", value: "Credit Card" },
+    ],
     placeholder: "Enter Payment Method",
   },
   {

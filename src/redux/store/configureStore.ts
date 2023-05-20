@@ -16,7 +16,7 @@ import cartReducer from "../reducers/cartReducer";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", ""], // only navigation will be persisted
+  whitelist: ["user", "cart"], // only navigation will be persisted
 };
 
 // conbine reducers here
