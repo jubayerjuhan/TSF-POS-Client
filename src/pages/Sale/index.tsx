@@ -12,6 +12,7 @@ import { rearrangeCart } from "../../utils/cart/rearrangeCart";
 import { ADD_SALE_FIELDS } from "../../constants/InputFields/sale/addSale";
 import InputField from "../../components/core/InputField/InputField";
 import Button from "../../components/core/Button/Button";
+import Checkbox from "../../components/core/Checkbox/Checkbox";
 
 const Sale = () => {
   // const { branch, loading } = useSelector((state: StateType) => state.branch);
@@ -22,15 +23,16 @@ const Sale = () => {
   );
 
   const dispatch = useDispatch();
-  const { handleSubmit, register, setValue } = useForm();
+  const { handleSubmit, register, setValue, watch } = useForm();
 
   useEffect(() => {
     if (branchId) dispatch(getBranch(branchId));
   }, [dispatch, branchId]);
 
   useEffect(() => {
-    const newCart = rearrangeCart(cart);
-    setValue("items", newCart);
+    const { rearrangedCart, totalPrice } = rearrangeCart(cart);
+    setValue("items", rearrangedCart);
+    setValue("total", totalPrice);
   }, [cart, setValue]);
 
   const submitSale = (data: object) => {
@@ -52,17 +54,42 @@ const Sale = () => {
             ))}
           </div>
           <div className="customer__details">
-            {/* <h6 className="fs-5 fw-semibold">Customer Info</h6> */}
+            <div className="price__section">
+              <p className="mb-2 fw-semibold">
+                Total Price : <span>{watch("total")}</span> Taka
+              </p>
+            </div>
             <div className="customer__info d-flex flex-column gap-3 my-4">
-              {ADD_SALE_FIELDS.map((field, index) => (
-                <InputField
-                  label={field.label}
-                  name={field.label}
-                  register={register}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                />
-              ))}
+              {ADD_SALE_FIELDS.map((field, index) => {
+                if (field.name === "partialPayment")
+                  return (
+                    <>
+                      <Checkbox
+                        label={field.label}
+                        name={field.name}
+                        register={register}
+                      />
+                      {watch("partialPayment") && (
+                        <InputField
+                          label="Partial Payment Amount"
+                          name="partialPaymentAmount"
+                          placeholder="Enter Partial Payment Amount"
+                          register={register}
+                          type="number"
+                        />
+                      )}
+                    </>
+                  );
+                return (
+                  <InputField
+                    label={field.label}
+                    name={field.label}
+                    register={register}
+                    type={field.type}
+                    placeholder={field.placeholder}
+                  />
+                );
+              })}
               <Button title="Submit" onClick={handleSubmit(submitSale)} />
             </div>
           </div>

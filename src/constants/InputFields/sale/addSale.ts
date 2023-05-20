@@ -25,7 +25,6 @@ const ADD_SALE_FIELDS: FieldTypes[] = [
     type: "checkbox",
     placeholder: "Enter Partial Payment",
   },
-
   {
     name: "note",
     label: "Note",

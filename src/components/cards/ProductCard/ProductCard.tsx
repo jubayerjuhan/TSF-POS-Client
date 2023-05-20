@@ -50,7 +50,7 @@ const ProductCard = ({
           )}
           <Card.Text>Cost Price: {product.costPrice}</Card.Text>
           <Card.Text className="mb-3">
-            Sell Price: {product.costPrice}
+            Sell Price: {product.sellPrice}
           </Card.Text>
         </div>
         <div className="button__container">
