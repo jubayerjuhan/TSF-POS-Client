@@ -2,6 +2,7 @@ import { toast } from "react-hot-toast";
 import { BranchProduct } from "../../components/sections/Branch/BranchProducts/BranchProducts";
 import {
   ADD_TO_CART,
+  CHANGE_PRICE,
   CHANGE_QUANTITY,
 } from "../../constants/reduxActionsNames/cart";
 import { CartProduct } from "../../types/Product/ProductTypes";
@@ -29,6 +30,15 @@ const cartReducer = (
     }
 
     case CHANGE_QUANTITY: {
+      return {
+        ...state,
+        cart: state.cart.map((pd: CartProduct) =>
+          pd._id === action.payload._id ? action.payload : pd
+        ),
+      };
+    }
+
+    case CHANGE_PRICE: {
       return {
         ...state,
         cart: state.cart.map((pd: CartProduct) =>
