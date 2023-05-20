@@ -5,6 +5,7 @@ import { ADD_TO_CART } from "../../../../constants/reduxActionsNames/cart";
 import { toast } from "react-hot-toast";
 import { BranchProduct } from "../../Branch/BranchProducts/BranchProducts";
 import "./productSection.scss";
+import AlertPopup from "../../../AlertPopup/AlertPopup";
 
 const ProductSection = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,10 @@ const ProductSection = () => {
   };
 
   if (!branch?.products && loading) return <>loading...</>;
-  if (!branch?.products) return <>no product</>;
+  if (!branch?.products)
+    return <AlertPopup message="Please Select a Branch First" />;
+  if (branch?.products.length === 0)
+    return <AlertPopup message="No Products Available on This Branch" />;
 
   return (
     <div className="product__section my-4 px-2">

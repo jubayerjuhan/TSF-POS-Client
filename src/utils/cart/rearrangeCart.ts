@@ -5,7 +5,7 @@ export const rearrangeCart = (cart: CartProduct[]) => {
   let totalPrice = 0;
   cart.forEach((pd) => {
     totalPrice += pd.sellPrice * pd.quantity;
-    rearrangedCart.push({ ...pd, id: pd.productId, unitprice: pd.sellPrice });
+    rearrangedCart.push({ ...pd, id: pd.productId, unitPrice: pd.sellPrice });
   });
   return { rearrangedCart, totalPrice };
 };

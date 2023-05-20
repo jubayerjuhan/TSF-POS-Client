@@ -14,9 +14,13 @@ import InputField from "../../components/core/InputField/InputField";
 import Button from "../../components/core/Button/Button";
 import Checkbox from "../../components/core/Checkbox/Checkbox";
 import SelectField from "../../components/core/SelectField/SelectField";
+import { addSale } from "../../redux/actions/sale/addSale";
+import { toast } from "react-hot-toast";
+import { CLEAR_SALE_MESSAGE } from "../../constants/reduxActionsNames/sale";
+import AlertPopup from "../../components/AlertPopup/AlertPopup";
 
 const Sale = () => {
-  // const { branch, loading } = useSelector((state: StateType) => state.branch);
+  const { error, message } = useSelector((state: StateType) => state.sale);
   const { user } = useSelector((state: StateType) => state.user);
   const { cart } = useSelector((state: StateType) => state.cart);
   const [branchId, setBranchId] = useState<string | null>(
@@ -33,18 +37,28 @@ const Sale = () => {
   } = useForm();
 
   useEffect(() => {
-    if (branchId) dispatch(getBranch(branchId));
-    setValue("branch", branchId);
+    if (error) toast.error(error);
+    if (message) toast.success(message);
+    dispatch({ type: CLEAR_SALE_MESSAGE });
+  }, [error, message, dispatch]);
+
+  useEffect(() => {
+    if (branchId) {
+      dispatch(getBranch(branchId));
+      console.log(branchId, "branchID");
+    }
   }, [dispatch, branchId, setValue]);
 
   useEffect(() => {
     const { rearrangedCart, totalPrice } = rearrangeCart(cart);
     setValue("items", rearrangedCart);
     setValue("total", totalPrice);
-  }, [cart, setValue]);
+    setValue("branch", branchId);
+  }, [cart, setValue, branchId]);
 
   const submitSale = (data: object) => {
-    console.log(data);
+    console.log(data, "data...");
+    dispatch(addSale(data));
   };
 
   return (
@@ -56,63 +70,69 @@ const Sale = () => {
         </div>
         <div className="sale__info-side pt-3 p-4 ">
           <h6 className="fs-5 fw-semibold">Create Order</h6>
-          <div className="sale__info my-3 d-flex flex-column gap-3">
-            {cart.map((product, key) => (
-              <HorizontalProductCard key={key} product={product} />
-            ))}
-          </div>
-          <div className="customer__details">
-            <div className="price__section">
-              <p className="mb-2 fw-semibold">
-                Total Price : <span>{watch("total")}</span> Taka
-              </p>
-            </div>
-            <div className="customer__info d-flex flex-column gap-3 my-4">
-              {ADD_SALE_FIELDS.map((field, index) => {
-                if (field.name === "partialPayment")
-                  return (
-                    <div key={index}>
-                      <Checkbox
+          {!branchId ? (
+            <AlertPopup message="Please Select A Branch First" />
+          ) : (
+            <>
+              <div className="sale__info my-3 d-flex flex-column gap-3">
+                {cart.map((product, key) => (
+                  <HorizontalProductCard key={key} product={product} />
+                ))}
+              </div>
+              <div className="customer__details">
+                <div className="price__section">
+                  <p className="mb-2 fw-semibold">
+                    Total Price : <span>{watch("total")}</span> Taka
+                  </p>
+                </div>
+                <div className="customer__info d-flex flex-column gap-3 my-4">
+                  {ADD_SALE_FIELDS.map((field, index) => {
+                    if (field.name === "partialPayment")
+                      return (
+                        <div key={index}>
+                          <Checkbox
+                            label={field.label}
+                            name={field.name}
+                            register={register}
+                          />
+                          {watch("partialPayment") && (
+                            <InputField
+                              className="mt-3"
+                              label="Partial Payment Amount"
+                              name="partialPaymentAmount"
+                              placeholder="Enter Partial Payment Amount"
+                              register={register}
+                              type="number"
+                            />
+                          )}
+                        </div>
+                      );
+
+                    if (field.type === "select") {
+                      return (
+                        <SelectField
+                          error={errors[field.name]?.message}
+                          field={field}
+                          register={register}
+                        />
+                      );
+                    }
+                    return (
+                      <InputField
+                        key={index}
                         label={field.label}
                         name={field.name}
                         register={register}
+                        type={field.type}
+                        placeholder={field.placeholder}
                       />
-                      {watch("partialPayment") && (
-                        <InputField
-                          className="mt-3"
-                          label="Partial Payment Amount"
-                          name="partialPaymentAmount"
-                          placeholder="Enter Partial Payment Amount"
-                          register={register}
-                          type="number"
-                        />
-                      )}
-                    </div>
-                  );
-
-                if (field.type === "select") {
-                  return (
-                    <SelectField
-                      error={errors[field.name]?.message}
-                      field={field}
-                      register={register}
-                    />
-                  );
-                }
-                return (
-                  <InputField
-                    key={index}
-                    label={field.label}
-                    name={field.label}
-                    register={register}
-                    type={field.type}
-                    placeholder={field.placeholder}
-                  />
-                );
-              })}
-              <Button title="Submit" onClick={handleSubmit(submitSale)} />
-            </div>
-          </div>
+                    );
+                  })}
+                  <Button title="Submit" onClick={handleSubmit(submitSale)} />
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </Pagewrapper>

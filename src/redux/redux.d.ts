@@ -63,6 +63,12 @@ interface StateType {
     message: string | null;
     products: Product[];
   };
+  sale: {
+    loading: boolean;
+    success: boolean;
+    message: string | null;
+    error: string | null;
+  };
   promise: {
     loading: boolean;
     success: boolean;
