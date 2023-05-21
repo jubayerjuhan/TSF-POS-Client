@@ -17,7 +17,8 @@ const InvoicePage = () => {
     if (id) dispatch(getSale(id));
   }, [id, dispatch]);
 
-  if (!sale) return <AlertPopup message={error} />;
+  if (error) return <AlertPopup message={error} />;
+  if (!sale) return <AlertPopup message={"No Sale Found"} />;
   return (
     <div className="invoice">
       <div className="invoice-header">
@@ -38,7 +39,7 @@ const InvoicePage = () => {
         <div className="invoice-info mt-3">
           <div className="info-block">
             <span className="info-label">Invoice Number:</span>
-            <span className="info-value">#12345</span>
+            <span className="info-value">#{sale.saleId}</span>
           </div>
           <div className="info-block">
             <span className="info-label">Date:</span>
@@ -50,31 +51,30 @@ const InvoicePage = () => {
         </div>
         <div className="info-block my-3">
           <span className="info-label">Billed To:</span>
-          <span className="info-value">Jubayer Hossain</span>
+          <span className="info-value">{sale.customerName}</span>
         </div>
 
         <table className="invoice-items">
           <thead>
             <tr>
-              <th>Item</th>
+              <th>ID</th>
+              <th>Item Name</th>
               <th>Quantity</th>
               <th>Price</th>
               <th>Total</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Product A</td>
-              <td>2</td>
-              <td>$10.00</td>
-              <td>$20.00</td>
-            </tr>
-            <tr>
-              <td>Product B</td>
-              <td>1</td>
-              <td>$15.00</td>
-              <td>$15.00</td>
-            </tr>
+            {sale.items.map((item, index) => (
+              <tr key={index}>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.quantity}</td>
+                <td>৳{item.unitPrice}৳</td>
+                <td>৳{item.quantity * item.unitPrice}</td>
+              </tr>
+            ))}
+
             {/* Add more invoice items as needed */}
           </tbody>
         </table>
@@ -83,7 +83,7 @@ const InvoicePage = () => {
           {/* Invoice totals (e.g., subtotal, tax, total) */}
           <div className="total-block">
             <span className="total-label">Total : </span>
-            <span className="total-value">$35.00</span>
+            <span className="total-value">৳{sale.total}</span>
           </div>
           {/* Add more total blocks as needed */}
         </div>

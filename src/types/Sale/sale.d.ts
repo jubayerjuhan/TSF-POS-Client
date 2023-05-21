@@ -1,3 +1,5 @@
+import { Branch } from "../Branch/branchTypes";
+
 interface SaleItem {
   name: string;
   photo: string;
@@ -19,8 +21,9 @@ export interface Sale {
   partialPaymentAmount: number;
   tax: number;
   note: string;
-  branch: string;
+  branch: Branch;
   createdAt: string;
   updatedAt: string;
+  saleId: number;
   __v: number;
 }
