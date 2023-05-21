@@ -3,6 +3,7 @@ import Branch from "../pages/Branch";
 import Branches from "../pages/Branches/Branches";
 import Dashboard from "../pages/Dashboard";
 import ForgotPassword from "../pages/ForgotPassword";
+import InvoicePage from "../pages/Invoice";
 import Login from "../pages/Login";
 import Product from "../pages/Product";
 import Products from "../pages/Products";
@@ -71,6 +72,11 @@ const routes: Route[] = [
   {
     path: "/sale",
     component: Sale,
+    secured: true,
+  },
+  {
+    path: "/invoice/:id",
+    component: InvoicePage,
     secured: true,
   },
 ];
