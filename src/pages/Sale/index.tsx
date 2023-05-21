@@ -14,7 +14,7 @@ import InputField from "../../components/core/InputField/InputField";
 import Button from "../../components/core/Button/Button";
 import Checkbox from "../../components/core/Checkbox/Checkbox";
 import SelectField from "../../components/core/SelectField/SelectField";
-import { addSale } from "../../redux/actions/sale/addSale";
+import { addSale } from "../../redux/actions/sale/sale";
 import { toast } from "react-hot-toast";
 import { CLEAR_SALE_MESSAGE } from "../../constants/reduxActionsNames/sale";
 import AlertPopup from "../../components/AlertPopup/AlertPopup";
