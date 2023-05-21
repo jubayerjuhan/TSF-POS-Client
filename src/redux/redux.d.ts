@@ -5,6 +5,7 @@ import { User } from "../types/User/userTypes";
 import { Branch } from "../types/Branch/branchTypes";
 import { CartProduct, Product } from "../types/Product/ProductTypes";
 import { SearchedProduct } from "../types/Product/searchProductTypes";
+import { Sale } from "../types/Sale/sale";
 
 export interface ReduxAction extends Action {
   payload: object | string | Array;
@@ -64,10 +65,11 @@ interface StateType {
     products: Product[];
   };
   sale: {
+    sale: Sale;
     loading: boolean;
     success: boolean;
     message: string | null;
-    error: string | null;
+    error: string;
   };
   promise: {
     loading: boolean;

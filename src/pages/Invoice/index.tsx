@@ -1,14 +1,23 @@
-import "./invoice.scss";
 import logo from "../../assets/sisters_furniture_logo.jpeg";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { getSale } from "../../redux/actions/sale/sale";
+import { useDispatch, useSelector } from "react-redux";
+import { StateType } from "../../redux/redux";
+import AlertPopup from "../../components/AlertPopup/AlertPopup";
+import "./invoice.scss";
 
 const InvoicePage = () => {
+  const { sale, error } = useSelector((state: StateType) => state.sale);
   const { id } = useParams();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {}, []);
+  useEffect(() => {
+    if (id) dispatch(getSale(id));
+  }, [id, dispatch]);
 
+  if (!sale) return <AlertPopup message={error} />;
   return (
     <div className="invoice">
       <div className="invoice-header">

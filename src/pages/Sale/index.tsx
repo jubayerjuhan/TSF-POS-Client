@@ -81,7 +81,11 @@ const Sale = () => {
           ) : (
             <>
               {success ? (
-                <AlertPopup message="Sale Success" btnTitle="Print Invoice" />
+                <AlertPopup
+                  message="Sale Success"
+                  btnTitle="Print Invoice"
+                  type="success"
+                />
               ) : (
                 <>
                   <div className="sale__info my-3 d-flex flex-column gap-3">

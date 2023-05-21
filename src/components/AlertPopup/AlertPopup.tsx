@@ -19,9 +19,9 @@ const AlertPopup = ({
       className="d-flex flex-column justify-content-center align-items-center gap-4"
     >
       {type === "success" ? (
-        <WarningAmberIcon style={{ fontSize: "80px" }} color="error" />
-      ) : (
         <CheckCircleIcon style={{ fontSize: "80px" }} color="primary" />
+      ) : (
+        <WarningAmberIcon style={{ fontSize: "80px" }} color="error" />
       )}{" "}
       <p className="fw-semibold">{message}</p>
       {btnTitle && <Button title={btnTitle} onClick={onButtonClick} />}
