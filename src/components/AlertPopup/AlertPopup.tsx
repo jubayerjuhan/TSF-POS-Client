@@ -1,13 +1,30 @@
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Button from "../core/Button/Button";
 
-const AlertPopup = ({ message }: { message: string }) => {
+const AlertPopup = ({
+  message,
+  type,
+  btnTitle,
+  onButtonClick,
+}: {
+  message: string;
+  type?: string;
+  btnTitle?: string;
+  onButtonClick?: () => void;
+}) => {
   return (
     <div
       style={{ height: 400 }}
       className="d-flex flex-column justify-content-center align-items-center gap-4"
     >
-      <WarningAmberIcon style={{ fontSize: "80px" }} color="error" />
+      {type === "success" ? (
+        <WarningAmberIcon style={{ fontSize: "80px" }} color="error" />
+      ) : (
+        <CheckCircleIcon style={{ fontSize: "80px" }} color="primary" />
+      )}{" "}
       <p className="fw-semibold">{message}</p>
+      {btnTitle && <Button title={btnTitle} onClick={onButtonClick} />}
     </div>
   );
 };

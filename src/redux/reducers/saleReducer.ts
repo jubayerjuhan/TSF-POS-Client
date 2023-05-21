@@ -18,6 +18,7 @@ const saleReducer = (state = {}, action: ReduxAction) => {
         ...state,
         loading: false,
         message: action.payload,
+        success: true,
       };
     case ADD_SALE_ERROR:
       return {

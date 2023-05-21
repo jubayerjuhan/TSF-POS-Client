@@ -20,7 +20,10 @@ import { CLEAR_SALE_MESSAGE } from "../../constants/reduxActionsNames/sale";
 import AlertPopup from "../../components/AlertPopup/AlertPopup";
 
 const Sale = () => {
-  const { error, message } = useSelector((state: StateType) => state.sale);
+  // const [total,]
+  const { error, message, success } = useSelector(
+    (state: StateType) => state.sale
+  );
   const { user } = useSelector((state: StateType) => state.user);
   const { cart } = useSelector((state: StateType) => state.cart);
   const [branchId, setBranchId] = useState<string | null>(
@@ -38,7 +41,9 @@ const Sale = () => {
 
   useEffect(() => {
     if (error) toast.error(error);
-    if (message) toast.success(message);
+    if (message) {
+      toast.success(message);
+    }
     dispatch({ type: CLEAR_SALE_MESSAGE });
   }, [error, message, dispatch]);
 
@@ -58,6 +63,7 @@ const Sale = () => {
 
   const submitSale = (data: object) => {
     console.log(data, "data...");
+    // reset({ values: {} });
     dispatch(addSale(data));
   };
 
@@ -74,63 +80,72 @@ const Sale = () => {
             <AlertPopup message="Please Select A Branch First" />
           ) : (
             <>
-              <div className="sale__info my-3 d-flex flex-column gap-3">
-                {cart.map((product, key) => (
-                  <HorizontalProductCard key={key} product={product} />
-                ))}
-              </div>
-              <div className="customer__details">
-                <div className="price__section">
-                  <p className="mb-2 fw-semibold">
-                    Total Price : <span>{watch("total")}</span> Taka
-                  </p>
-                </div>
-                <div className="customer__info d-flex flex-column gap-3 my-4">
-                  {ADD_SALE_FIELDS.map((field, index) => {
-                    if (field.name === "partialPayment")
-                      return (
-                        <div key={index}>
-                          <Checkbox
+              {success ? (
+                <AlertPopup message="Sale Success" btnTitle="Print Invoice" />
+              ) : (
+                <>
+                  <div className="sale__info my-3 d-flex flex-column gap-3">
+                    {cart.map((product, key) => (
+                      <HorizontalProductCard key={key} product={product} />
+                    ))}
+                  </div>
+                  <div className="customer__details">
+                    <div className="price__section">
+                      <p className="mb-2 fw-semibold">
+                        Total Price : <span>{watch("total")}</span> Taka
+                      </p>
+                    </div>
+                    <div className="customer__info d-flex flex-column gap-3 my-4">
+                      {ADD_SALE_FIELDS.map((field, index) => {
+                        if (field.name === "partialPayment")
+                          return (
+                            <div key={index}>
+                              <Checkbox
+                                label={field.label}
+                                name={field.name}
+                                register={register}
+                              />
+                              {watch("partialPayment") && (
+                                <InputField
+                                  className="mt-3"
+                                  label="Partial Payment Amount"
+                                  name="partialPaymentAmount"
+                                  placeholder="Enter Partial Payment Amount"
+                                  register={register}
+                                  type="number"
+                                />
+                              )}
+                            </div>
+                          );
+
+                        if (field.type === "select") {
+                          return (
+                            <SelectField
+                              error={errors[field.name]?.message}
+                              field={field}
+                              register={register}
+                            />
+                          );
+                        }
+                        return (
+                          <InputField
+                            key={index}
                             label={field.label}
                             name={field.name}
                             register={register}
+                            type={field.type}
+                            placeholder={field.placeholder}
                           />
-                          {watch("partialPayment") && (
-                            <InputField
-                              className="mt-3"
-                              label="Partial Payment Amount"
-                              name="partialPaymentAmount"
-                              placeholder="Enter Partial Payment Amount"
-                              register={register}
-                              type="number"
-                            />
-                          )}
-                        </div>
-                      );
-
-                    if (field.type === "select") {
-                      return (
-                        <SelectField
-                          error={errors[field.name]?.message}
-                          field={field}
-                          register={register}
-                        />
-                      );
-                    }
-                    return (
-                      <InputField
-                        key={index}
-                        label={field.label}
-                        name={field.name}
-                        register={register}
-                        type={field.type}
-                        placeholder={field.placeholder}
+                        );
+                      })}
+                      <Button
+                        title="Submit"
+                        onClick={handleSubmit(submitSale)}
                       />
-                    );
-                  })}
-                  <Button title="Submit" onClick={handleSubmit(submitSale)} />
-                </div>
-              </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </>
           )}
         </div>
