@@ -4,6 +4,7 @@ import {
   ADD_TO_CART,
   CHANGE_PRICE,
   CHANGE_QUANTITY,
+  CLEAR_CART,
 } from "../../constants/reduxActionsNames/cart";
 import { CartProduct } from "../../types/Product/ProductTypes";
 import { ReduxAction } from "../redux";
@@ -46,6 +47,12 @@ const cartReducer = (
         ),
       };
     }
+
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: [],
+      };
 
     default:
       return state;

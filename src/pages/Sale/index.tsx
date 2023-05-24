@@ -18,10 +18,12 @@ import { addSale } from "../../redux/actions/sale/sale";
 import { toast } from "react-hot-toast";
 import { CLEAR_SALE_MESSAGE } from "../../constants/reduxActionsNames/sale";
 import AlertPopup from "../../components/AlertPopup/AlertPopup";
+import { useNavigate } from "react-router-dom";
+import { CLEAR_CART } from "../../constants/reduxActionsNames/cart";
 
 const Sale = () => {
-  // const [total,]
-  const { error, message, success } = useSelector(
+  const navigate = useNavigate();
+  const { error, message, success, sale } = useSelector(
     (state: StateType) => state.sale
   );
   const { user } = useSelector((state: StateType) => state.user);
@@ -43,6 +45,7 @@ const Sale = () => {
     if (error) toast.error(error);
     if (message) {
       toast.success(message);
+      dispatch({ type: CLEAR_CART });
     }
     dispatch({ type: CLEAR_SALE_MESSAGE });
   }, [error, message, dispatch]);
@@ -61,8 +64,8 @@ const Sale = () => {
     setValue("branch", branchId);
   }, [cart, setValue, branchId]);
 
-  const submitSale = (data: object) => {
-    dispatch(addSale(data));
+  const submitSale = async (data: object) => {
+    await dispatch(addSale(data));
   };
 
   return (
@@ -83,7 +86,7 @@ const Sale = () => {
                   message="Sale Success"
                   btnTitle="Print Invoice"
                   type="success"
-                  // onButtonClick={() => navigate(`${sale.}`)}
+                  onButtonClick={() => navigate(`/invoice/${sale._id}`)}
                 />
               ) : (
                 <>
