@@ -23,3 +23,30 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  .product__cart {
+    flex-direction: column;
+    gap: 15px;
+    .btn {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .product__price {
+      input {
+        width: fit-content;
+      }
+    }
+  }
+
+  .product__quantity {
+    position: relative;
+    &::before {
+      // position: absolute;
+      content: "Quantity :";
+      top: 0px;
+      font-weight: 600;
+    }
+  }
+}
