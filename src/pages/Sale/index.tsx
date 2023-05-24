@@ -62,8 +62,6 @@ const Sale = () => {
   }, [cart, setValue, branchId]);
 
   const submitSale = (data: object) => {
-    console.log(data, "data...");
-    // reset({ values: {} });
     dispatch(addSale(data));
   };
 
@@ -85,6 +83,7 @@ const Sale = () => {
                   message="Sale Success"
                   btnTitle="Print Invoice"
                   type="success"
+                  // onButtonClick={() => navigate(`${sale.}`)}
                 />
               ) : (
                 <>
