@@ -5,21 +5,16 @@ import ProductSection from "../../components/sections/Sale/ProductSection/Produc
 import { useDispatch, useSelector } from "react-redux";
 import { StateType } from "../../redux/redux";
 import "./sale.scss";
-import HorizontalProductCard from "../../components/cards/HorizontalProductCard/HorizontalProductCard";
 import { getBranch } from "../../redux/actions/branch/branchAction";
 import { useForm } from "react-hook-form";
 import { rearrangeCart } from "../../utils/cart/rearrangeCart";
-import { ADD_SALE_FIELDS } from "../../constants/InputFields/sale/addSale";
-import InputField from "../../components/core/InputField/InputField";
-import Button from "../../components/core/Button/Button";
-import Checkbox from "../../components/core/Checkbox/Checkbox";
-import SelectField from "../../components/core/SelectField/SelectField";
 import { addSale } from "../../redux/actions/sale/sale";
 import { toast } from "react-hot-toast";
 import { CLEAR_SALE_MESSAGE } from "../../constants/reduxActionsNames/sale";
 import AlertPopup from "../../components/AlertPopup/AlertPopup";
 import { useNavigate } from "react-router-dom";
 import { CLEAR_CART } from "../../constants/reduxActionsNames/cart";
+import SaleInfo from "../../components/sections/Sale/SaleInfo/SaleInfo";
 
 const Sale = () => {
   const navigate = useNavigate();
@@ -89,68 +84,13 @@ const Sale = () => {
                   onButtonClick={() => navigate(`/invoice/${sale._id}`)}
                 />
               ) : (
-                <>
-                  <div className="sale__info my-3 d-flex flex-column gap-3">
-                    {cart.map((product, key) => (
-                      <HorizontalProductCard key={key} product={product} />
-                    ))}
-                  </div>
-                  <div className="customer__details">
-                    <div className="price__section">
-                      <p className="mb-2 fw-semibold">
-                        Total Price : <span>{watch("total")}</span> Taka
-                      </p>
-                    </div>
-                    <div className="customer__info d-flex flex-column gap-3 my-4">
-                      {ADD_SALE_FIELDS.map((field, index) => {
-                        if (field.name === "partialPayment")
-                          return (
-                            <div key={index}>
-                              <Checkbox
-                                label={field.label}
-                                name={field.name}
-                                register={register}
-                              />
-                              {watch("partialPayment") && (
-                                <InputField
-                                  className="mt-3"
-                                  label="Partial Payment Amount"
-                                  name="partialPaymentAmount"
-                                  placeholder="Enter Partial Payment Amount"
-                                  register={register}
-                                  type="number"
-                                />
-                              )}
-                            </div>
-                          );
-
-                        if (field.type === "select") {
-                          return (
-                            <SelectField
-                              error={errors[field.name]?.message}
-                              field={field}
-                              register={register}
-                            />
-                          );
-                        }
-                        return (
-                          <InputField
-                            key={index}
-                            label={field.label}
-                            name={field.name}
-                            register={register}
-                            type={field.type}
-                            placeholder={field.placeholder}
-                          />
-                        );
-                      })}
-                      <Button
-                        title="Submit"
-                        onClick={handleSubmit(submitSale)}
-                      />
-                    </div>
-                  </div>
-                </>
+                <SaleInfo
+                  handleSubmit={handleSubmit}
+                  register={register}
+                  submitSale={submitSale}
+                  watch={watch}
+                  errors={errors}
+                />
               )}
             </>
           )}
