@@ -23,8 +23,8 @@ const Sale = () => {
   );
   const { user } = useSelector((state: StateType) => state.user);
   const { cart } = useSelector((state: StateType) => state.cart);
-  const [branchId, setBranchId] = useState<string | null>(
-    user.branch ? user.branch : null
+  const [branchId, setBranchId] = useState<string>(
+    user.branch ? user.branch : ""
   );
 
   const dispatch = useDispatch();

@@ -15,7 +15,7 @@ export const getSales =
       dispatch({ type: SALES_PENDING });
       const { data }: { data: SalesResponse } = await client.get(`${url}`);
       if (data.success)
-        dispatch({ type: SALES_SUCCESS, payload: data.saleInfo[0] });
+        dispatch({ type: SALES_SUCCESS, payload: data.saleInfo });
     } catch (error) {
       errorDispatcher(error, SALES_ERROR, dispatch);
     }

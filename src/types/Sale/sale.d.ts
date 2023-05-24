@@ -21,7 +21,7 @@ export interface Sale {
   partialPaymentAmount: number;
   tax: number;
   note: string;
-  branch: Branch;
+  branch: Branch[];
   createdAt: string;
   updatedAt: string;
   saleId: number;

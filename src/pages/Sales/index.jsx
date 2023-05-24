@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSales } from "../../redux/actions/sales/salesAction.ts";
 import BranchSelector from "../../components/sections/Branch/BranchSelector/BranchSelector";
+import useAdminPermission from "../../hooks/permission/useAdminPermission";
 
 const Sales = () => {
   const { sales } = useSelector((state) => state.sales);
   const { user } = useSelector((state) => state.user);
   const [branchId, setBranchId] = useState(user?.branch ? user.branch : "");
   const dispatch = useDispatch();
+  const adminPermission = useAdminPermission();
 
   useEffect(() => {
     dispatch(getSales(`/sale/list?branch=${branchId}`));
@@ -19,12 +21,12 @@ const Sales = () => {
   const row = [];
 
   sales?.sales?.map((sale) => {
-    row.push({ ...sale, id: sale.saleId });
+    row.push({ ...sale, branch: sale.branch[0].name, id: sale.saleId });
   });
 
   return (
     <Pagewrapper title="Sales">
-      <BranchSelector setBranchId={setBranchId} />
+      {adminPermission && <BranchSelector setBranchId={setBranchId} />}
       <DataGrid
         columns={saleColumns}
         rows={row}

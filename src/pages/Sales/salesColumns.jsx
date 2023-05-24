@@ -6,31 +6,33 @@ export const saleColumns = [
     field: "customerName",
     headerName: "Customer name",
     flex: 1,
+    minWidth: 200,
   },
   {
     field: "phone",
     headerName: "Phone Number",
     flex: 1,
+    minWidth: 200,
   },
   {
     field: "branch",
     headerName: "Branch",
-    flex: 1,
+    minWidth: 200,
   },
   {
     field: "partialPaymentAmount",
     headerName: "Partial Amount",
-    flex: 1,
+    minWidth: 100,
   },
   {
     field: "total",
     headerName: "Total",
-    flex: 1,
+    minWidth: 100,
   },
   {
     field: "paymentMethod",
     headerName: "Payment Method",
-    flex: 1,
+    minWidth: 100,
   },
   {
     field: "Invoice",
