@@ -18,7 +18,7 @@ import salesReducer from "../reducers/salesListReducer";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "cart"], // only navigation will be persisted
+  whitelist: ["user", ""], // only navigation will be persisted
 };
 
 // conbine reducers here
