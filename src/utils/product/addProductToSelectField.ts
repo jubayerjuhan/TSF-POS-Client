@@ -12,7 +12,10 @@ export const addProductToSelectField = (
     if (isMatched) {
       field.options = field.options?.slice(0, 1);
       products.map((product) => {
-        const option = { label: product.id.name, value: product.id._id };
+        const option = {
+          label: ` ${product.id.productId} - ${product.id.name} - Stock : ${product.quantity}`,
+          value: product.id._id,
+        };
 
         if (field.options?.some((o) => o.value === option.value)) return;
         field.options?.push(option);
