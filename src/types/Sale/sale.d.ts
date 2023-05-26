@@ -25,5 +25,6 @@ export interface Sale {
   createdAt: string;
   updatedAt: string;
   saleId: number;
+  partialAmountPayingDate?: string;
   __v: number;
 }

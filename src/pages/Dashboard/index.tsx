@@ -12,6 +12,7 @@ import {
 import { DefaultDate } from "./types";
 import moment from "moment";
 import { StateType } from "../../redux/redux";
+import DashCharts from "../../components/sections/DashChart/DashCharts";
 
 const Dashboard = () => {
   const { sales } = useSelector((state: StateType) => state.sales);
@@ -33,7 +34,6 @@ const Dashboard = () => {
     dispatch(getPartialPaymentInfo(partialPaymentUrl));
   }, [dispatch, url, partialPaymentUrl]);
 
-  console.log(sales, "sales");
   return (
     <Pagewrapper>
       <div className="d-flex gap-4 flex-wrap">
@@ -58,6 +58,7 @@ const Dashboard = () => {
           number={amountToBeRecived}
         />
       </div>
+      <DashCharts />
     </Pagewrapper>
   );
 };
