@@ -13,6 +13,7 @@ import productsReducer from "../reducers/productsReducer";
 import cartReducer from "../reducers/cartReducer";
 import saleReducer from "../reducers/saleReducer";
 import salesReducer from "../reducers/salesListReducer";
+import partialPaymentReducer from "../reducers/partialPaymentReducer";
 
 //persist config for persistor
 const persistConfig = {
@@ -32,6 +33,7 @@ const reducers = combineReducers({
   cart: cartReducer,
   sale: saleReducer,
   sales: salesReducer,
+  partialPayment: partialPaymentReducer,
   promise: promiseReducer,
 });
 

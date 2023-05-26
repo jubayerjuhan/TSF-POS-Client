@@ -10,3 +10,9 @@ interface SalesResponse {
   success: boolean;
   saleInfo: SaleInfo[];
 }
+
+interface PartialPaymentResponse {
+  success: boolean;
+  secondPartialAmountRecived: number;
+  secondPartialAmountToBeRecived: number;
+}

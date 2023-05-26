@@ -77,6 +77,18 @@ interface StateType {
     loading: boolean;
     error: string;
   };
+  partialPayment: {
+    amountRecived: number;
+    amountToBeRecived: number;
+    loading: boolean;
+    error: string;
+  };
+  sales: {
+    sales: SaleInfo;
+    loading: boolean;
+    error: string;
+  };
+
   promise: {
     loading: boolean;
     success: boolean;
