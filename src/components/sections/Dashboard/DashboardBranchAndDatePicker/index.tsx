@@ -11,8 +11,10 @@ import {
   CHANGE_TO_DATE,
 } from "../../../../constants/reduxActionsNames/dashboard";
 import dayjs from "dayjs";
+import useAdminPermission from "../../../../hooks/permission/useAdminPermission";
 
 const DashboardBranchAndDatePicker = () => {
+  const adminPermission = useAdminPermission();
   const { user } = useSelector((state: StateType) => state.user);
   const { fromDate, toDate } = useSelector(
     (state: StateType) => state.dashboard
@@ -29,10 +31,12 @@ const DashboardBranchAndDatePicker = () => {
 
   return (
     <div className="mb-4 d-flex gap-4 align-items-end">
-      <div>
-        <p className="mb-2">Please Select A Branch</p>
-        <BranchSelector setBranchId={setBranchId} style={{ height: 55 }} />
-      </div>
+      {adminPermission && (
+        <div>
+          <p className="mb-2">Please Select A Branch</p>
+          <BranchSelector setBranchId={setBranchId} style={{ height: 55 }} />
+        </div>
+      )}
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div>

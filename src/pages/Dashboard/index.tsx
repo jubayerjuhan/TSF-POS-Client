@@ -1,32 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Pagewrapper from "../../components/Pagewrapper/Pagewrapper";
-
-// icons
+import DashCharts from "../../components/sections/Dashboard/DashChart/DashCharts";
+import DashboardAmount from "../../components/sections/Dashboard/DashboardAmount/DashboardAmount";
+import DashboardBranchAndDatePicker from "../../components/sections/Dashboard/DashboardBranchAndDatePicker";
 import { useDispatch, useSelector } from "react-redux";
+import { StateType } from "../../redux/redux";
 import {
   getPartialPaymentInfo,
   getSales,
 } from "../../redux/actions/sales/salesAction";
-import { DefaultDate } from "./types";
-import { StateType } from "../../redux/redux";
-import DashCharts from "../../components/sections/Dashboard/DashChart/DashCharts";
-
-import DashboardAmount from "../../components/sections/Dashboard/DashboardAmount/DashboardAmount";
-import DashboardBranchAndDatePicker from "../../components/sections/Dashboard/DashboardBranchAndDatePicker";
 
 const Dashboard = () => {
-  // const dispatch = useDispatch();
-  // const url = `sale/list?startDate=${dayjs(defaultDate.startDate).format(
-  //   "MM-DD-YYYY"
-  // )}&endDate=${dayjs(defaultDate.endDate).format(
-  //   "MM-DD-YYYY"
-  // )}&branch=${branch}`;
-  // const partialPaymentUrl = `sale/partial-payment/list?startDate=${defaultDate.startDate}&endDate=${defaultDate.endDate}&branch=${branch}`;
+  const { branch, fromDate, toDate } = useSelector(
+    (state: StateType) => state.dashboard
+  );
+  const dispatch = useDispatch();
+  const url = `sale/list?startDate=${fromDate}&endDate=${toDate}&branch=${branch}`;
+  const partialPaymentUrl = `sale/partial-payment/list?startDate=${fromDate}&endDate=${toDate}&branch=${branch}`;
 
-  // useEffect(() => {
-  //   dispatch(getSales(url));
-  //   dispatch(getPartialPaymentInfo(partialPaymentUrl));
-  // }, [dispatch, url, partialPaymentUrl]);
+  useEffect(() => {
+    dispatch(getSales(url));
+    dispatch(getPartialPaymentInfo(partialPaymentUrl));
+  }, [dispatch, url, partialPaymentUrl]);
 
   return (
     <Pagewrapper>
