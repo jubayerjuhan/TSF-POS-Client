@@ -1,4 +1,6 @@
+import { Dayjs } from "dayjs";
+
 export interface DefaultDate {
-  startDate: Date | number | string;
-  endDate: Date | number | string;
+  startDate: Dayjs | number | string | null;
+  endDate: Dayjs | number | string | null;
 }

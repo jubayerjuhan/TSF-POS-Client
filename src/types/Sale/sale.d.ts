@@ -6,6 +6,7 @@ interface SaleItem {
   id: number;
   quantity: number;
   unitPrice: number;
+  costPrice: number;
   _id: string;
 }
 
@@ -21,7 +22,7 @@ export interface Sale {
   partialPaymentAmount: number;
   tax: number;
   note: string;
-  branch: Branch[];
+  branch: Branch[] | string;
   createdAt: string;
   updatedAt: string;
   saleId: number;

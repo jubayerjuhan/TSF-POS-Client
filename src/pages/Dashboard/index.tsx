@@ -10,9 +10,15 @@ import {
   getSales,
 } from "../../redux/actions/sales/salesAction";
 import { DefaultDate } from "./types";
-import moment from "moment";
 import { StateType } from "../../redux/redux";
-import DashCharts from "../../components/sections/DashChart/DashCharts";
+import DashCharts from "../../components/sections/Dashboard/DashChart/DashCharts";
+
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import InputLabel from "@mui/material/InputLabel";
+import dayjs from "dayjs";
+import BranchSelector from "../../components/sections/Branch/BranchSelector/BranchSelector";
 
 const Dashboard = () => {
   const { sales } = useSelector((state: StateType) => state.sales);
@@ -21,13 +27,18 @@ const Dashboard = () => {
   );
   const { user } = useSelector((state: StateType) => state.user);
   const [defaultDate, setDefaultDate] = useState<DefaultDate>({
-    startDate: moment().format("MM-DD-YYYY"),
-    endDate: moment().format("MM-DD-YYYY"),
+    startDate: dayjs(),
+    endDate: dayjs(),
   });
+
   const dispatch = useDispatch();
-  const [branch, setBranch] = useState("");
-  const url = `sale/list?startDate=${defaultDate.startDate}&endDate=${defaultDate.endDate}&branch=${user.branch}`;
-  const partialPaymentUrl = `sale/partial-payment/list?startDate=${defaultDate.startDate}&endDate=${defaultDate.endDate}&branch=${user.branch}`;
+  const [branch, setBranch] = useState<string>(user.branch ? user.branch : "");
+  const url = `sale/list?startDate=${dayjs(defaultDate.startDate).format(
+    "MM-DD-YYYY"
+  )}&endDate=${dayjs(defaultDate.endDate).format(
+    "MM-DD-YYYY"
+  )}&branch=${branch}`;
+  const partialPaymentUrl = `sale/partial-payment/list?startDate=${defaultDate.startDate}&endDate=${defaultDate.endDate}&branch=${branch}`;
 
   useEffect(() => {
     dispatch(getSales(url));
@@ -36,6 +47,31 @@ const Dashboard = () => {
 
   return (
     <Pagewrapper>
+      <div className="mb-4 d-flex gap-4 align-items-end">
+        <div>
+          <p className="mb-2">Please Select A Branch</p>
+          <BranchSelector setBranchId={setBranch} style={{ height: 55 }} />
+        </div>
+
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <div>
+            <p className="mb-2">From Date:</p>
+            <DatePicker
+              value={defaultDate?.startDate}
+              onChange={(e) => setDefaultDate({ ...defaultDate, startDate: e })}
+              format="DD-MM-YYYY"
+            />
+          </div>
+          <div>
+            <p className="mb-2">To Date</p>
+            <DatePicker
+              value={defaultDate?.endDate}
+              onChange={(e) => setDefaultDate({ ...defaultDate, endDate: e })}
+              format="DD-MM-YYYY"
+            />
+          </div>
+        </LocalizationProvider>
+      </div>
       <div className="d-flex gap-4 flex-wrap">
         <StatsCard
           title="Total Revenue"

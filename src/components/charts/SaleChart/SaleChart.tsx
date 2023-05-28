@@ -1,6 +1,3 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { StateType } from "../../../redux/redux";
 import moment from "moment";
 import {
   Chart as ChartJS,
@@ -13,6 +10,9 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useCallback, useEffect, useState } from "react";
+import client from "../../../client/axiosInstance";
+import { Sale } from "../../../types/Sale/sale";
 
 ChartJS.register(
   CategoryScale,
@@ -24,27 +24,38 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top" as const,
-    },
-    title: {
-      display: true,
-      text: "Chart.js Line Chart",
-    },
-  },
-};
+const SaleChart = () => {
+  const [sales, setSales] = useState<Sale[]>([]);
+  // const { sales } = useSelector((state: StateType) => state.sales);
 
-const DashCharts = () => {
-  const { sales } = useSelector((state: StateType) => state.sales);
+  const fetchSales = useCallback(async () => {
+    const { data } = await client.get(
+      "/sale/all/list?startDate=05-27-2023&endDate=05-27-2023"
+    );
+    setSales(data.allSales);
+  }, []);
 
-  const today = moment().format("DD-MM-YYYY");
+  useEffect(() => {
+    fetchSales();
+  }, [fetchSales]);
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: "Sales Graph",
+      },
+    },
+  };
+
   const lastSevenDays = [];
   const dayNameLabels = [];
 
-  for (let i = 0; i < 7; i++) {
+  for (let i = 7; i >= 0; i--) {
     lastSevenDays.push({ date: moment().subtract(i, "days"), amount: 0 });
     dayNameLabels.push(moment().subtract(i, "days").format("dddd"));
   }
@@ -52,7 +63,8 @@ const DashCharts = () => {
   // here iterating last 7days
   lastSevenDays.forEach((day) => {
     // here iterating every sales
-    sales?.sales?.forEach((sale) => {
+    sales?.forEach((sale) => {
+      console.log(sale, "sale..sale..");
       // checking if there is any 2ndpartialAmountPaid today
       if (
         moment(sale.partialAmountPayingDate)
@@ -60,6 +72,7 @@ const DashCharts = () => {
           .format("DD-MM-YY") ===
         moment(day.date).startOf("day").format("DD-MM-YY")
       ) {
+        console.log(day, sale, "daySale");
         // if there is a 2nd partial payment add it with today
         day.amount += sale.total - sale.partialPaymentAmount;
       }
@@ -71,13 +84,14 @@ const DashCharts = () => {
       ) {
         // if not partial payment add full total
         if (!sale.partialPayment) return (day.amount += sale.total);
-
         // if partial payment add only partialPaymentAmount
         if (sale.partialPayment)
           return (day.amount += sale.partialPaymentAmount);
       }
     });
   });
+
+  console.log(lastSevenDays, "last");
 
   const data = {
     labels: dayNameLabels,
@@ -91,11 +105,7 @@ const DashCharts = () => {
     ],
   };
 
-  return (
-    <div className="mt-4">
-      <Line options={options} data={data} />;
-    </div>
-  );
+  return <Line options={options} data={data} />;
 };
 
-export default DashCharts;
+export default SaleChart;

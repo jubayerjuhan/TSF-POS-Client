@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StateType } from "../../../../redux/redux";
 import { getBranchList } from "../../../../redux/actions/branches/branchesAction";
 
-const BranchSelector = ({ setBranchId }: BranchSelectorProps) => {
+const BranchSelector = ({ setBranchId, style }: BranchSelectorProps) => {
   const { branches } = useSelector((state: StateType) => state.branches);
 
   const dispatch = useDispatch();
@@ -42,6 +42,7 @@ const BranchSelector = ({ setBranchId }: BranchSelectorProps) => {
             id=""
             onChange={(e) => setBranchId(e.target.value)}
             key={index}
+            style={style}
           >
             {field.options?.map((option, index) => (
               <option value={option.value} key={index}>
