@@ -1,4 +1,4 @@
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import ADD_PRODUCT_FIELDS from "../../../../constants/InputFields/product/addProduct";
 import FormModal from "../../../Modals/FormModal/FormModal";
 import { useForm } from "react-hook-form";
@@ -19,9 +19,26 @@ const EditProduct = ({
     handleSubmit,
     formState: { errors },
     register,
+    setValue,
   } = useForm();
 
   const dispatch = useDispatch();
+  const [defaultValues, setDefaultValues] = useState<Product | undefined>(
+    editingProduct
+  );
+
+  useEffect(() => {
+    setDefaultValues(editingProduct);
+  }, [editingProduct]);
+
+  useEffect(() => {
+    if (defaultValues) {
+      Object.keys(defaultValues).forEach((key) => {
+        setValue(key, defaultValues[key as keyof Product]);
+      });
+    }
+  }, [defaultValues, setValue]);
+
   const handleEditProduct = async (data: object) => {
     const formData = new FormData();
     for (const [key, value] of Object.entries(data)) {
@@ -48,7 +65,7 @@ const EditProduct = ({
       loading={false}
       open={open}
       setOpen={setOpen}
-      defaultValues={editingProduct}
+      defaultValues={defaultValues}
     />
   );
 };
