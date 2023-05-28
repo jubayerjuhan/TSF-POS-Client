@@ -14,6 +14,7 @@ import cartReducer from "../reducers/cartReducer";
 import saleReducer from "../reducers/saleReducer";
 import salesReducer from "../reducers/salesListReducer";
 import partialPaymentReducer from "../reducers/partialPaymentReducer";
+import dashboardReducer from "../reducers/dashboardReducer";
 
 //persist config for persistor
 const persistConfig = {
@@ -24,6 +25,7 @@ const persistConfig = {
 
 // conbine reducers here
 const reducers = combineReducers({
+  dashboard: dashboardReducer,
   user: userReducer,
   users: usersReducer,
   branch: branchReducer,

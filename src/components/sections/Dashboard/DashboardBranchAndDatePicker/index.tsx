@@ -2,37 +2,64 @@ import BranchSelector from "../../Branch/BranchSelector/BranchSelector";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { StateType } from "../../../../redux/redux";
+import {
+  CHANGE_BRANCH,
+  CHANGE_FROM_DATE,
+  CHANGE_TO_DATE,
+} from "../../../../constants/reduxActionsNames/dashboard";
+import dayjs from "dayjs";
 
 const DashboardBranchAndDatePicker = () => {
   const { user } = useSelector((state: StateType) => state.user);
-  const [branch, setBranch] = useState<string>(user.branch ? user.branch : "");
+  const { fromDate, toDate } = useSelector(
+    (state: StateType) => state.dashboard
+  );
+  const [branchId, setBranchId] = useState<string>(
+    user.branch ? user.branch : ""
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: CHANGE_BRANCH, payload: branchId });
+  }, [branchId, dispatch]);
 
   return (
     <div className="mb-4 d-flex gap-4 align-items-end">
       <div>
         <p className="mb-2">Please Select A Branch</p>
-        <BranchSelector setBranchId={setBranch} style={{ height: 55 }} />
+        <BranchSelector setBranchId={setBranchId} style={{ height: 55 }} />
       </div>
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div>
           <p className="mb-2">From Date:</p>
-          {/* <DatePicker
-            value={}
-            onChange={(e) => setDefaultDate({ ...defaultDate, startDate: e })}
+          <DatePicker
+            value={dayjs(fromDate)}
+            onChange={(e) =>
+              dispatch({
+                type: CHANGE_FROM_DATE,
+                payload: dayjs(e).format("MM-DD-YYYY"),
+              })
+            }
             format="DD-MM-YYYY"
-          /> */}
+          />
         </div>
         <div>
           <p className="mb-2">To Date</p>
-          {/* <DatePicker
-            value={defaultDate?.endDate}
-            onChange={(e) => setDefaultDate({ ...defaultDate, endDate: e })}
+          <DatePicker
+            value={dayjs(toDate)}
+            onChange={(e) =>
+              dispatch({
+                type: CHANGE_TO_DATE,
+                payload: dayjs(e).format("MM-DD-YYYY"),
+              })
+            }
             format="DD-MM-YYYY"
-          /> */}
+          />
         </div>
       </LocalizationProvider>
     </div>

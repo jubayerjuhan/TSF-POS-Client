@@ -17,7 +17,7 @@ export const getBranchList = (): RootThunk => async (dispatch: AppDispatch) => {
     );
     if (data.success)
       dispatch({ type: BRANCHES_SUCCESS, payload: data.branches });
-  } catch (error: any) {
+  } catch (error) {
     errorDispatcher(error, BRANCHES_ERROR, dispatch);
   }
 };

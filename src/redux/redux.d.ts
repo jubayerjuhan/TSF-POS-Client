@@ -7,6 +7,7 @@ import { CartProduct, Product } from "../types/Product/ProductTypes";
 import { SearchedProduct } from "../types/Product/searchProductTypes";
 import { Sale } from "../types/Sale/sale";
 import { SaleInfo } from "./actions/sales/types";
+import { Dayjs } from "dayjs";
 
 export interface ReduxAction extends Action {
   payload: object | string | Array;
@@ -94,6 +95,11 @@ interface StateType {
     success: boolean;
     message: string | null;
     error: string | null;
+  };
+  dashboard: {
+    fromDate: string;
+    toDate: string;
+    branch: string;
   };
 
   cart: {
