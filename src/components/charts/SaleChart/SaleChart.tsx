@@ -29,9 +29,7 @@ ChartJS.register(
 
 const SaleChart = () => {
   const [sales, setSales] = useState<Sale[]>([]);
-  const { fromDate, toDate, branch } = useSelector(
-    (state: StateType) => state.dashboard
-  );
+  const { branch } = useSelector((state: StateType) => state.dashboard);
 
   const fetchSales = useCallback(async () => {
     const sevenDaysBefore = dayjs().subtract(6, "days").format("MM-DD-YYYY");

@@ -19,11 +19,7 @@ const SearchProduct = () => {
   const { loading, error, product } = useSelector(
     (state: StateType) => state.product
   );
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SearchProductData>();
+  const { register, handleSubmit } = useForm<SearchProductData>();
 
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();

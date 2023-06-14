@@ -1,5 +1,4 @@
 import { toast } from "react-hot-toast";
-import { BranchProduct } from "../../components/sections/Branch/BranchProducts/BranchProducts";
 import {
   ADD_TO_CART,
   CHANGE_PRICE,

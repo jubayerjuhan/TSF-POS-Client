@@ -38,7 +38,7 @@ export const saleColumns = [
     field: "Invoice",
     headerName: "Invoice",
     flex: 1,
-    renderCell: (params) => {
+    renderCell: (params: any) => {
       console.log(params);
       return (
         <>

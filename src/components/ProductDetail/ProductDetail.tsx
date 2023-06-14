@@ -1,5 +1,4 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { Product } from "../../types/Product/ProductTypes";
 import { IMAGE_URL } from "../../constants/links/imageLink";
 import { SearchedProduct } from "../../types/Product/searchProductTypes";
 
