@@ -16,7 +16,7 @@ const ADD_EXPENSE_FIELDS: FieldTypes[] = [
   {
     name: "amount",
     label: "Amount",
-    type: "text",
+    type: "number",
     placeholder: "Enter Amount",
   },
   {

@@ -1,9 +1,11 @@
 import "./AddExpense.scss";
 import Button from "../../../core/Button/Button";
 import FormModal from "../../../Modals/FormModal/FormModal";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm, FieldValues } from "react-hook-form";
 import { useState } from "react";
 import ADD_EXPENSE_FIELDS from "../../../../constants/InputFields/expense/addExpenseFields";
+import { yupResolver } from "@hookform/resolvers/yup";
+import expenseValidationSchema from "../../../../constants/InputValidation/expense/expenseValidation";
 
 const AddExpense = () => {
   const [open, setOpen] = useState(false);
@@ -13,11 +15,11 @@ const AddExpense = () => {
     setValue,
     formState: { errors },
   } = useForm({
-    // resolver: yupResolver(addUserValidationSchema(userRole)),
+    resolver: yupResolver(expenseValidationSchema),
   });
 
-  // onsubmit function to dispatch the action
-  const onSubmit = (value: any) => {
+  // onSubmit function to dispatch the action
+  const onSubmit: SubmitHandler<FieldValues> = (value: FieldValues) => {
     console.log(value, "val");
   };
 
