@@ -8,6 +8,7 @@ import { SearchedProduct } from "../types/Product/searchProductTypes";
 import { Sale } from "../types/Sale/sale";
 import { SaleInfo } from "./actions/sales/types";
 import { Dayjs } from "dayjs";
+import { Expense } from "../types/Expense/ExpenseType";
 
 export interface ReduxAction extends Action {
   payload: object | string | Array;
@@ -77,6 +78,11 @@ interface StateType {
     sales: SaleInfo;
     loading: boolean;
     error: string;
+  };
+  expenses: {
+    expenses: Expense[];
+    loading: boolean;
+    error?: string;
   };
   partialPayment: {
     amountRecived: number;

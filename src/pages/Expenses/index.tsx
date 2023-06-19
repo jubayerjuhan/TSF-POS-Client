@@ -4,19 +4,42 @@ import useAdminPermission from "../../hooks/permission/useAdminPermission";
 import BranchSelector from "../../components/sections/Branch/BranchSelector/BranchSelector";
 import { useDispatch, useSelector } from "react-redux";
 import { StateType } from "../../redux/redux";
+import { getExpenses } from "../../redux/actions/expenses/expenseAction";
+import { Expense } from "../../types/Expense/ExpenseType";
+import { DataGrid } from "@mui/x-data-grid";
+import { expenseColumns } from "./expenseColumns";
+import moment from "moment";
 
 const Expenses = () => {
   const { user } = useSelector((state: StateType) => state.user);
+  const { expenses } = useSelector((state: StateType) => state.expenses);
+
   const [branchId, setBranchId] = useState(user?.branch ? user.branch : "");
   const adminPermission = useAdminPermission();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch();
+    dispatch(getExpenses(`/expense/list?branch=${branchId}`));
   }, [dispatch, branchId]);
+
+  const row: any = [];
+
+  expenses?.map((expense: Expense, index) => {
+    row.push({
+      ...expense,
+      createdAt: moment(expense.createdAt).format("DD/MM/YYYY hh:mm a"),
+      id: index + 1,
+    });
+  });
+
   return (
     <Pagewrapper>
       {adminPermission && <BranchSelector setBranchId={setBranchId} />}
+      <DataGrid
+        columns={expenseColumns}
+        rows={row}
+        sx={{ height: "80vh", mt: 3 }}
+      />
     </Pagewrapper>
   );
 };

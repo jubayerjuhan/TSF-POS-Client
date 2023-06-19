@@ -17,7 +17,7 @@ const expensesListReducer = (state = {}, action: ReduxAction) => {
       return {
         ...state,
         loading: false,
-        branches: action.payload,
+        expenses: action.payload,
         loaded: true,
       };
     case EXPENSES_ERROR:
