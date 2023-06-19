@@ -10,10 +10,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import { expenseColumns } from "./expenseColumns";
 import moment from "moment";
 import AddExpense from "../../components/sections/Expenses/AddExpense/AddExpense";
+import { toast } from "react-hot-toast";
 
 const Expenses = () => {
   const { user } = useSelector((state: StateType) => state.user);
-  const { expenses } = useSelector((state: StateType) => state.expenses);
+  const { expenses, error, message } = useSelector(
+    (state: StateType) => state.expenses
+  );
 
   const [branchId, setBranchId] = useState(user?.branch ? user.branch : "");
   const adminPermission = useAdminPermission();
@@ -21,14 +24,19 @@ const Expenses = () => {
 
   useEffect(() => {
     dispatch(getExpenses(`/expense/list?branch=${branchId}`));
-  }, [dispatch, branchId]);
+  }, [dispatch, branchId, message]);
+
+  useEffect(() => {
+    if (error) toast.error(error);
+    if (message) toast.success(message);
+  }, [error, message]);
 
   const row: any = [];
 
   expenses?.map((expense: Expense, index) => {
     row.push({
       ...expense,
-      createdAt: moment(expense.createdAt).format("DD/MM/YYYY hh:mm a"),
+      createdAt: moment(expense.createdAt).format("DD - MM - YYYY hh:mm a"),
       id: index + 1,
     });
   });

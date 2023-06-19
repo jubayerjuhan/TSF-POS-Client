@@ -83,6 +83,7 @@ interface StateType {
     expenses: Expense[];
     loading: boolean;
     error?: string;
+    message?: string;
   };
   partialPayment: {
     amountRecived: number;

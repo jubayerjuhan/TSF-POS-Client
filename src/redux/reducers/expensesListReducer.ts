@@ -1,4 +1,7 @@
 import {
+  ADD_EXPENSE_ERROR,
+  ADD_EXPENSE_PENDING,
+  ADD_EXPENSE_SUCCESS,
   CLEAR_EXPENSES_MESSAGES,
   EXPENSES_ERROR,
   EXPENSES_PENDING,
@@ -18,7 +21,6 @@ const expensesListReducer = (state = {}, action: ReduxAction) => {
         ...state,
         loading: false,
         expenses: action.payload,
-        loaded: true,
       };
     case EXPENSES_ERROR:
       return {
@@ -26,6 +28,26 @@ const expensesListReducer = (state = {}, action: ReduxAction) => {
         loading: false,
         error: action.payload,
       };
+
+    // Add Expenses
+    case ADD_EXPENSE_PENDING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ADD_EXPENSE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
+    case ADD_EXPENSE_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
     case CLEAR_EXPENSES_MESSAGES:
       return {
         ...state,
