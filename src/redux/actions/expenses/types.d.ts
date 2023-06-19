@@ -4,3 +4,8 @@ export interface ExpensesResponse {
   success: boolean;
   expenses: Expense[];
 }
+
+export interface AddExpenseResponse {
+  success: boolean;
+  message: string;
+}

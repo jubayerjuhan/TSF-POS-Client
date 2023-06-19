@@ -1,12 +1,18 @@
-import client from "../../../client/axiosInstance";
 import {
+  ADD_EXPENSE_SUCCESS,
+  ADD_EXPENSE_ERROR,
+} from "./../../../constants/reduxActionsNames/expenses/index";
+import client from "../../../client/axiosInstance";
+import { AddExpenseData } from "../../../components/sections/Expenses/AddExpense/types";
+import {
+  ADD_EXPENSE_PENDING,
   EXPENSES_ERROR,
   EXPENSES_PENDING,
   EXPENSES_SUCCESS,
 } from "../../../constants/reduxActionsNames/expenses";
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk } from "../../redux";
-import { ExpensesResponse } from "./types";
+import { AddExpenseResponse, ExpensesResponse } from "./types";
 
 export const getExpenses =
   (url: string): RootThunk =>
@@ -18,5 +24,22 @@ export const getExpenses =
         dispatch({ type: EXPENSES_SUCCESS, payload: data.expenses });
     } catch (error) {
       errorDispatcher(error, EXPENSES_ERROR, dispatch);
+    }
+  };
+
+// Add Expense
+export const addExpense =
+  (expenseData: AddExpenseData): RootThunk =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: ADD_EXPENSE_PENDING });
+      const { data }: { data: AddExpenseResponse } = await client.post(
+        `/expense/add?branch=${expenseData.branch}`,
+        expenseData
+      );
+      if (data.success)
+        dispatch({ type: ADD_EXPENSE_SUCCESS, payload: data.message });
+    } catch (error) {
+      errorDispatcher(error, ADD_EXPENSE_ERROR, dispatch);
     }
   };

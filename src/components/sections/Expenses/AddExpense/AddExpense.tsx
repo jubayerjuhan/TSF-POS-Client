@@ -1,26 +1,33 @@
 import "./AddExpense.scss";
 import Button from "../../../core/Button/Button";
 import FormModal from "../../../Modals/FormModal/FormModal";
-import { SubmitHandler, useForm, FieldValues } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import ADD_EXPENSE_FIELDS from "../../../../constants/InputFields/expense/addExpenseFields";
 import { yupResolver } from "@hookform/resolvers/yup";
 import expenseValidationSchema from "../../../../constants/InputValidation/expense/expenseValidation";
+import { addExpense } from "../../../../redux/actions/expenses/expenseAction";
+import { AddExpenseData } from "./types";
+import { useDispatch } from "react-redux";
 
 const AddExpense = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({
+  } = useForm<AddExpenseData>({
     resolver: yupResolver(expenseValidationSchema),
   });
 
   // onSubmit function to dispatch the action
-  const onSubmit: SubmitHandler<FieldValues> = (value: FieldValues) => {
-    console.log(value, "val");
+  const onSubmit: SubmitHandler<AddExpenseData> = async (
+    value: AddExpenseData
+  ) => {
+    await dispatch(addExpense(value));
+    setOpen(false);
   };
 
   return (

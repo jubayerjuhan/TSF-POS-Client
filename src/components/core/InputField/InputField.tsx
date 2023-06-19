@@ -16,6 +16,7 @@ const InputField = ({
     <div className={`input__wrapper ${className}`}>
       <p className="top__label mb-2">{label}</p>
       <Form.Control
+        onWheel={(e) => e.preventDefault()}
         defaultValue={defaultValue}
         type={type}
         className="form-control core__inputField"

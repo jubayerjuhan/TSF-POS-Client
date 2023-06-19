@@ -11,6 +11,6 @@ export interface FormModalTypes {
   errors: FieldErrors<FieldValues>;
   register: (rules?: RegisterOptions) => RefReturn;
   loading?: boolean;
-  setValue?: UseFormSetValue<FieldValues>;
+  setValue?: UseFormSetValue<any>;
   branchSelector?: boolean;
 }
