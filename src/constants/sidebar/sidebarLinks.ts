@@ -14,6 +14,7 @@ const sidebarLinks: SidebarLinkType[] = [
   { name: "All Products", icon: ChairIcon, link: "/products" },
   { name: "Sale", icon: SellIcon, link: "/sale" },
   { name: "Sale List", icon: FormatListBulletedIcon, link: "/sales" },
+  { name: "Expenses", icon: FormatListBulletedIcon, link: "/expenses" },
   { name: "Search Product", icon: SearchIcon, link: "/search" },
   { name: "Transfer Stock", icon: MoveUpIcon, link: "/transfer-stock" },
   { name: "Branches", icon: StorefrontIcon, link: "/branches" },
