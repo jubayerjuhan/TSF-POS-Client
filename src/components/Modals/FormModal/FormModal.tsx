@@ -5,19 +5,28 @@ import InputField from "../../core/InputField/InputField";
 import SelectField from "../../core/SelectField/SelectField";
 import { FormModalTypes } from "./types";
 import Modal from "react-bootstrap/Modal";
+import BranchSelector from "../../sections/Branch/BranchSelector/BranchSelector";
+import { useEffect, useState } from "react";
 
 const FormModal = ({
   open,
   setOpen,
   loading,
   submitFields,
+  setValue,
   title,
   fields,
   register,
   errors,
   defaultValues,
+  branchSelector,
 }: FormModalTypes) => {
   const handleClose = () => setOpen(false);
+  const [branchId, setBranchId] = useState("");
+
+  useEffect(() => {
+    if (setValue) setValue("branch", branchId);
+  }, [branchId, setValue]);
 
   return (
     <Modal show={open} onHide={handleClose} style={{ paddingTop: 80 }}>
@@ -31,6 +40,7 @@ const FormModal = ({
       ) : (
         <Modal.Body>
           <form className="d-flex flex-column gap-4 my-2">
+            {branchSelector && <BranchSelector setBranchId={setBranchId} />}
             {fields.map((field, index) => {
               if (field.type === "select") {
                 return (

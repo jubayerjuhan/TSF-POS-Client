@@ -1,4 +1,4 @@
-import { FieldErrors, FieldValues } from "react-hook-form";
+import { FieldErrors, FieldValues, UseFormSetValue } from "react-hook-form";
 import { FieldTypes } from "../../../types/FieldTypes/FieldTypes";
 
 export interface FormModalTypes {
@@ -11,4 +11,6 @@ export interface FormModalTypes {
   errors: FieldErrors<FieldValues>;
   register: (rules?: RegisterOptions) => RefReturn;
   loading?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+  branchSelector?: boolean;
 }

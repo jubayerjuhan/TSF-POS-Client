@@ -10,23 +10,26 @@ const AddExpense = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     // resolver: yupResolver(addUserValidationSchema(userRole)),
   });
 
   // onsubmit function to dispatch the action
-  const onSubmit = () => {
-    console.log("object");
+  const onSubmit = (value: any) => {
+    console.log(value, "val");
   };
 
   return (
     <div className="add__expense-section">
       <Button title="Add Expense" onClick={() => setOpen(true)} />
       <FormModal
+        branchSelector
         fields={ADD_EXPENSE_FIELDS}
         title="Add Expense"
         errors={errors}
+        setValue={setValue}
         open={open}
         register={register}
         setOpen={setOpen}

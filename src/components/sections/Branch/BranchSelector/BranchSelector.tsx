@@ -32,8 +32,6 @@ const BranchSelector = ({ setBranchId, style }: BranchSelectorProps) => {
     }
   }, [branches]);
 
-  console.log(BRANCH_SELECTOR_FIELDS, "fields");
-
   return (
     <div style={{ maxWidth: 300, width: "100%" }}>
       {BRANCH_SELECTOR_FIELDS.map((field, index) => {
