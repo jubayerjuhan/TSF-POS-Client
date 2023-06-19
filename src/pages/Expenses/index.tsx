@@ -9,6 +9,7 @@ import { Expense } from "../../types/Expense/ExpenseType";
 import { DataGrid } from "@mui/x-data-grid";
 import { expenseColumns } from "./expenseColumns";
 import moment from "moment";
+import AddExpense from "../../components/sections/Expenses/AddExpense/AddExpense";
 
 const Expenses = () => {
   const { user } = useSelector((state: StateType) => state.user);
@@ -35,6 +36,7 @@ const Expenses = () => {
   return (
     <Pagewrapper>
       {adminPermission && <BranchSelector setBranchId={setBranchId} />}
+      <AddExpense />
       <DataGrid
         columns={expenseColumns}
         rows={row}
