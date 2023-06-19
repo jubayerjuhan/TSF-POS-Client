@@ -6,7 +6,7 @@ const BRANCH_SELECTOR_FIELDS: FieldTypes[] = [
     name: "branch",
     placeholder: "Select Branch!",
     type: "select",
-    options: [{ label: "Select One Branch", value: 0 }],
+    options: [{ label: "Showing For All Branch", value: "" }],
   },
 ];
 
