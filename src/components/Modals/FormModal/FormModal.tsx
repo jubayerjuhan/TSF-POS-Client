@@ -23,6 +23,7 @@ const FormModal = ({
 }: FormModalTypes) => {
   const handleClose = () => setOpen(false);
   const [branchId, setBranchId] = useState("");
+  console.log(errors, "error");
 
   useEffect(() => {
     if (setValue) setValue("branch", branchId);
@@ -40,7 +41,12 @@ const FormModal = ({
       ) : (
         <Modal.Body>
           <form className="d-flex flex-column gap-4 my-2">
-            {branchSelector && <BranchSelector setBranchId={setBranchId} />}
+            {branchSelector && (
+              <BranchSelector
+                setBranchId={setBranchId}
+                errorMessage={errors.branch ? errors.branch.message : undefined}
+              />
+            )}
             {fields.map((field, index) => {
               if (field.type === "select") {
                 return (

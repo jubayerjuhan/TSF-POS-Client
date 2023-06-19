@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { StateType } from "../../../../redux/redux";
 import { getBranchList } from "../../../../redux/actions/branches/branchesAction";
 
-const BranchSelector = ({ setBranchId, style }: BranchSelectorProps) => {
+const BranchSelector = ({
+  setBranchId,
+  style,
+  errorMessage,
+}: BranchSelectorProps) => {
   const { branches } = useSelector((state: StateType) => state.branches);
 
   const dispatch = useDispatch();
@@ -36,18 +40,29 @@ const BranchSelector = ({ setBranchId, style }: BranchSelectorProps) => {
     <div style={{ maxWidth: 300, width: "100%" }}>
       {BRANCH_SELECTOR_FIELDS.map((field, index) => {
         return (
-          <Form.Select
-            id=""
-            onChange={(e) => setBranchId(e.target.value)}
-            key={index}
-            style={style}
-          >
-            {field.options?.map((option, index) => (
-              <option value={option.value} key={index}>
-                {option.label}
-              </option>
-            ))}
-          </Form.Select>
+          <div>
+            <Form.Select
+              id=""
+              onChange={(e) => setBranchId(e.target.value)}
+              key={index}
+              style={style}
+            >
+              {field.options?.map((option, index) => (
+                <option value={option.value} key={index}>
+                  {option.label}
+                </option>
+              ))}
+            </Form.Select>
+
+            {errorMessage && (
+              <small
+                className="mt-3"
+                style={{ marginTop: "10px", color: "red" }}
+              >
+                {errorMessage}
+              </small>
+            )}
+          </div>
         );
       })}
     </div>
