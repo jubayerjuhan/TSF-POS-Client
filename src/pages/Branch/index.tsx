@@ -10,7 +10,9 @@ import AlertPopup from "../../components/AlertPopup/AlertPopup";
 import { CLEAR_ERROR } from "../../constants/reduxActionsNames/user";
 import BranchHeader from "../../components/sections/Branch/BranchHeader/BranchHeader";
 import BranchProducts from "../../components/sections/Branch/BranchProducts/BranchProducts";
+import useAdminPermission from "../../hooks/permission/useAdminPermission";
 const Branch = () => {
+  const isAdmin = useAdminPermission();
   const { branch, error, loading } = useSelector(
     (state: StateType) => state.branch
   );
@@ -42,10 +44,12 @@ const Branch = () => {
       ) : (
         <div>
           <BranchHeader branch={branch} />
-          <BranchModerators
-            moderators={branch?.moderators}
-            branchId={branch?._id}
-          />
+          {isAdmin && (
+            <BranchModerators
+              moderators={branch?.moderators}
+              branchId={branch?._id}
+            />
+          )}
           <BranchProducts products={branch?.products} />
         </div>
       )}
