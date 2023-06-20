@@ -14,8 +14,11 @@ import {
   editBranch,
 } from "../../../../redux/actions/branch/branchAction";
 import AppModal from "../../../Modals/AppModal/AppModal";
+import useAdminPermission from "../../../../hooks/permission/useAdminPermission";
 
 const BranchHeader = ({ branch }: { branch: Branch }) => {
+  const isAdmin = useAdminPermission();
+
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
   const dispatch: AppDispatch = useDispatch();
@@ -71,18 +74,20 @@ const BranchHeader = ({ branch }: { branch: Branch }) => {
           <p className="fs-3 fw-bold mb-2">{branch?.name}</p>
           <p className="fs-6 ">{branch?.address}</p>
         </div>
-        <div className="d-flex gap-2">
-          <Button
-            title="Edit Branch"
-            className="btn-warning text-black"
-            onClick={() => setEditModalOpen(true)}
-          />
-          <Button
-            title="Delete Branch"
-            className="btn-danger text-white"
-            onClick={() => setDeleteModalOpen(true)}
-          />
-        </div>
+        {isAdmin && (
+          <div className="d-flex gap-2">
+            <Button
+              title="Edit Branch"
+              className="btn-warning text-black"
+              onClick={() => setEditModalOpen(true)}
+            />
+            <Button
+              title="Delete Branch"
+              className="btn-danger text-white"
+              onClick={() => setDeleteModalOpen(true)}
+            />
+          </div>
+        )}
       </div>
     </>
   );

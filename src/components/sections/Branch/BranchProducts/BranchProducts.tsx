@@ -11,6 +11,7 @@ import EditBranchProduct from "../EditBranchProduct/EditBranchProduct";
 import BranchAddProduct from "../BranchAddProduct/BranchAddProduct";
 import { CLEAR_PRODUCT } from "../../../../constants/reduxActionsNames/product";
 import { getBranch } from "../../../../redux/actions/branch/branchAction";
+import useAdminPermission from "../../../../hooks/permission/useAdminPermission";
 
 export interface BranchProduct {
   id: Product;
@@ -22,6 +23,7 @@ export interface BranchProductProps {
   products: BranchProduct[];
 }
 const BranchProducts = ({ products }: BranchProductProps) => {
+  const isAdmin = useAdminPermission();
   const { branch } = useSelector((state: StateType) => state.branch);
   const { loading, error, message } = useSelector(
     (state: StateType) => state.product
@@ -66,7 +68,7 @@ const BranchProducts = ({ products }: BranchProductProps) => {
         <p className="fs-4 fw-bold text-muted mb-3">
           Products ({products?.length})
         </p>
-        <BranchAddProduct />
+        {isAdmin && <BranchAddProduct />}
       </div>
 
       <div className="product__list">
