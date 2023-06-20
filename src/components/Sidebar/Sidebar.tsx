@@ -16,6 +16,10 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/sisters_furniture_logo.jpeg";
 import sidebarLinks from "../../constants/sidebar/sidebarLinks";
 import { useNavigate } from "react-router-dom";
+import StoreMallDirectoryIcon from "@mui/icons-material/StoreMallDirectory";
+import useAdminPermission from "../../hooks/permission/useAdminPermission";
+import { useSelector } from "react-redux";
+import { StateType } from "../../redux/redux";
 
 const drawerWidth = 240;
 
@@ -27,6 +31,8 @@ interface Props {
 }
 
 export default function Sidebar(props: Props) {
+  const { user } = useSelector((state: StateType) => state.user);
+  const isAdmin = useAdminPermission();
   const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -44,19 +50,35 @@ export default function Sidebar(props: Props) {
       <img src={logo} alt="" style={{ width: "100%", padding: 20 }} />
       <Divider />
       <List>
-        {sidebarLinks.map((link, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton onClick={() => handleLinkClick(link.link)}>
+        {sidebarLinks.map((link, index) => {
+          if (link.adminOnlyPermission && !isAdmin) return;
+          return (
+            <ListItem key={index} disablePadding>
+              <ListItemButton onClick={() => handleLinkClick(link.link)}>
+                <ListItemIcon>
+                  <link.icon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={link.name}
+                  sx={{ fontFamily: "Poppins" }}
+                />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+        {!isAdmin && (
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => navigate(`/branch/${user.branch}`)}>
               <ListItemIcon>
-                <link.icon />
+                <StoreMallDirectoryIcon />
               </ListItemIcon>
               <ListItemText
-                primary={link.name}
+                primary={"My Branch"}
                 sx={{ fontFamily: "Poppins" }}
               />
             </ListItemButton>
           </ListItem>
-        ))}
+        )}
       </List>
     </div>
   );
