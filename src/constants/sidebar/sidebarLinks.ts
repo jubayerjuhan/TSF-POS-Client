@@ -12,14 +12,29 @@ import { SidebarLinkType } from "./types";
 
 const sidebarLinks: SidebarLinkType[] = [
   { name: "Dashboard", icon: DashboardIcon, link: "/" },
-  { name: "All Products", icon: ChairIcon, link: "/products" },
+  {
+    name: "All Products",
+    icon: ChairIcon,
+    link: "/products",
+    adminOnlyPermission: true,
+  },
   { name: "Sale", icon: SellIcon, link: "/sale" },
   { name: "Sale List", icon: FormatListBulletedIcon, link: "/sales" },
   { name: "Expenses", icon: PaidIcon, link: "/expenses" },
   { name: "Search Product", icon: SearchIcon, link: "/search" },
-  { name: "Transfer Stock", icon: MoveUpIcon, link: "/transfer-stock" },
-  { name: "Branches", icon: StorefrontIcon, link: "/branches" },
-  { name: "Users", icon: GroupIcon, link: "/users" },
+  {
+    name: "Transfer Stock",
+    icon: MoveUpIcon,
+    link: "/transfer-stock",
+    adminOnlyPermission: true,
+  },
+  {
+    name: "Branches",
+    icon: StorefrontIcon,
+    link: "/branches",
+    adminOnlyPermission: true,
+  },
+  { name: "Users", icon: GroupIcon, link: "/users", adminOnlyPermission: true },
 ];
 
 export default sidebarLinks;

@@ -4,5 +4,6 @@ import { OverridableComponent } from "@mui/material/OverridableComponent";
 export type SidebarLinkType = {
   name: string;
   link: string;
+  adminOnlyPermission?: boolean;
   icon: OverridableComponent<SvgIconTypeMap<unknown, "svg">>;
 };
