@@ -4,6 +4,7 @@ import Button from "../../core/Button/Button";
 import "./productCard.scss";
 import { ProductCardTypes } from "./types";
 import { useNavigate } from "react-router-dom";
+import useAdminPermission from "../../../hooks/permission/useAdminPermission";
 
 const ProductCard = ({
   product,
@@ -15,6 +16,8 @@ const ProductCard = ({
   setEditingProduct,
   hideQty,
 }: ProductCardTypes) => {
+  const isAdmin = useAdminPermission();
+
   const onDeleteClick = () => {
     setDeletingProductId(product._id);
     setDeletionModelOpen(true);
@@ -48,7 +51,7 @@ const ProductCard = ({
               Quantity: <span className="fw-bold">{quantity}</span>
             </Card.Text>
           )}
-          <Card.Text>Cost Price: {product.costPrice}</Card.Text>
+          {isAdmin && <Card.Text>Cost Price: {product.costPrice}</Card.Text>}
           <Card.Text className="mb-3">
             Sell Price: {product.sellPrice}
           </Card.Text>
