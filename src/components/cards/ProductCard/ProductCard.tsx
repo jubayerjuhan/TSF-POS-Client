@@ -56,14 +56,20 @@ const ProductCard = ({
             Sell Price: {product.sellPrice}
           </Card.Text>
         </div>
-        <div className="button__container">
-          <Button
-            title="Delete"
-            className="btn-danger"
-            onClick={onDeleteClick}
-          />
-          <Button title="Edit" className="btn-primary" onClick={onEditClick} />
-        </div>
+        {isAdmin && (
+          <div className="button__container">
+            <Button
+              title="Delete"
+              className="btn-danger"
+              onClick={onDeleteClick}
+            />
+            <Button
+              title="Edit"
+              className="btn-primary"
+              onClick={onEditClick}
+            />
+          </div>
+        )}
       </Card.Body>
     </Card>
   );
