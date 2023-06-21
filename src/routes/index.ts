@@ -1,6 +1,7 @@
 // conponent for routes
 import Branch from "../pages/Branch";
 import Branches from "../pages/Branches/Branches";
+import CustomOrder from "../pages/CustomOrder";
 import Dashboard from "../pages/Dashboard";
 import Expenses from "../pages/Expenses";
 import ForgotPassword from "../pages/ForgotPassword";
@@ -74,6 +75,11 @@ const routes: Route[] = [
   {
     path: "/sale",
     component: Sale,
+    secured: true,
+  },
+  {
+    path: "/custom-order",
+    component: CustomOrder,
     secured: true,
   },
   {

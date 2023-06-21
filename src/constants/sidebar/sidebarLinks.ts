@@ -7,6 +7,7 @@ import MoveUpIcon from "@mui/icons-material/MoveUp";
 import SellIcon from "@mui/icons-material/Sell";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import PaidIcon from "@mui/icons-material/Paid";
+import ConstructionIcon from "@mui/icons-material/Construction";
 
 import { SidebarLinkType } from "./types";
 
@@ -19,6 +20,7 @@ const sidebarLinks: SidebarLinkType[] = [
     adminOnlyPermission: true,
   },
   { name: "Sale", icon: SellIcon, link: "/sale" },
+  { name: "Custom Order", icon: ConstructionIcon, link: "/custom-order" },
   { name: "Sale List", icon: FormatListBulletedIcon, link: "/sales" },
   { name: "Expenses", icon: PaidIcon, link: "/expenses" },
   { name: "Search Product", icon: SearchIcon, link: "/search" },
