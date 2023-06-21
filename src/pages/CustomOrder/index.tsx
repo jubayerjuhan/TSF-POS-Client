@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCustomOrder } from "../../redux/actions/customOrder/customOrderAction";
 import { StateType } from "../../redux/redux";
 import { toast } from "react-hot-toast";
-import { error } from "jquery";
 import { CUSTOM_ORDER_CLEAR_MESSAGE } from "../../constants/reduxActionsNames/customOrder";
+import CustomOrderList from "../../components/sections/CustomOrder/CustomOrderList/CustomOrderList";
 
 const CustomOrder = () => {
   const { user } = useSelector((state: StateType) => state.user);
@@ -60,6 +60,7 @@ const CustomOrder = () => {
         branchSelector={isAdmin}
         setValue={setValue}
       />
+      <CustomOrderList />
     </Pagewrapper>
   );
 };
