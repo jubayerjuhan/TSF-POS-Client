@@ -6,18 +6,23 @@ import CUSTOM_ORDER_FIELDS from "../../constants/InputFields/customOrder/customO
 import { useState } from "react";
 import { CustomOrderType } from "../../types/CustomOrder/CustomOrderTypes";
 import useAdminPermission from "../../hooks/permission/useAdminPermission";
+import { useDispatch } from "react-redux";
+import { addCustomOrder } from "../../redux/actions/customOrder/customOrderAction";
 
 const CustomOrder = () => {
-  const isAdmin = useAdminPermission();
   const [open, setOpen] = useState(false);
+  const isAdmin = useAdminPermission();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<CustomOrderType>();
 
-  const onSubmit: SubmitHandler<CustomOrderType> = (value: CustomOrderType) => {
-    console.log(value, "custom order value");
+  const onSubmit: SubmitHandler<CustomOrderType> = async (
+    value: CustomOrderType
+  ) => {
+    await dispatch(addCustomOrder(value));
   };
 
   return (
