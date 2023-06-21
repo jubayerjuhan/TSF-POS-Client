@@ -74,13 +74,11 @@ interface StateType {
     message: string | null;
     error: string;
   };
-  // sale: {
-  //   sale: Sale;
-  //   loading: boolean;
-  //   success: boolean;
-  //   message: string | null;
-  //   error: string;
-  // };
+  customOrder: {
+    loading: boolean;
+    message: string | null;
+    error: string | null;
+  };
   sales: {
     sales: SaleInfo;
     loading: boolean;

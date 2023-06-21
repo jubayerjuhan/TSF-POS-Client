@@ -12,7 +12,7 @@ import { StateType } from "../../redux/redux";
 
 const CustomOrder = () => {
   const { user } = useSelector((state: StateType) => state.user);
-  // const { user } = useSelector((state: StateType) => state.user);
+  const { user } = useSelector((state: StateType) => state.user);
   const [open, setOpen] = useState(false);
   const isAdmin = useAdminPermission();
   const dispatch = useDispatch();
@@ -22,6 +22,10 @@ const CustomOrder = () => {
     setValue,
     formState: { errors },
   } = useForm<CustomOrderType>();
+
+  useEffect(() => {
+    if (!isAdmin) setValue("branch", user.branch ? user.branch : "");
+  }, [isAdmin, user, setValue]);
 
   useEffect(() => {
     if (!isAdmin) setValue("branch", user.branch ? user.branch : "");
