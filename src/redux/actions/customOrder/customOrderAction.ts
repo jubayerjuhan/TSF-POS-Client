@@ -1,4 +1,9 @@
-import { FETCH_CUSTOM_ORDERS_ERROR } from "./../../../constants/reduxActionsNames/customOrder/index";
+import {
+  FETCH_CUSTOM_ORDERS_ERROR,
+  FETCH_SINGLE_CUSTOM_ORDERS_ERROR,
+  FETCH_SINGLE_CUSTOM_ORDERS_PENDING,
+  FETCH_SINGLE_CUSTOM_ORDERS_SUCCESS,
+} from "./../../../constants/reduxActionsNames/customOrder/index";
 import client from "../../../client/axiosInstance";
 import {
   ADD_CUSTOM_ORDER_ERROR,
@@ -56,13 +61,16 @@ export const fetchCustomOrders: RootThunk =
 export const fetchSingleOrder: RootThunk =
   (orderId: string) => async (dispatch: AppDispatch) => {
     try {
-      dispatch({ type: FETCH_CUSTOM_ORDERS_PENDING });
+      dispatch({ type: FETCH_SINGLE_CUSTOM_ORDERS_PENDING });
 
       const { data }: { data: FetchSingleCustomOrderSuccess } =
         await client.get(`custom-order/action/${orderId}`);
 
-      dispatch({ type: FETCH_CUSTOM_ORDERS_SUCCESS, payload: data.orders });
+      dispatch({
+        type: FETCH_SINGLE_CUSTOM_ORDERS_SUCCESS,
+        payload: data.order,
+      });
     } catch (error) {
-      errorDispatcher(error, FETCH_CUSTOM_ORDERS_ERROR, dispatch);
+      errorDispatcher(error, FETCH_SINGLE_CUSTOM_ORDERS_ERROR, dispatch);
     }
   };

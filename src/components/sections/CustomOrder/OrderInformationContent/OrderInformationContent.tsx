@@ -1,4 +1,10 @@
-const OrderInformationContent = () => {
+import { CustomOrderFromServer } from "../../../../types/CustomOrder/CustomOrderTypes";
+
+const OrderInformationContent = ({
+  order,
+}: {
+  order: CustomOrderFromServer;
+}) => {
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">Order Information</h1>
@@ -11,10 +17,10 @@ const OrderInformationContent = () => {
             </div>
             <div className="card-body">
               <p className="mb-2">
-                <strong>Name:</strong> Jubayer Juhan
+                <strong>Name:</strong> {order.customerName}
               </p>
               <p className="mb-2">
-                <strong>Phone:</strong> 01620692839
+                <strong>Phone:</strong> {order.customerPhone}
               </p>
             </div>
           </div>
@@ -26,47 +32,51 @@ const OrderInformationContent = () => {
             </div>
             <div className="card-body">
               <p className="mb-2">
-                <strong>Description:</strong> asjdhuashdkjh
+                <strong>Description:</strong> {order.description}
               </p>
               <p className="mb-2">
-                <strong>Color:</strong> Tetul Bichi
+                <strong>Color:</strong> {order.color}
               </p>
               <p className="mb-2">
-                <strong>Wood:</strong> Oak
+                <strong>Wood:</strong> {order.wood}
               </p>
               <p className="mb-2">
-                <strong>Total Price:</strong> $20,000
+                <strong>Total Price:</strong> {order.totalPrice}
               </p>
               <p className="mb-2">
-                <strong>Status:</strong> Order Taken
+                <strong>Status:</strong> {order.status}
               </p>
               <p className="mb-2">
-                <strong>Advance Payment:</strong> $10,000
+                <strong>Advance Payment:</strong> {order.advancePayment}
               </p>
               <p className="mb-0">
-                <strong>Order ID:</strong> 1
+                <strong>Order ID:</strong> {order.orderId}
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="card-body">
-        <table className="table table-bordered mb-0">
-          <thead className="card-header">
-            <tr>
-              <th>Product Name</th>
-              <th>Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Product 1</td>
-              <td>10</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      {order.products.length > 0 && (
+        <div className="card-body">
+          <table className="table table-bordered mb-0">
+            <thead className="card-header">
+              <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {order.products.map((product, index) => (
+                <tr>
+                  <td>Product 1</td>
+                  <td>10</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

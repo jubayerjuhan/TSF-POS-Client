@@ -10,5 +10,5 @@ export interface FetchCustomOrdersSuccess {
 }
 export interface FetchSingleCustomOrderSuccess {
   success: boolean;
-  orders: CustomOrderFromServer;
+  order: CustomOrderFromServer;
 }
