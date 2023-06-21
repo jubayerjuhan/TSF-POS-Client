@@ -18,6 +18,7 @@ export interface CustomOrderFromServer {
   description: string;
   totalPrice: number;
   advancePayment: number;
+  orderId: number;
   branch: {
     _id: string;
     name: string;

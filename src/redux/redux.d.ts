@@ -9,6 +9,7 @@ import { Sale } from "../types/Sale/sale";
 import { SaleInfo } from "./actions/sales/types";
 import { Dayjs } from "dayjs";
 import { Expense } from "../types/Expense/ExpenseType";
+import { CustomOrderFromServer } from "../types/CustomOrder/CustomOrderTypes";
 
 export interface ReduxAction extends Action {
   payload: object | string | Array;
@@ -78,6 +79,7 @@ interface StateType {
     loading: boolean;
     message: string | null;
     error: string | null;
+    orders: CustomOrderFromServer[];
   };
   sales: {
     sales: SaleInfo;
