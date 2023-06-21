@@ -19,6 +19,8 @@ export interface CustomOrderFromServer {
   totalPrice: number;
   advancePayment: number;
   orderId: number;
+  color: string;
+  wood: string;
   branch: {
     _id: string;
     name: string;
