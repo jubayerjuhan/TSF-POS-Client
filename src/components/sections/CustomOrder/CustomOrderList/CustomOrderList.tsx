@@ -12,14 +12,14 @@ import useAdminPermission from "../../../../hooks/permission/useAdminPermission"
 
 const CustomOrderList = () => {
   const isAdmin = useAdminPermission();
-
+  const { user } = useSelector((state: StateType) => state.user);
   const { orders } = useSelector((state: StateType) => state.customOrder);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCustomOrders());
-  }, [dispatch]);
+    dispatch(fetchCustomOrders(user.branch));
+  }, [dispatch, user]);
 
   const row: any = [];
 
