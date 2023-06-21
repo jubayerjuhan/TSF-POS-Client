@@ -1,6 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { IMAGE_URL } from "../../constants/links/imageLink";
 import { SearchedProduct } from "../../types/Product/searchProductTypes";
+import useAdminPermission from "../../hooks/permission/useAdminPermission";
 
 const ProductDetail = ({
   product,
@@ -9,7 +10,8 @@ const ProductDetail = ({
   product: SearchedProduct;
   branchDetail?: boolean;
 }) => {
-  console.log(product.branches);
+  const isAdmin = useAdminPermission();
+
   return (
     <Container>
       <Row style={{ gap: 15 }}>
@@ -27,9 +29,11 @@ const ProductDetail = ({
           </p>
           <p>Color : {product?.color}</p>
           <p>Wood : {product?.wood}</p>
-          <p className="fw-semibold badge badge-pill badge-primary">
-            Cost Price: {product?.costPrice}
-          </p>
+          {isAdmin && (
+            <p className="fw-semibold badge badge-pill badge-primary">
+              Cost Price: {product?.costPrice}
+            </p>
+          )}
           <br />
           <p className="fw-semibold badge badge-pill badge-success">
             Sell Price: {product?.sellPrice}

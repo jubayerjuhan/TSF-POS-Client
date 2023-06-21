@@ -53,7 +53,7 @@ const SaleChart = () => {
       },
       title: {
         display: true,
-        text: "Sales Graph",
+        text: "Sales Graph (This Week)",
       },
     },
   };

@@ -17,12 +17,12 @@ const DashboardAmount = () => {
         number={sales?.total + amountRecived}
       />
       <StatsCard
-        title="First Partial Payment and Sales Only"
+        title="Advance Payment and Sales Only"
         icon={AttachMoneyIcon}
         number={sales?.total}
       />
       <StatsCard
-        title="2nd Partial Payment Recived"
+        title="Full Payment Recived"
         icon={AttachMoneyIcon}
         number={amountRecived}
       />
