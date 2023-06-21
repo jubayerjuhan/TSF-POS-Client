@@ -2,15 +2,19 @@ import "./AddExpense.scss";
 import Button from "../../../core/Button/Button";
 import FormModal from "../../../Modals/FormModal/FormModal";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ADD_EXPENSE_FIELDS from "../../../../constants/InputFields/expense/addExpenseFields";
 import { yupResolver } from "@hookform/resolvers/yup";
 import expenseValidationSchema from "../../../../constants/InputValidation/expense/expenseValidation";
 import { addExpense } from "../../../../redux/actions/expenses/expenseAction";
 import { AddExpenseData } from "./types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useAdminPermission from "../../../../hooks/permission/useAdminPermission";
+import { StateType } from "../../../../redux/redux";
 
 const AddExpense = () => {
+  const isAdmin = useAdminPermission();
+  const { user } = useSelector((state: StateType) => state.user);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const {
@@ -21,6 +25,10 @@ const AddExpense = () => {
   } = useForm<AddExpenseData>({
     resolver: yupResolver(expenseValidationSchema),
   });
+
+  useEffect(() => {
+    if (!isAdmin) setValue("branch", user.branch ? user.branch : "");
+  }, [isAdmin, setValue, user]);
 
   // onSubmit function to dispatch the action
   const onSubmit: SubmitHandler<AddExpenseData> = async (

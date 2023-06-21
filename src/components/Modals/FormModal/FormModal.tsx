@@ -7,6 +7,7 @@ import { FormModalTypes } from "./types";
 import Modal from "react-bootstrap/Modal";
 import BranchSelector from "../../sections/Branch/BranchSelector/BranchSelector";
 import { useEffect, useState } from "react";
+import useAdminPermission from "../../../hooks/permission/useAdminPermission";
 
 const FormModal = ({
   open,
@@ -21,6 +22,7 @@ const FormModal = ({
   defaultValues,
   branchSelector,
 }: FormModalTypes) => {
+  const isAdmin = useAdminPermission();
   const handleClose = () => setOpen(false);
   const [branchId, setBranchId] = useState("");
   console.log(errors, "error");
@@ -41,7 +43,7 @@ const FormModal = ({
       ) : (
         <Modal.Body>
           <form className="d-flex flex-column gap-4 my-2">
-            {branchSelector && (
+            {branchSelector && isAdmin && (
               <BranchSelector
                 setBranchId={setBranchId}
                 errorMessage={errors.branch ? errors.branch.message : undefined}
