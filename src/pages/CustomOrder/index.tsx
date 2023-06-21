@@ -9,10 +9,15 @@ import useAdminPermission from "../../hooks/permission/useAdminPermission";
 import { useDispatch, useSelector } from "react-redux";
 import { addCustomOrder } from "../../redux/actions/customOrder/customOrderAction";
 import { StateType } from "../../redux/redux";
+import { toast } from "react-hot-toast";
+import { error } from "jquery";
+import { CUSTOM_ORDER_CLEAR_MESSAGE } from "../../constants/reduxActionsNames/customOrder";
 
 const CustomOrder = () => {
   const { user } = useSelector((state: StateType) => state.user);
-  const { user } = useSelector((state: StateType) => state.user);
+  const { loading, error, message } = useSelector(
+    (state: StateType) => state.customOrder
+  );
   const [open, setOpen] = useState(false);
   const isAdmin = useAdminPermission();
   const dispatch = useDispatch();
@@ -28,19 +33,23 @@ const CustomOrder = () => {
   }, [isAdmin, user, setValue]);
 
   useEffect(() => {
-    if (!isAdmin) setValue("branch", user.branch ? user.branch : "");
-  }, [isAdmin, user, setValue]);
+    if (error) toast.error(error);
+    if (message) toast.success(message);
+    dispatch({ type: CUSTOM_ORDER_CLEAR_MESSAGE });
+  }, [error, message, dispatch]);
 
   const onSubmit: SubmitHandler<CustomOrderType> = async (
     value: CustomOrderType
   ) => {
     await dispatch(addCustomOrder(value));
+    setOpen(false);
   };
 
   return (
     <Pagewrapper>
       <Button title="Add Custom Order" onClick={() => setOpen(true)} />
       <FormModal
+        loading={loading}
         title="Custom Order"
         fields={CUSTOM_ORDER_FIELDS}
         open={open}
