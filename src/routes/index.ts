@@ -7,6 +7,7 @@ import Expenses from "../pages/Expenses";
 import ForgotPassword from "../pages/ForgotPassword";
 import InvoicePage from "../pages/Invoice";
 import Login from "../pages/Login";
+import OrderInformation from "../pages/OrderInformation/OrderInformation";
 import Product from "../pages/Product";
 import Products from "../pages/Products";
 import ResetPassword from "../pages/ResetPassword";
@@ -80,6 +81,11 @@ const routes: Route[] = [
   {
     path: "/custom-order",
     component: CustomOrder,
+    secured: true,
+  },
+  {
+    path: "/order/:id",
+    component: OrderInformation,
     secured: true,
   },
   {
