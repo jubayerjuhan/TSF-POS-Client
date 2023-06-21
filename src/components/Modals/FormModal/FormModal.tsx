@@ -45,6 +45,7 @@ const FormModal = ({
           <form className="d-flex flex-column gap-4 my-2">
             {branchSelector && isAdmin && (
               <BranchSelector
+                fullWidth
                 setBranchId={setBranchId}
                 errorMessage={errors.branch ? errors.branch.message : undefined}
               />

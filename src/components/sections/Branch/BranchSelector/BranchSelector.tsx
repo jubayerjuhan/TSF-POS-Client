@@ -9,6 +9,7 @@ import { getBranchList } from "../../../../redux/actions/branches/branchesAction
 const BranchSelector = ({
   setBranchId,
   style,
+  fullWidth,
   errorMessage,
 }: BranchSelectorProps) => {
   const { branches } = useSelector((state: StateType) => state.branches);
@@ -37,7 +38,7 @@ const BranchSelector = ({
   }, [branches]);
 
   return (
-    <div style={{ maxWidth: 300, width: "100%" }}>
+    <div style={{ maxWidth: fullWidth ? "100%" : 300, width: "100%" }}>
       {BRANCH_SELECTOR_FIELDS.map((field, index) => {
         return (
           <div>
