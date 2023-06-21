@@ -10,7 +10,10 @@ import {
 import { CustomOrderType } from "../../../types/CustomOrder/CustomOrderTypes";
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk } from "../../redux";
-import { FetchCustomOrdersSuccess } from "./types";
+import {
+  FetchCustomOrdersSuccess,
+  FetchSingleCustomOrderSuccess,
+} from "./types";
 
 export const addCustomOrder: RootThunk =
   (customOrderData: CustomOrderType) => async (dispatch: AppDispatch) => {
@@ -42,6 +45,21 @@ export const fetchCustomOrders: RootThunk =
       const { data }: { data: FetchCustomOrdersSuccess } = await client.get(
         `custom-order/list?branchId=${branchId ? branchId : ""}`
       );
+
+      dispatch({ type: FETCH_CUSTOM_ORDERS_SUCCESS, payload: data.orders });
+    } catch (error) {
+      errorDispatcher(error, FETCH_CUSTOM_ORDERS_ERROR, dispatch);
+    }
+  };
+
+// with this we will fetch only one custom order by id
+export const fetchSingleOrder: RootThunk =
+  (orderId: string) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: FETCH_CUSTOM_ORDERS_PENDING });
+
+      const { data }: { data: FetchSingleCustomOrderSuccess } =
+        await client.get(`custom-order/action/${orderId}`);
 
       dispatch({ type: FETCH_CUSTOM_ORDERS_SUCCESS, payload: data.orders });
     } catch (error) {

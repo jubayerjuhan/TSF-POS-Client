@@ -80,6 +80,7 @@ interface StateType {
     message: string | null;
     error: string | null;
     orders: CustomOrderFromServer[];
+    order: CustomOrderFromServer;
   };
   sales: {
     sales: SaleInfo;

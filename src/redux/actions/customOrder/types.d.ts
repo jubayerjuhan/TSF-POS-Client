@@ -8,3 +8,7 @@ export interface FetchCustomOrdersSuccess {
   success: boolean;
   orders: CustomOrderFromServer[];
 }
+export interface FetchSingleCustomOrderSuccess {
+  success: boolean;
+  orders: CustomOrderFromServer;
+}
