@@ -16,6 +16,7 @@ import salesReducer from "../reducers/salesListReducer";
 import partialPaymentReducer from "../reducers/partialPaymentReducer";
 import dashboardReducer from "../reducers/dashboardReducer";
 import expensesListReducer from "../reducers/expensesListReducer";
+import customOrderReducer from "../reducers/customOrderReducer";
 
 //persist config for persistor
 const persistConfig = {
@@ -38,6 +39,7 @@ const reducers = combineReducers({
   sales: salesReducer,
   expenses: expensesListReducer,
   partialPayment: partialPaymentReducer,
+  customOrder: customOrderReducer,
   promise: promiseReducer,
 });
 

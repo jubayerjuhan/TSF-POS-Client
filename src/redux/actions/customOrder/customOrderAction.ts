@@ -7,19 +7,15 @@ import {
 import { CustomOrderType } from "../../../types/CustomOrder/CustomOrderTypes";
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk } from "../../redux";
-import { AddCustomOrderSuccess } from "./types";
 
 export const addCustomOrder: RootThunk =
   (customOrderData: CustomOrderType) => async (dispatch: AppDispatch) => {
     try {
       dispatch({ type: ADD_CUSTOM_ORDER_PENDING });
 
-      const { data }: { data: AddCustomOrderSuccess } = await client.post(
-        "custom-order/create",
-        customOrderData
-      );
+      await client.post("custom-order/create", customOrderData);
 
-      dispatch({ type: ADD_CUSTOM_ORDER_SUCCESS, payload: data.message });
+      dispatch({ type: ADD_CUSTOM_ORDER_SUCCESS });
     } catch (error) {
       errorDispatcher(error, ADD_CUSTOM_ORDER_ERROR, dispatch);
     }

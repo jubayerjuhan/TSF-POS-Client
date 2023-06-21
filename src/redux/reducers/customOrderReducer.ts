@@ -17,7 +17,7 @@ const customOrderReducer = (state = {}, action: ReduxAction) => {
       return {
         ...state,
         loading: false,
-        message: action.payload,
+        message: "Order Placed Successfully",
       };
     case ADD_CUSTOM_ORDER_ERROR:
       return {
