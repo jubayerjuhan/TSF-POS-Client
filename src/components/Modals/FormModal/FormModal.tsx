@@ -28,8 +28,8 @@ const FormModal = ({
   console.log(errors, "error");
 
   useEffect(() => {
-    if (setValue) setValue("branch", branchId);
-  }, [branchId, setValue]);
+    if (setValue && branchSelector) setValue("branch", branchId);
+  }, [branchId, setValue, branchSelector]);
 
   return (
     <Modal show={open} onHide={handleClose} style={{ paddingTop: 80 }}>

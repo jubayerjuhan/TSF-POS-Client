@@ -74,6 +74,13 @@ interface StateType {
     message: string | null;
     error: string;
   };
+  // sale: {
+  //   sale: Sale;
+  //   loading: boolean;
+  //   success: boolean;
+  //   message: string | null;
+  //   error: string;
+  // };
   sales: {
     sales: SaleInfo;
     loading: boolean;
