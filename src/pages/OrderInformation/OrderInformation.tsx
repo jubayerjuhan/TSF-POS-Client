@@ -4,14 +4,22 @@ import OrderInformationContent from "../../components/sections/CustomOrder/Order
 import "./orderInfo.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSingleOrder } from "../../redux/actions/customOrder/customOrderAction";
+import {
+  changeOrderStatus,
+  fetchSingleOrder,
+} from "../../redux/actions/customOrder/customOrderAction";
 import { StateType } from "../../redux/redux";
 import OrderStatusSelector from "../../components/sections/CustomOrder/OrderStatusSelector/OrderStatusSelector";
 import { fetchAllProducts } from "../../redux/actions/products/productsAction";
 import Button from "../../components/core/Button/Button";
+import { toast } from "react-hot-toast";
+import { CUSTOM_ORDER_CLEAR_MESSAGE } from "../../constants/reduxActionsNames/customOrder";
 
 const OrderInformation = () => {
   const { products } = useSelector((state: StateType) => state.products);
+  const { message, loading, error } = useSelector(
+    (state: StateType) => state.customOrder
+  );
   const [orderStatus, setOrderStatus] = useState("");
   const [product, setProduct] = useState("");
   const [quantity, setQuantity] = useState<number>();
@@ -22,7 +30,13 @@ const OrderInformation = () => {
   useEffect(() => {
     dispatch(fetchSingleOrder(orderId));
     dispatch(fetchAllProducts());
-  }, [dispatch, orderId]);
+  }, [dispatch, orderId, message]);
+
+  useEffect(() => {
+    if (message) toast.success(message);
+    if (error) toast.error(error);
+    dispatch({ type: CUSTOM_ORDER_CLEAR_MESSAGE });
+  }, [message, error, dispatch]);
 
   const handleProductChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setProduct(e.target.value);
@@ -33,8 +47,11 @@ const OrderInformation = () => {
   };
 
   const handleChangeOrderStatus = () => {
-    alert(
-      `Status ${orderStatus} Branch ${order.branch._id}, id: ${product} quantity: ${quantity}`
+    dispatch(
+      changeOrderStatus(order._id, {
+        productIds: [{ id: product, quantity }],
+        status: orderStatus,
+      })
     );
   };
 
@@ -76,6 +93,7 @@ const OrderInformation = () => {
         </div>
       )}
       <Button
+        loading={loading}
         className="mt-3"
         title="Change Status"
         onClick={handleChangeOrderStatus}

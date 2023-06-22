@@ -85,7 +85,7 @@ export const changeOrderStatus: RootThunk =
     try {
       dispatch({ type: CHANGE_ORDER_STATUS_PENDING });
 
-      const { data }: { data: ChangeOrderStatusSuccess } = await client.post(
+      const { data }: { data: ChangeOrderStatusSuccess } = await client.put(
         `custom-order/action/${orderId}`,
         orderData
       );
