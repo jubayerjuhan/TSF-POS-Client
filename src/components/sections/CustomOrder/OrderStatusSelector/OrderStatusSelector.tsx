@@ -28,7 +28,8 @@ const OrderStatusSelector = ({
                 ((order?.status === "Shipped" ||
                   order?.status === "Delivered") &&
                   orderStatus === "Order Taken") ||
-                order?.status === "Delivered"
+                order?.status === "Delivered" ||
+                (order?.status === "Order Taken" && orderStatus === "Delivered")
               }
               selected={order?.status === orderStatus}
             >
