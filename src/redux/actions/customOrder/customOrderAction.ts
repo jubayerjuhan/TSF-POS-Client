@@ -1,4 +1,7 @@
 import {
+  CHANGE_ORDER_STATUS_ERROR,
+  CHANGE_ORDER_STATUS_PENDING,
+  CHANGE_ORDER_STATUS_SUCCESS,
   FETCH_CUSTOM_ORDERS_ERROR,
   FETCH_SINGLE_CUSTOM_ORDERS_ERROR,
   FETCH_SINGLE_CUSTOM_ORDERS_PENDING,
@@ -16,6 +19,7 @@ import { CustomOrderType } from "../../../types/CustomOrder/CustomOrderTypes";
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk } from "../../redux";
 import {
+  ChangeOrderStatusSuccess,
   FetchCustomOrdersSuccess,
   FetchSingleCustomOrderSuccess,
 } from "./types";
@@ -72,5 +76,25 @@ export const fetchSingleOrder: RootThunk =
       });
     } catch (error) {
       errorDispatcher(error, FETCH_SINGLE_CUSTOM_ORDERS_ERROR, dispatch);
+    }
+  };
+
+// with this we will change the order status
+export const changeOrderStatus: RootThunk =
+  (orderId: string, orderData: object) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: CHANGE_ORDER_STATUS_PENDING });
+
+      const { data }: { data: ChangeOrderStatusSuccess } = await client.post(
+        `custom-order/action/${orderId}`,
+        orderData
+      );
+
+      dispatch({
+        type: CHANGE_ORDER_STATUS_SUCCESS,
+        payload: data.message,
+      });
+    } catch (error) {
+      errorDispatcher(error, CHANGE_ORDER_STATUS_ERROR, dispatch);
     }
   };

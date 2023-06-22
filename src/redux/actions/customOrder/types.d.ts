@@ -12,3 +12,8 @@ export interface FetchSingleCustomOrderSuccess {
   success: boolean;
   order: CustomOrderFromServer;
 }
+
+export interface ChangeOrderStatusSuccess {
+  message: string;
+  success: boolean;
+}
