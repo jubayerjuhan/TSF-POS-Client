@@ -1,5 +1,4 @@
 import { Form } from "react-bootstrap";
-import Button from "../../../core/Button/Button";
 import { OrderStatusSelectorType } from "./types";
 import { ChangeEvent } from "react";
 
@@ -10,7 +9,7 @@ const OrderStatusSelector = ({
   const orderStatuses = ["Order Taken", "Shipped", "Delivered"];
 
   return (
-    <div className="orderStatus">
+    <div className="orderStatus mt-4">
       <h5>Change Order Status</h5>
       <Form.Select
         className="mt-2"

@@ -14,8 +14,10 @@ import { fetchAllProducts } from "../../redux/actions/products/productsAction";
 import Button from "../../components/core/Button/Button";
 import { toast } from "react-hot-toast";
 import { CUSTOM_ORDER_CLEAR_MESSAGE } from "../../constants/reduxActionsNames/customOrder";
+import useAdminPermission from "../../hooks/permission/useAdminPermission";
 
 const OrderInformation = () => {
+  const isAdmin = useAdminPermission();
   const { products } = useSelector((state: StateType) => state.products);
   const { message, loading, error } = useSelector(
     (state: StateType) => state.customOrder
@@ -55,10 +57,16 @@ const OrderInformation = () => {
     );
   };
 
+  const statusSelectorAvailable =
+    isAdmin || (!isAdmin && order?.status !== "Order Taken");
+
   return (
     <Pagewrapper>
       {order && <OrderInformationContent order={order} />}
-      <OrderStatusSelector order={order} setOrderStatus={setOrderStatus} />
+
+      {statusSelectorAvailable && (
+        <OrderStatusSelector order={order} setOrderStatus={setOrderStatus} />
+      )}
       {orderStatus === "Shipped" && (
         <div className="mt-4 productSelector">
           <h4 className="mb-3">Product Information:</h4>
@@ -92,12 +100,15 @@ const OrderInformation = () => {
           </div>
         </div>
       )}
-      <Button
-        loading={loading}
-        className="mt-3"
-        title="Change Status"
-        onClick={handleChangeOrderStatus}
-      />
+
+      {statusSelectorAvailable && (
+        <Button
+          loading={loading}
+          className="mt-3"
+          title="Change Status"
+          onClick={handleChangeOrderStatus}
+        />
+      )}
     </Pagewrapper>
   );
 };

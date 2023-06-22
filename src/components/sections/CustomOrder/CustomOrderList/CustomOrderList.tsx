@@ -8,13 +8,15 @@ import { CustomOrderFromServer } from "../../../../types/CustomOrder/CustomOrder
 
 const CustomOrderList = () => {
   const { user } = useSelector((state: StateType) => state.user);
-  const { orders } = useSelector((state: StateType) => state.customOrder);
+  const { orders, message } = useSelector(
+    (state: StateType) => state.customOrder
+  );
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCustomOrders(user.branch));
-  }, [dispatch, user]);
+  }, [dispatch, user, message]);
 
   const row: any = [];
 
