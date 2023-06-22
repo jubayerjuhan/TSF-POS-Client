@@ -2,13 +2,14 @@ import { useParams } from "react-router-dom";
 import Pagewrapper from "../../components/Pagewrapper/Pagewrapper";
 import OrderInformationContent from "../../components/sections/CustomOrder/OrderInformationContent/OrderInformationContent";
 import "./orderInfo.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleOrder } from "../../redux/actions/customOrder/customOrderAction";
 import { StateType } from "../../redux/redux";
 import OrderStatusSelector from "../../components/sections/CustomOrder/OrderStatusSelector/OrderStatusSelector";
 
 const OrderInformation = () => {
+  const [orderStatus, setOrderStatus] = useState("");
   const { order } = useSelector((state: StateType) => state.customOrder);
   const { id: orderId } = useParams();
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const OrderInformation = () => {
   return (
     <Pagewrapper>
       {order && <OrderInformationContent order={order} />}
-      <OrderStatusSelector order={order} />
+      <OrderStatusSelector order={order} setOrderStatus={setOrderStatus} />
     </Pagewrapper>
   );
 };
