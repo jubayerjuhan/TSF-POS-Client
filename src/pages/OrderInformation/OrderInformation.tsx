@@ -7,18 +7,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleOrder } from "../../redux/actions/customOrder/customOrderAction";
 import { StateType } from "../../redux/redux";
 import OrderStatusSelector from "../../components/sections/CustomOrder/OrderStatusSelector/OrderStatusSelector";
+import { fetchAllProducts } from "../../redux/actions/products/productsAction";
 
 const OrderInformation = () => {
+  const { products } = useSelector((state: StateType) => state.products);
   const [orderStatus, setOrderStatus] = useState("");
   const [product, setProduct] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState<number>();
   const { order } = useSelector((state: StateType) => state.customOrder);
   const { id: orderId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchSingleOrder(orderId));
+    dispatch(fetchAllProducts());
   }, [dispatch, orderId]);
+
+  console.log(products, "products");
 
   const handleProductChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setProduct(e.target.value);
@@ -43,10 +48,14 @@ const OrderInformation = () => {
               value={product}
               onChange={handleProductChange}
             >
-              <option value="">Select Product</option>
-              <option value="product1">Product 1</option>
-              <option value="product2">Product 2</option>
-              <option value="product3">Product 3</option>
+              <option value={0} selected>
+                Select Product
+              </option>
+              {products.map((product, index) => (
+                <option value={product._id} key={index}>
+                  {product.productId} - {product.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="form-group">
