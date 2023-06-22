@@ -22,6 +22,9 @@ const OrderInformationContent = ({
               <p className="mb-2">
                 <strong>Phone:</strong> {order.customerPhone}
               </p>
+              <p className="mb-2">
+                <strong>Branch:</strong> {order.branch.name}
+              </p>
             </div>
           </div>
         </div>

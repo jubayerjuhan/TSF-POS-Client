@@ -38,7 +38,6 @@ const OrderStatusSelector = ({
           );
         })}
       </Form.Select>
-      <Button title="Change Status" />
     </div>
   );
 };

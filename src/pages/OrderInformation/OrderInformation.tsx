@@ -8,6 +8,7 @@ import { fetchSingleOrder } from "../../redux/actions/customOrder/customOrderAct
 import { StateType } from "../../redux/redux";
 import OrderStatusSelector from "../../components/sections/CustomOrder/OrderStatusSelector/OrderStatusSelector";
 import { fetchAllProducts } from "../../redux/actions/products/productsAction";
+import Button from "../../components/core/Button/Button";
 
 const OrderInformation = () => {
   const { products } = useSelector((state: StateType) => state.products);
@@ -23,14 +24,18 @@ const OrderInformation = () => {
     dispatch(fetchAllProducts());
   }, [dispatch, orderId]);
 
-  console.log(products, "products");
-
   const handleProductChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setProduct(e.target.value);
   };
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuantity(Number(e.target.value));
+  };
+
+  const handleChangeOrderStatus = () => {
+    alert(
+      `Status ${orderStatus} Branch ${order.branch._id}, id: ${product} quantity: ${quantity}`
+    );
   };
 
   return (
@@ -70,6 +75,11 @@ const OrderInformation = () => {
           </div>
         </div>
       )}
+      <Button
+        className="mt-3"
+        title="Change Status"
+        onClick={handleChangeOrderStatus}
+      />
     </Pagewrapper>
   );
 };
