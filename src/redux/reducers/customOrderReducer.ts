@@ -1,4 +1,7 @@
 import {
+  CHANGE_ORDER_STATUS_ERROR,
+  CHANGE_ORDER_STATUS_PENDING,
+  CHANGE_ORDER_STATUS_SUCCESS,
   FETCH_SINGLE_CUSTOM_ORDERS_ERROR,
   FETCH_SINGLE_CUSTOM_ORDERS_SUCCESS,
 } from "./../../constants/reduxActionsNames/customOrder/index";
@@ -65,6 +68,26 @@ const customOrderReducer = (state = {}, action: ReduxAction) => {
         order: action.payload,
       };
     case FETCH_SINGLE_CUSTOM_ORDERS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CHANGE_ORDER_STATUS_PENDING:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case CHANGE_ORDER_STATUS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
+
+    case CHANGE_ORDER_STATUS_ERROR:
       return {
         ...state,
         loading: false,
