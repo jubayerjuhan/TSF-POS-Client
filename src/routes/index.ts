@@ -1,5 +1,6 @@
 // conponent for routes
 import Branch from "../pages/Branch";
+import BranchValuation from "../pages/BranchValuation/BranchValuation";
 import Branches from "../pages/Branches/Branches";
 import CustomOrder from "../pages/CustomOrder";
 import Dashboard from "../pages/Dashboard";
@@ -46,6 +47,11 @@ const routes: Route[] = [
   {
     path: "/branches",
     component: Branches,
+    secured: true,
+  },
+  {
+    path: "/branch-valuation",
+    component: BranchValuation,
     secured: true,
   },
   {
