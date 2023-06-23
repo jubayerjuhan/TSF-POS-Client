@@ -1,7 +1,16 @@
+import { useEffect } from "react";
 import Pagewrapper from "../../components/Pagewrapper/Pagewrapper";
+import { useDispatch } from "react-redux";
+import { getBranchValuation } from "../../redux/actions/branchValuation/branchValuationAction";
 
 const BranchValuation = () => {
-  return <Pagewrapper>BranchValuation</Pagewrapper>;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBranchValuation());
+  }, [dispatch]);
+
+  return <Pagewrapper></Pagewrapper>;
 };
 
 export default BranchValuation;

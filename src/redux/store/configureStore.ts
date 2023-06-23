@@ -17,6 +17,7 @@ import partialPaymentReducer from "../reducers/partialPaymentReducer";
 import dashboardReducer from "../reducers/dashboardReducer";
 import expensesListReducer from "../reducers/expensesListReducer";
 import customOrderReducer from "../reducers/customOrderReducer";
+import branchValuationReducer from "../reducers/branchValuationReducer";
 
 //persist config for persistor
 const persistConfig = {
@@ -40,6 +41,7 @@ const reducers = combineReducers({
   expenses: expensesListReducer,
   partialPayment: partialPaymentReducer,
   customOrder: customOrderReducer,
+  branchValuation: branchValuationReducer,
   promise: promiseReducer,
 });
 
