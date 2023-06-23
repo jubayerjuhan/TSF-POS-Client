@@ -8,6 +8,7 @@ import SellIcon from "@mui/icons-material/Sell";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import PaidIcon from "@mui/icons-material/Paid";
 import ConstructionIcon from "@mui/icons-material/Construction";
+import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 
 import { SidebarLinkType } from "./types";
 
@@ -28,6 +29,12 @@ const sidebarLinks: SidebarLinkType[] = [
     name: "Transfer Stock",
     icon: MoveUpIcon,
     link: "/transfer-stock",
+    adminOnlyPermission: true,
+  },
+  {
+    name: "Branch Valuation",
+    icon: LocalAtmIcon,
+    link: "/branch-valuation",
     adminOnlyPermission: true,
   },
   {

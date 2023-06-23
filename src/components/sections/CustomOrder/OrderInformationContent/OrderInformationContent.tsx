@@ -71,9 +71,9 @@ const OrderInformationContent = ({
             </thead>
             <tbody>
               {order.products.map((product, index) => (
-                <tr>
-                  <td>Product 1</td>
-                  <td>10</td>
+                <tr key={index}>
+                  <td>{product.product?.name}</td>
+                  <td>{product?.quantity}</td>
                 </tr>
               ))}
             </tbody>
