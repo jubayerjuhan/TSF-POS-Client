@@ -1,12 +1,18 @@
 import client from "../../../client/axiosInstance";
 import {
+  DELETE_BRANCH_VALUATION_ERROR,
+  DELETE_BRANCH_VALUATION_PENDING,
+  DELETE_BRANCH_VALUATION_SUCCESS,
   GET_BRANCH_VALUATION_ERROR,
   GET_BRANCH_VALUATION_PENDING,
   GET_BRANCH_VALUATION_SUCCESS,
 } from "../../../constants/reduxActionsNames/branchValidation";
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk } from "../../redux";
-import { GetBranchValuationsResponse } from "./types";
+import {
+  DeleteBranchValuationResponse,
+  GetBranchValuationsResponse,
+} from "./types";
 
 export const getBranchValuation =
   (branchId?: string): RootThunk =>
@@ -23,5 +29,21 @@ export const getBranchValuation =
         });
     } catch (error) {
       errorDispatcher(error, GET_BRANCH_VALUATION_ERROR, dispatch);
+    }
+  };
+
+export const deleteBranchValuation =
+  (valuationId: string): RootThunk =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: DELETE_BRANCH_VALUATION_PENDING });
+      const { data }: { data: DeleteBranchValuationResponse } =
+        await client.get(`branch-valuation/action/${valuationId}}`);
+      dispatch({
+        type: DELETE_BRANCH_VALUATION_SUCCESS,
+        payload: data.message,
+      });
+    } catch (error) {
+      errorDispatcher(error, DELETE_BRANCH_VALUATION_ERROR, dispatch);
     }
   };

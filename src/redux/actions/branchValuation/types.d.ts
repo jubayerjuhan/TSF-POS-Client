@@ -16,3 +16,8 @@ export interface GetBranchValuationsResponse {
   data: BranchValuation[];
   totalAmount: number;
 }
+
+export interface DeleteBranchValuationResponse {
+  success: boolean;
+  message: string;
+}
