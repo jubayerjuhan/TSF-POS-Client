@@ -32,13 +32,14 @@ export const getBranchValuation =
     }
   };
 
+// delete branch valuation
 export const deleteBranchValuation =
   (valuationId: string): RootThunk =>
   async (dispatch: AppDispatch) => {
     try {
       dispatch({ type: DELETE_BRANCH_VALUATION_PENDING });
       const { data }: { data: DeleteBranchValuationResponse } =
-        await client.get(`branch-valuation/action/${valuationId}}`);
+        await client.delete(`/branch-valuation/action/${valuationId}}`);
       dispatch({
         type: DELETE_BRANCH_VALUATION_SUCCESS,
         payload: data.message,

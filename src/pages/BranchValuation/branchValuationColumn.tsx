@@ -1,5 +1,23 @@
 import Button from "../../components/core/Button/Button";
+import { DeleteBranchValuationResponse } from "../../redux/actions/branchValuation/types";
+import client from "../../client/axiosInstance";
 
+const deleteBranchValuation = async (valuationId: string) => {
+  try {
+    const concent = window.confirm("Do You Want To Delete This Valuation?");
+    if (!concent) return;
+
+    const { data }: { data: DeleteBranchValuationResponse } =
+      await client.delete(`/branch-valuation/action/${valuationId}`);
+
+    if (data.success) {
+      window.alert("Branch Valuation Deleted");
+      window.location.reload();
+    }
+  } catch (error) {
+    window.alert("Branch Valuation Deletion Failed");
+  }
+};
 export const branchValuationColumns = [
   { field: "id", headerName: "Id", width: 90 },
   {
@@ -36,7 +54,7 @@ export const branchValuationColumns = [
           <Button
             title={"Delete"}
             className="btn-danger"
-            onClick={() => window.open(`/order/${params.row._id}`)}
+            onClick={() => deleteBranchValuation(params.row._id)}
           />
         </div>
       );
