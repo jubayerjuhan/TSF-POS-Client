@@ -17,7 +17,7 @@ const branchValuationReducer = (state = {}, action: ReduxAction) => {
         ...state,
         loading: false,
         totalAmount: action.payload.totalAmount,
-        valuationsList: action.payload.data,
+        valuationList: action.payload.data,
       };
     case GET_BRANCH_VALUATION_ERROR:
       return {

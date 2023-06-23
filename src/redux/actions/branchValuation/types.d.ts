@@ -1,4 +1,4 @@
-interface BranchValuation {
+export interface BranchValuation {
   _id: string;
   name: string;
   branch: {

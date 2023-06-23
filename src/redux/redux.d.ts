@@ -10,6 +10,10 @@ import { SaleInfo } from "./actions/sales/types";
 import { Dayjs } from "dayjs";
 import { Expense } from "../types/Expense/ExpenseType";
 import { CustomOrderFromServer } from "../types/CustomOrder/CustomOrderTypes";
+import {
+  BranchValuation,
+  GetBranchValuationsResponse,
+} from "./actions/branchValuation/types";
 
 export interface ReduxAction extends Action {
   payload: object | string | Array;
@@ -103,6 +107,14 @@ interface StateType {
     sales: SaleInfo;
     loading: boolean;
     error: string;
+  };
+
+  branchValuation: {
+    loading: boolean;
+    totalAmount: number;
+    valuationList: BranchValuation[];
+    error: string;
+    message: string;
   };
 
   promise: {
