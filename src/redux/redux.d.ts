@@ -85,6 +85,11 @@ interface StateType {
     error: string | null;
     orders: CustomOrderFromServer[];
     order: CustomOrderFromServer;
+    amount: {
+      advancePayment: number;
+      fullPayment: number;
+      totalRevenue: number;
+    };
   };
   sales: {
     sales: SaleInfo;
