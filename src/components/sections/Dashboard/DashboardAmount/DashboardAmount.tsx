@@ -15,7 +15,7 @@ const DashboardAmount = () => {
       <StatsCard
         title="Total Revenue"
         icon={AttachMoneyIcon}
-        number={sales?.total + amount.totalRevenue}
+        number={sales?.total + amount?.totalRevenue}
       />
       <StatsCard
         title="Revenue From Direct Sales"
@@ -25,17 +25,17 @@ const DashboardAmount = () => {
       <StatsCard
         title="Revenue From Custom Order"
         icon={AttachMoneyIcon}
-        number={amount.totalRevenue}
+        number={amount?.totalRevenue}
       />
       <StatsCard
         title="Custom Order Advance Payment"
         icon={AttachMoneyIcon}
-        number={amount.advancePayment}
+        number={amount?.advancePayment}
       />
       <StatsCard
         title="Custom Order Full Payment"
         icon={AttachMoneyIcon}
-        number={amount.fullPayment}
+        number={amount?.fullPayment}
       />
     </>
   );

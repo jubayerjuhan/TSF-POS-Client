@@ -28,9 +28,8 @@ const InvoicePage = () => {
         </div>
         <div className="company-details d-flex flex-column gap-2">
           <h2 className="fs-5 fw-semibold">The Sisters Furniture</h2>
-          <p>123 Main Street, City, State</p>
-          <p>Phone: (123) 456-7890</p>
-          <p>Email: info@company.com</p>
+          <p>{sale.branch.address}</p>
+          <p>Email: info.sistersfurniture@gmail.com</p>
         </div>
       </div>
 
@@ -84,6 +83,14 @@ const InvoicePage = () => {
           <div className="total-block">
             <span className="total-label">Total : </span>
             <span className="total-value">৳{sale.total}</span>
+          </div>
+          {/* Add more total blocks as needed */}
+        </div>
+        <div className="invoice-total">
+          {/* Invoice totals (e.g., subtotal, tax, total) */}
+          <div className="total-block">
+            <span className="total-label">Payment Method : </span>
+            <span className="total-value">{sale.paymentMethod}</span>
           </div>
           {/* Add more total blocks as needed */}
         </div>
