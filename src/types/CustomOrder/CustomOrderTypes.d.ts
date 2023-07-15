@@ -21,6 +21,7 @@ export interface CustomOrderFromServer {
   orderId: number;
   color: string;
   wood: string;
+  deliveredAt?: string;
   branch: {
     _id: string;
     name: string;
