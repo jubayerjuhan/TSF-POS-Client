@@ -98,3 +98,10 @@ export const changeOrderStatus: RootThunk =
       errorDispatcher(error, CHANGE_ORDER_STATUS_ERROR, dispatch);
     }
   };
+
+// with this we will change the order status
+// export const getCustomOrderAmount: RootThunk =
+//   (url: string) => async (dispatch: AppDispatch) => {
+//     try {
+//     } catch (error) {}
+//   };

@@ -24,12 +24,12 @@ const ADD_SALE_FIELDS: FieldTypes[] = [
     ],
     placeholder: "Enter Payment Method",
   },
-  {
-    name: "partialPayment",
-    label: "Partial Payment",
-    type: "checkbox",
-    placeholder: "Enter Partial Payment",
-  },
+  // {
+  //   name: "partialPayment",
+  //   label: "Partial Payment",
+  //   type: "checkbox",
+  //   placeholder: "Enter Partial Payment",
+  // },
   {
     name: "note",
     label: "Note",

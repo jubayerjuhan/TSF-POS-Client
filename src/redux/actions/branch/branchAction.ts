@@ -43,6 +43,8 @@ export const getBranch =
       const { data }: { data: BranchResponse } = await client.get(
         `/branch/action/${branchId}`
       );
+
+      console.log(data);
       if (data.success)
         dispatch({ type: BRANCH_SUCCESS, payload: data.branch });
     } catch (error: any) {

@@ -1,4 +1,7 @@
 import {
+  CUSTOM_ORDER_AMOUNT_ERROR,
+  CUSTOM_ORDER_AMOUNT_PENDING,
+  CUSTOM_ORDER_AMOUNT_SUCCESS,
   CHANGE_ORDER_STATUS_ERROR,
   CHANGE_ORDER_STATUS_PENDING,
   CHANGE_ORDER_STATUS_SUCCESS,
@@ -88,6 +91,24 @@ const customOrderReducer = (state = {}, action: ReduxAction) => {
       };
 
     case CHANGE_ORDER_STATUS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case CUSTOM_ORDER_AMOUNT_PENDING:
+      return {
+        ...state,
+        loading: true,
+        error: action.payload,
+      };
+    case CUSTOM_ORDER_AMOUNT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        amount: action.payload,
+      };
+    case CUSTOM_ORDER_AMOUNT_ERROR:
       return {
         ...state,
         loading: false,

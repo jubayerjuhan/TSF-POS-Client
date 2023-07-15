@@ -16,7 +16,7 @@ const DashboardAmount = () => {
         icon={AttachMoneyIcon}
         number={sales?.total + amountRecived}
       />
-      <StatsCard
+      {/* <StatsCard
         title="Advance Payment and Sales Only"
         icon={AttachMoneyIcon}
         number={sales?.total}
@@ -30,7 +30,7 @@ const DashboardAmount = () => {
         title="Partial Payment Remaining"
         icon={AttachMoneyIcon}
         number={amountToBeRecived}
-      />
+      /> */}
     </>
   );
 };
