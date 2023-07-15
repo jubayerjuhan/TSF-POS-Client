@@ -5,32 +5,38 @@ import { StateType } from "../../../../redux/redux";
 
 const DashboardAmount = () => {
   const { sales } = useSelector((state: StateType) => state.sales);
-  const { amountRecived, amountToBeRecived } = useSelector(
-    (state: StateType) => state.partialPayment
-  );
+  const { amount } = useSelector((state: StateType) => state.customOrder);
+  // const { amountRecived, amountToBeRecived } = useSelector(
+  //   (state: StateType) => state.partialPayment
+  // );
 
   return (
     <>
       <StatsCard
         title="Total Revenue"
         icon={AttachMoneyIcon}
-        number={sales?.total + amountRecived}
+        number={sales?.total + amount.totalRevenue}
       />
-      {/* <StatsCard
-        title="Advance Payment and Sales Only"
+      <StatsCard
+        title="Revenue From Direct Sales"
         icon={AttachMoneyIcon}
         number={sales?.total}
       />
       <StatsCard
-        title="Full Payment Recived"
+        title="Revenue From Custom Order"
         icon={AttachMoneyIcon}
-        number={amountRecived}
+        number={amount.totalRevenue}
       />
       <StatsCard
-        title="Partial Payment Remaining"
+        title="Custom Order Advance Payment"
         icon={AttachMoneyIcon}
-        number={amountToBeRecived}
-      /> */}
+        number={amount.advancePayment}
+      />
+      <StatsCard
+        title="Custom Order Full Payment"
+        icon={AttachMoneyIcon}
+        number={amount.fullPayment}
+      />
     </>
   );
 };

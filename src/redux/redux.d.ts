@@ -7,13 +7,9 @@ import { CartProduct, Product } from "../types/Product/ProductTypes";
 import { SearchedProduct } from "../types/Product/searchProductTypes";
 import { Sale } from "../types/Sale/sale";
 import { SaleInfo } from "./actions/sales/types";
-import { Dayjs } from "dayjs";
 import { Expense } from "../types/Expense/ExpenseType";
 import { CustomOrderFromServer } from "../types/CustomOrder/CustomOrderTypes";
-import {
-  BranchValuation,
-  GetBranchValuationsResponse,
-} from "./actions/branchValuation/types";
+import { BranchValuation } from "./actions/branchValuation/types";
 
 export interface ReduxAction extends Action {
   payload: object | string | Array;
