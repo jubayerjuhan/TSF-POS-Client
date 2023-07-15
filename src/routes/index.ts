@@ -3,6 +3,7 @@ import Branch from "../pages/Branch";
 import BranchValuation from "../pages/BranchValuation/BranchValuation";
 import Branches from "../pages/Branches/Branches";
 import CustomOrder from "../pages/CustomOrder";
+import CustomOrderInvoice from "../pages/CustomOrderInvoice";
 import Dashboard from "../pages/Dashboard";
 import Expenses from "../pages/Expenses";
 import ForgotPassword from "../pages/ForgotPassword";
@@ -107,6 +108,11 @@ const routes: Route[] = [
   {
     path: "/invoice/:id",
     component: InvoicePage,
+    secured: true,
+  },
+  {
+    path: "/custom-order-invoice/:id",
+    component: CustomOrderInvoice,
     secured: true,
   },
 ];

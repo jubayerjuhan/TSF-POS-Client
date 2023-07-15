@@ -1,4 +1,5 @@
 import { CustomOrderFromServer } from "../../../../types/CustomOrder/CustomOrderTypes";
+import Button from "../../../core/Button/Button";
 
 const OrderInformationContent = ({
   order,
@@ -8,7 +9,11 @@ const OrderInformationContent = ({
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">Order Information</h1>
-
+      <Button
+        title="Print Invoice"
+        className="mb-4 btn-success"
+        onClick={() => window.open(`/custom-order-invoice/${order._id}`)}
+      />
       <div className="row">
         <div className="col-md-6">
           <div className="card mb-4">

@@ -1,3 +1,4 @@
+import { Branch } from "../Branch/branchTypes";
 import { Product } from "../Product/ProductTypes";
 
 export interface CustomOrderType {
@@ -22,10 +23,7 @@ export interface CustomOrderFromServer {
   color: string;
   wood: string;
   deliveredAt?: string;
-  branch: {
-    _id: string;
-    name: string;
-  };
+  branch: Branch;
   products: {
     product: Product;
     quantity: number;
