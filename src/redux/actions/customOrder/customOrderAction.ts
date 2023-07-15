@@ -2,6 +2,9 @@ import {
   CHANGE_ORDER_STATUS_ERROR,
   CHANGE_ORDER_STATUS_PENDING,
   CHANGE_ORDER_STATUS_SUCCESS,
+  CUSTOM_ORDER_AMOUNT_ERROR,
+  CUSTOM_ORDER_AMOUNT_PENDING,
+  CUSTOM_ORDER_AMOUNT_SUCCESS,
   FETCH_CUSTOM_ORDERS_ERROR,
   FETCH_SINGLE_CUSTOM_ORDERS_ERROR,
   FETCH_SINGLE_CUSTOM_ORDERS_PENDING,
@@ -20,6 +23,7 @@ import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk } from "../../redux";
 import {
   ChangeOrderStatusSuccess,
+  CustomOrderAmountSuccess,
   FetchCustomOrdersSuccess,
   FetchSingleCustomOrderSuccess,
 } from "./types";
@@ -100,8 +104,16 @@ export const changeOrderStatus: RootThunk =
   };
 
 // with this we will change the order status
-// export const getCustomOrderAmount: RootThunk =
-//   (url: string) => async (dispatch: AppDispatch) => {
-//     try {
-//     } catch (error) {}
-//   };
+export const getCustomOrderAmount: RootThunk =
+  (url: string) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: CUSTOM_ORDER_AMOUNT_PENDING });
+      const { data }: { data: CustomOrderAmountSuccess } = await client.get(
+        url
+      );
+
+      dispatch({ type: CUSTOM_ORDER_AMOUNT_SUCCESS, payload: data.amount });
+    } catch (error) {
+      errorDispatcher(error, CUSTOM_ORDER_AMOUNT_ERROR, dispatch);
+    }
+  };

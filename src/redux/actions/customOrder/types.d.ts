@@ -17,3 +17,12 @@ export interface ChangeOrderStatusSuccess {
   message: string;
   success: boolean;
 }
+
+export interface CustomOrderAmountSuccess {
+  success: boolean;
+  amount: {
+    advancePayment: number;
+    fullPayment: number;
+    totalRevenue: number;
+  };
+}

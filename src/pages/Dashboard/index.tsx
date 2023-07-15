@@ -9,6 +9,7 @@ import {
   getPartialPaymentInfo,
   getSales,
 } from "../../redux/actions/sales/salesAction";
+import { getCustomOrderAmount } from "../../redux/actions/customOrder/customOrderAction";
 
 const Dashboard = () => {
   const { branch, fromDate, toDate } = useSelector(
@@ -16,12 +17,16 @@ const Dashboard = () => {
   );
   const dispatch = useDispatch();
   const url = `sale/list?startDate=${fromDate}&endDate=${toDate}&branch=${branch}`;
+  const customOrderAmountUrl = `custom-order/amount?fromDate=${fromDate}&toDate=${toDate}&branchId=${branch}`;
   const partialPaymentUrl = `sale/partial-payment/list?startDate=${fromDate}&endDate=${toDate}&branch=${branch}`;
+
+  console.info(url, customOrderAmountUrl, "jubayerjuhanHello");
 
   useEffect(() => {
     dispatch(getSales(url));
     dispatch(getPartialPaymentInfo(partialPaymentUrl));
-  }, [dispatch, url, partialPaymentUrl]);
+    dispatch(getCustomOrderAmount(customOrderAmountUrl));
+  }, [dispatch, url, partialPaymentUrl, customOrderAmountUrl]);
 
   return (
     <Pagewrapper>
