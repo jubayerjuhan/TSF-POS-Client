@@ -1,3 +1,4 @@
+import moment from "moment";
 import { CustomOrderFromServer } from "../../../../types/CustomOrder/CustomOrderTypes";
 import Button from "../../../core/Button/Button";
 
@@ -57,8 +58,12 @@ const OrderInformationContent = ({
               <p className="mb-2">
                 <strong>Advance Payment:</strong> {order.advancePayment}
               </p>
-              <p className="mb-0">
+              <p className="mb-2">
                 <strong>Order ID:</strong> {order.orderId}
+              </p>
+              <p className="mb-0">
+                <strong>Order Date:</strong>{" "}
+                {moment(order.createdAt).format("Do MMMM YYYY")}
               </p>
             </div>
           </div>
