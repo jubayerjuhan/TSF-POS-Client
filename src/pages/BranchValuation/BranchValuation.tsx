@@ -11,7 +11,7 @@ import { getBranch } from "../../redux/actions/branch/branchAction";
 import AlertPopup from "../../components/AlertPopup/AlertPopup";
 
 const BranchValuation = () => {
-  const { loading, valuationList, totalAmount } = useSelector(
+  const { valuationList, totalAmount } = useSelector(
     (state: StateType) => state.branchValuation
   );
   const { branch } = useSelector((state: StateType) => state.branch);

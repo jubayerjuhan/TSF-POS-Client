@@ -1,1 +1,1 @@
-export const IMAGE_URL = "http://localhost:8000/images";
+export const IMAGE_URL = "https://oyster-app-upr7i.ondigitalocean.app/images";

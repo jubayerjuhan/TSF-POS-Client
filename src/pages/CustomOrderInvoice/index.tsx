@@ -18,7 +18,7 @@ const CustomOrderInvoice = () => {
   }, [dispatch, id]);
 
   console.log(order, "order...");
-  if (loading) return <>Loading</>;
+  if (loading) return <p>Loading</p>;
   if (order)
     return (
       <div className="invoice">
@@ -138,6 +138,8 @@ const CustomOrderInvoice = () => {
         </button>
       </div>
     );
+
+  return <></>;
 };
 
 export default CustomOrderInvoice;

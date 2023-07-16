@@ -12,10 +12,10 @@ import {
 import { Line } from "react-chartjs-2";
 import { useCallback, useEffect, useState } from "react";
 import client from "../../../client/axiosInstance";
-import { Sale } from "../../../types/Sale/sale";
 import { useSelector } from "react-redux";
 import { StateType } from "../../../redux/redux";
 import dayjs from "dayjs";
+import { CustomOrderFromServer } from "../../../types/CustomOrder/CustomOrderTypes";
 
 ChartJS.register(
   CategoryScale,
@@ -27,8 +27,8 @@ ChartJS.register(
   Legend
 );
 
-const SaleChart = () => {
-  const [sales, setSales] = useState<Sale[]>([]);
+const CustomOrderChart = () => {
+  const [sales, setSales] = useState<CustomOrderFromServer[]>([]);
   const { branch } = useSelector((state: StateType) => state.dashboard);
 
   const fetchSales = useCallback(async () => {
@@ -36,9 +36,11 @@ const SaleChart = () => {
     const today = dayjs().subtract(0, "days").format("MM-DD-YYYY");
 
     const { data } = await client.get(
-      `/sale/all/list?startDate=${sevenDaysBefore}&endDate=${today}&branch=${branch}`
+      `/custom-order/list?branchId=${branch}&startDate=${sevenDaysBefore}&endDate=${today}`
     );
-    setSales(data.allSales);
+
+    console.log(data, "data");
+    setSales(data.orders);
   }, [branch]);
 
   useEffect(() => {
@@ -53,7 +55,7 @@ const SaleChart = () => {
       },
       title: {
         display: true,
-        text: "Sales Graph (This Week)",
+        text: "Custom Order Graph (This Week)",
       },
     },
   };
@@ -69,41 +71,39 @@ const SaleChart = () => {
   // here iterating last 7days
   lastSevenDays.forEach((day) => {
     // here iterating every sales
+
     sales?.forEach((sale) => {
-      console.log(sale, "sale..sale..");
-      // checking if there is any 2ndpartialAmountPaid today
+      // checking if the sale is delivered or not
       if (
-        sale.partialAmountPayingDate &&
-        moment(sale.partialAmountPayingDate)
-          .startOf("day")
-          .format("DD-MM-YY") ===
-          moment(day.date).startOf("day").format("DD-MM-YY")
+        sale.status === "Delivered" &&
+        moment(day.date).format("DD-MM-YYYY") ===
+          moment(sale.deliveredAt).format("DD-MM-YYYY")
       ) {
-        // if there is a 2nd partial payment add it with today
-        console.log(sale, "sale,,,");
-        day.amount += sale.total - sale.partialPaymentAmount;
+        day.amount += sale.totalPrice - sale.advancePayment;
       }
-      // checking if there is any sale created on that day
+
       if (
-        moment(sale.createdAt).startOf("day").format("DD-MM-YY") ===
-        moment(day.date).startOf("day").format("DD-MM-YY")
+        sale.status === "Delivered" &&
+        moment(day.date).format("DD-MM-YYYY") ===
+          moment(sale.createdAt).format("DD-MM-YYYY")
       ) {
-        // if not partial payment add full total
-        if (!sale.partialPayment) return (day.amount += sale.total);
-        // if partial payment add only partialPaymentAmount
-        if (sale.partialPayment)
-          return (day.amount += sale.partialPaymentAmount);
+        day.amount += sale.advancePayment;
+      }
+      if (
+        sale.status !== "Delivered" &&
+        moment(day.date).format("DD-MM-YYYY") ===
+          moment(sale.createdAt).format("DD-MM-YYYY")
+      ) {
+        day.amount += sale.advancePayment;
       }
     });
   });
-
-  console.log(lastSevenDays, "last");
 
   const data = {
     labels: dayNameLabels,
     datasets: [
       {
-        label: "Sales and Partial Payment",
+        label: "Advance Payment and Full Payment",
         data: lastSevenDays.map((day) => day.amount),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -111,9 +111,7 @@ const SaleChart = () => {
     ],
   };
 
-  console.log(lastSevenDays, "lastSevenDays...");
-
   return <Line options={options} data={data} />;
 };
 
-export default SaleChart;
+export default CustomOrderChart;

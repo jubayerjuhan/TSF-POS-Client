@@ -1,8 +1,12 @@
 import SaleChart from "../../../charts/SaleChart/SaleChart";
+import "./DashCharts.scss";
 
 const DashCharts = () => {
   return (
-    <div className="mt-4 d-flex">
+    <div className="mt-4 chart__wrapper">
+      <div style={{ width: "50%" }}>
+        <SaleChart />
+      </div>
       <div style={{ width: "50%" }}>
         <SaleChart />
       </div>
