@@ -7,16 +7,21 @@ import { branchValuationColumns } from "./branchValuationColumn";
 import { DataGrid } from "@mui/x-data-grid";
 import moment from "moment";
 import BranchSelector from "../../components/sections/Branch/BranchSelector/BranchSelector";
+import { getBranch } from "../../redux/actions/branch/branchAction";
+import AlertPopup from "../../components/AlertPopup/AlertPopup";
 
 const BranchValuation = () => {
   const { loading, valuationList, totalAmount } = useSelector(
     (state: StateType) => state.branchValuation
   );
+  const { branch } = useSelector((state: StateType) => state.branch);
+
   const [branchId, setBranchId] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getBranchValuation(branchId));
+    if (branchId) dispatch(getBranchValuation(branchId));
+    dispatch(getBranch(branchId));
   }, [dispatch, branchId]);
 
   const row: any = [];
@@ -30,15 +35,34 @@ const BranchValuation = () => {
     });
   });
 
+  // calculating the amount of product the branch has currently
+  let productValue = 0;
+
+  branch?.products?.forEach((product) => {
+    productValue += product.id.costPrice * product.quantity;
+  });
+
   return (
     <Pagewrapper>
       <BranchSelector setBranchId={setBranchId} />
-      <h4 className="mt-4 font-weight-bold">Total : {totalAmount}</h4>
-      <DataGrid
-        columns={branchValuationColumns}
-        rows={row}
-        sx={{ height: "80vh", mt: 3 }}
-      />
+      {!branchId ? (
+        <AlertPopup message="Please Select a Branch"></AlertPopup>
+      ) : (
+        <>
+          <h6 className="mt-4 font-weight-bold">
+            Total Branch Value : {totalAmount + productValue}
+          </h6>
+          <h6 className="mt-4 font-weight-bold">
+            Product Value : {productValue}
+          </h6>
+          <h6 className="mt-4 font-weight-bold">Others : {totalAmount}</h6>
+          <DataGrid
+            columns={branchValuationColumns}
+            rows={row}
+            sx={{ height: "80vh", mt: 3 }}
+          />
+        </>
+      )}
     </Pagewrapper>
   );
 };

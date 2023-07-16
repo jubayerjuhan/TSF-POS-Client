@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import logo from "../../assets/sisters_furniture_logo.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleOrder } from "../../redux/actions/customOrder/customOrderAction";
@@ -77,7 +77,6 @@ const CustomOrderInvoice = () => {
             <table className="invoice-items">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Item Name</th>
                   <th>Quantity</th>
                 </tr>
@@ -85,7 +84,6 @@ const CustomOrderInvoice = () => {
               <tbody>
                 {order.products.map((item, index) => (
                   <tr key={index}>
-                    <td>{index + 1}</td>
                     <td>{item.product.name}</td>
                     <td>{item.quantity}</td>
                   </tr>

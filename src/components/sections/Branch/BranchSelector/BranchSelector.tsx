@@ -11,6 +11,7 @@ const BranchSelector = ({
   style,
   fullWidth,
   errorMessage,
+  disableAllBranch,
 }: BranchSelectorProps) => {
   const { branches } = useSelector((state: StateType) => state.branches);
 
@@ -35,7 +36,7 @@ const BranchSelector = ({
         });
       }
     }
-  }, [branches]);
+  }, [branches, disableAllBranch]);
 
   return (
     <div style={{ maxWidth: fullWidth ? "100%" : 300, width: "100%" }}>
@@ -48,11 +49,14 @@ const BranchSelector = ({
               key={index}
               style={style}
             >
-              {field.options?.map((option, index) => (
-                <option value={option.value} key={index}>
-                  {option.label}
-                </option>
-              ))}
+              {field.options?.map((option, index) => {
+                if (disableAllBranch && index === 0) return;
+                return (
+                  <option value={option.value} key={index}>
+                    {option.label}
+                  </option>
+                );
+              })}
             </Form.Select>
 
             {errorMessage && (
