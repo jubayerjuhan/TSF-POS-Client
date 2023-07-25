@@ -44,6 +44,7 @@ const sidebarLinks: SidebarLinkType[] = [
     adminOnlyPermission: true,
   },
   { name: "Users", icon: GroupIcon, link: "/users", adminOnlyPermission: true },
+  { name: "Logout", icon: GroupIcon, link: "/logout" },
 ];
 
 export default sidebarLinks;

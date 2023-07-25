@@ -1,3 +1,4 @@
+import CustomOrderChart from "../../../charts/CustomOrderChart/CustomOrderChart";
 import SaleChart from "../../../charts/SaleChart/SaleChart";
 import "./DashCharts.scss";
 
@@ -8,7 +9,7 @@ const DashCharts = () => {
         <SaleChart />
       </div>
       <div style={{ width: "50%" }}>
-        <SaleChart />
+        <CustomOrderChart />
       </div>
     </div>
   );
