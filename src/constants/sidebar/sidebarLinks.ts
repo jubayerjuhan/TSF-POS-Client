@@ -21,6 +21,7 @@ const sidebarLinks: SidebarLinkType[] = [
     adminOnlyPermission: true,
   },
   { name: "Sale", icon: SellIcon, link: "/sale" },
+  { name: "Sale", icon: SellIcon, link: "/sale" },
   { name: "Custom Order", icon: ConstructionIcon, link: "/custom-order" },
   { name: "Sale List", icon: FormatListBulletedIcon, link: "/sales" },
   { name: "Expenses", icon: PaidIcon, link: "/expenses" },

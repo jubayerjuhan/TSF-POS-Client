@@ -11,6 +11,13 @@ export interface Product {
   createdAt: string;
   updatedAt: string;
   __v: number;
+
+  // these attribute only available in all products req route
+  totalStock?: number;
+  branchStocks?: {
+    branchName: string;
+    stock: number;
+  }[];
 }
 
 export interface CartProduct extends Product {
