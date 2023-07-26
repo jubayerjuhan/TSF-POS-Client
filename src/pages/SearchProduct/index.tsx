@@ -30,8 +30,6 @@ const SearchProduct = () => {
     dispatch(getProduct(data.productId));
   };
 
-  console.log(product, "product");
-
   return (
     <Pagewrapper title="Search Product">
       <form

@@ -2,6 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { IMAGE_URL } from "../../constants/links/imageLink";
 import { SearchedProduct } from "../../types/Product/searchProductTypes";
 import useAdminPermission from "../../hooks/permission/useAdminPermission";
+import moment from "moment";
 
 const ProductDetail = ({
   product,
@@ -11,6 +12,8 @@ const ProductDetail = ({
   branchDetail?: boolean;
 }) => {
   const isAdmin = useAdminPermission();
+
+  console.log(product.sales);
 
   return (
     <Container>
@@ -60,6 +63,50 @@ const ProductDetail = ({
           )}
         </Col>
       </Row>
+      <div className="container mt-4 pb-4">
+        <h2 className="mb-4 font-weight-bold">Sales For This Product</h2>
+        <table className="table table-bordered">
+          <thead>
+            <tr>
+              <th>Sale ID</th>
+              <th>Customer Name</th>
+              <th>Phone</th>
+              <th>Branch</th>
+              <th>Quantity</th>
+              <th>Sale Date</th>
+              <th>Invoice</th>
+            </tr>
+          </thead>
+          <tbody>
+            {product.sales.map((sale, key) => {
+              const matchedProduct = sale.items.find(
+                (item) => item.id === product.productId
+              );
+
+              return (
+                <tr key={key}>
+                  <td>{sale.saleId}</td>
+                  <td>{sale.customerName}</td>
+                  <td>{sale.phone}</td>
+                  <td>{sale.branch.name}</td>
+                  <td>{matchedProduct?.quantity}</td>
+                  <td>{moment(sale.createdAt).format("DD-MM-YYYY")}</td>
+                  <td>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() =>
+                        window.open(`invoice/${sale._id}`, "_blank")
+                      }
+                    >
+                      Invoice
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </Container>
   );
 };
