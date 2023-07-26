@@ -15,6 +15,7 @@ const ProductCard = ({
   setEditingProductId,
   setEditingProduct,
   hideQty,
+  showTotalStock,
 }: ProductCardTypes) => {
   const isAdmin = useAdminPermission();
 
@@ -55,6 +56,12 @@ const ProductCard = ({
           <Card.Text className="mb-3">
             Sell Price: {product.sellPrice}
           </Card.Text>
+
+          {showTotalStock && (
+            <Card.Text className="mb-3">
+              Total Stock: {product?.totalStock}
+            </Card.Text>
+          )}
         </div>
         {isAdmin && (
           <div className="button__container">

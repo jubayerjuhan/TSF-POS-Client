@@ -30,12 +30,7 @@ const SearchProduct = () => {
     dispatch(getProduct(data.productId));
   };
 
-  //   return (
-  //     <Pagewrapper>
-  //       <AlertPopup message={error} />
-  //     </Pagewrapper>
-  //   );
-  // }
+  console.log(product, "product");
 
   return (
     <Pagewrapper title="Search Product">

@@ -44,6 +44,7 @@ const ProductList = ({ products }: { products: Product[] }) => {
         {products?.map((product, index) => (
           <ProductCard
             product={product}
+            showTotalStock
             setDeletingProductId={setDeletingProductId}
             setDeletionModelOpen={setDeletingProductModal}
             setEditingModelOpen={setEditingModelOpen}

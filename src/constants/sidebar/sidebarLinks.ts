@@ -9,6 +9,7 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import PaidIcon from "@mui/icons-material/Paid";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import { SidebarLinkType } from "./types";
 
@@ -20,7 +21,6 @@ const sidebarLinks: SidebarLinkType[] = [
     link: "/products",
     adminOnlyPermission: true,
   },
-  { name: "Sale", icon: SellIcon, link: "/sale" },
   { name: "Sale", icon: SellIcon, link: "/sale" },
   { name: "Custom Order", icon: ConstructionIcon, link: "/custom-order" },
   { name: "Sale List", icon: FormatListBulletedIcon, link: "/sales" },
@@ -45,7 +45,7 @@ const sidebarLinks: SidebarLinkType[] = [
     adminOnlyPermission: true,
   },
   { name: "Users", icon: GroupIcon, link: "/users", adminOnlyPermission: true },
-  { name: "Logout", icon: GroupIcon, link: "/logout" },
+  { name: "Logout", icon: LogoutIcon, link: "/logout" },
 ];
 
 export default sidebarLinks;
