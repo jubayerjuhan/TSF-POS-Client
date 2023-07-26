@@ -6,10 +6,13 @@ import { toast } from "react-hot-toast";
 import { BranchProduct } from "../../Branch/BranchProducts/BranchProducts";
 import "./productSection.scss";
 import AlertPopup from "../../../AlertPopup/AlertPopup";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const ProductSection = () => {
   const dispatch = useDispatch();
+  const [searchedProductId, setSearchedProductId] = useState<number>(0);
   const { branch, loading } = useSelector((state: StateType) => state.branch);
+  const [products, setProducts] = useState<BranchProduct[]>([]); // Updated initial state to an empty array
   const { cart } = useSelector((state: StateType) => state.cart);
 
   const handleAddToCart = (product: BranchProduct) => {
@@ -26,6 +29,24 @@ const ProductSection = () => {
     });
   };
 
+  useEffect(() => {
+    setProducts(branch?.products);
+  }, [branch]);
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchedProductId(Number(event.target.value));
+  };
+
+  const handleProductSearch = () => {
+    const product = branch.products.find(
+      (pd) => Number(pd.id.productId) === searchedProductId
+    );
+
+    if (!product) toast.error("No Product Available With This Id");
+
+    if (product) setProducts([product]);
+  };
+
   if (!branch?.products && loading) return <>loading...</>;
   if (!branch?.products)
     return <AlertPopup message="Please Select a Branch First" />;
@@ -34,8 +55,28 @@ const ProductSection = () => {
 
   return (
     <div className="product__section my-4 px-2">
+      <div className="d-flex gap-2 my-4">
+        <input
+          type="number"
+          className="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="Product Id"
+          onChange={handleInputChange}
+          style={{ maxWidth: 150 }}
+        />
+        <button className="btn btn-info" onClick={handleProductSearch}>
+          Search
+        </button>
+        <button
+          className="btn btn-danger"
+          onClick={() => setProducts(branch?.products)}
+        >
+          Clear Search
+        </button>
+      </div>
       <div className="sale-product__list">
-        {branch.products.map((product, key) => (
+        {products?.map((product, key) => (
           <ProductSaleCard
             product={product}
             key={key}
