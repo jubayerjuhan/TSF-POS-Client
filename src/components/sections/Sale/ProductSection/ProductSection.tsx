@@ -65,7 +65,10 @@ const ProductSection = () => {
           onChange={handleInputChange}
           style={{ maxWidth: 150 }}
         />
-        <button className="btn btn-info" onClick={handleProductSearch}>
+        <button
+          className="btn btn-info text-white"
+          onClick={handleProductSearch}
+        >
           Search
         </button>
         <button

@@ -3,6 +3,7 @@ import { IMAGE_URL } from "../../constants/links/imageLink";
 import { SearchedProduct } from "../../types/Product/searchProductTypes";
 import useAdminPermission from "../../hooks/permission/useAdminPermission";
 import moment from "moment";
+import { useEffect, useState } from "react";
 
 const ProductDetail = ({
   product,
@@ -11,9 +12,20 @@ const ProductDetail = ({
   product: SearchedProduct;
   branchDetail?: boolean;
 }) => {
+  const [totalSale, setTotalSale] = useState(0);
   const isAdmin = useAdminPermission();
 
-  console.log(product.sales);
+  useEffect(() => {
+    let totalSaleOfProduct = 0;
+    product.sales.map((sale, key) => {
+      const matchedProduct = sale.items.find(
+        (item) => item.id === product.productId
+      );
+
+      if (matchedProduct) totalSaleOfProduct += matchedProduct.quantity;
+    });
+    setTotalSale(totalSaleOfProduct);
+  }, [product]);
 
   return (
     <Container>
@@ -65,6 +77,9 @@ const ProductDetail = ({
       </Row>
       <div className="container mt-4 pb-4">
         <h2 className="mb-4 font-weight-bold">Sales For This Product</h2>
+        <h6 className="mb-4 font-weight-bold">
+          Total Sale quantity of this product : {totalSale}
+        </h6>
         <table className="table table-bordered">
           <thead>
             <tr>
