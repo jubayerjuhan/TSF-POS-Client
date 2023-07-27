@@ -1,7 +1,6 @@
 import { Product } from "../../../types/Product/ProductTypes";
 import { Card } from "react-bootstrap";
 import Button from "../../core/Button/Button";
-import { IMAGE_URL } from "../../../constants/links/imageLink";
 import "./productsalecard.scss";
 
 const ProductSaleCard = ({
@@ -16,7 +15,7 @@ const ProductSaleCard = ({
       <Card.Img
         className="product__image "
         variant="top"
-        src={`${IMAGE_URL}${product.id.photo}`}
+        src={`${product.id.photo}`}
       />
       <Card.Body className="d-flex flex-column justify-content-between">
         <div>

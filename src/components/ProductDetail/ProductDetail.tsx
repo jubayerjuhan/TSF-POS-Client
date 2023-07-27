@@ -1,5 +1,4 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { IMAGE_URL } from "../../constants/links/imageLink";
 import { SearchedProduct } from "../../types/Product/searchProductTypes";
 import useAdminPermission from "../../hooks/permission/useAdminPermission";
 import moment from "moment";
@@ -32,7 +31,7 @@ const ProductDetail = ({
       <Row style={{ gap: 15 }}>
         <Col lg={5}>
           <img
-            src={`${IMAGE_URL + product?.photo}`}
+            src={`${product?.photo}`}
             alt={product?.name}
             className="product__image"
           />

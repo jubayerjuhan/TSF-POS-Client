@@ -56,7 +56,7 @@ const HorizontalProductCard = ({ product }: { product: CartProduct }) => {
   return (
     <div className="sale__list-product p-3 rounded-2 gap-3 ">
       <div className="product__image">
-        <img src={`${IMAGE_URL + product?.photo}`} alt="" />
+        <img src={`${product?.photo}`} alt="" />
       </div>
       <div className="product__info w-100">
         <p className="product__name mb-3 fs-6 fw-semibold">{product?.name}</p>

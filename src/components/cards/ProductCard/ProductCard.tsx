@@ -1,5 +1,4 @@
 import Card from "react-bootstrap/Card";
-import { IMAGE_URL } from "../../../constants/links/imageLink";
 import Button from "../../core/Button/Button";
 import "./productCard.scss";
 import { ProductCardTypes } from "./types";
@@ -36,7 +35,7 @@ const ProductCard = ({
       <Card.Img
         className="product__image "
         variant="top"
-        src={`${IMAGE_URL}${product.photo}`}
+        src={`${product.photo}`}
         onClick={() => navigate(`/product/${product.productId}`)}
       />
       <Card.Body className="d-flex flex-column justify-content-between">

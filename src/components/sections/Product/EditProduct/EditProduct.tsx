@@ -3,8 +3,9 @@ import ADD_PRODUCT_FIELDS from "../../../../constants/InputFields/product/addPro
 import FormModal from "../../../Modals/FormModal/FormModal";
 import { useForm } from "react-hook-form";
 import { Product } from "../../../../types/Product/ProductTypes";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editProduct } from "../../../../redux/actions/product/productAction";
+import { StateType } from "../../../../redux/redux";
 
 const EditProduct = ({
   open,
@@ -22,6 +23,7 @@ const EditProduct = ({
     setValue,
   } = useForm();
 
+  const { loading } = useSelector((state: StateType) => state.product);
   const dispatch = useDispatch();
   const [defaultValues, setDefaultValues] = useState<Product | undefined>(
     editingProduct
@@ -62,7 +64,7 @@ const EditProduct = ({
       register={register}
       submitFields={handleSubmit(handleEditProduct)}
       title="Edit Product"
-      loading={false}
+      loading={loading}
       open={open}
       setOpen={setOpen}
       defaultValues={defaultValues}
