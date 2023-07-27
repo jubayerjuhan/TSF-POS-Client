@@ -8,8 +8,14 @@ import { ReduxAction } from "../redux";
 
 const dashboardReducer = (
   state = {
-    fromDate: dayjs().format("MM-DD-YYYY"),
-    toDate: dayjs().format("MM-DD-YYYY"),
+    fromDate: dayjs()
+      .startOf("day")
+      .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+      .toString(),
+    toDate: dayjs()
+      .endOf("day")
+      .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+      .toString(),
   },
   action: ReduxAction
 ) => {

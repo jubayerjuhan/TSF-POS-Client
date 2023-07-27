@@ -6,9 +6,7 @@ import { StateType } from "../../../../redux/redux";
 const DashboardAmount = () => {
   const { sales } = useSelector((state: StateType) => state.sales);
   const { amount } = useSelector((state: StateType) => state.customOrder);
-  const { expenses, totalExpense } = useSelector(
-    (state: StateType) => state.expenses
-  );
+  const { totalExpense } = useSelector((state: StateType) => state.expenses);
   return (
     <>
       <StatsCard

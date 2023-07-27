@@ -46,7 +46,7 @@ const DashboardBranchAndDatePicker = () => {
             onChange={(e) =>
               dispatch({
                 type: CHANGE_FROM_DATE,
-                payload: dayjs(e).format("MM-DD-YYYY"),
+                payload: dayjs(e),
               })
             }
             format="DD-MM-YYYY"
@@ -59,7 +59,7 @@ const DashboardBranchAndDatePicker = () => {
             onChange={(e) =>
               dispatch({
                 type: CHANGE_TO_DATE,
-                payload: dayjs(e).format("MM-DD-YYYY"),
+                payload: dayjs(e),
               })
             }
             format="DD-MM-YYYY"

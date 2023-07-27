@@ -16,11 +16,22 @@ const Dashboard = () => {
   const { branch, fromDate, toDate } = useSelector(
     (state: StateType) => state.dashboard
   );
+
+  console.log(fromDate, toDate, "from and to date");
+
   const dispatch = useDispatch();
-  const url = `sale/list?startDate=${fromDate}&endDate=${toDate}&branch=${branch}`;
-  const customOrderAmountUrl = `custom-order/amount?fromDate=${fromDate}&toDate=${toDate}&branchId=${branch}`;
-  const partialPaymentUrl = `sale/partial-payment/list?startDate=${fromDate}&endDate=${toDate}&branch=${branch}`;
-  const expensesUrl = `/expense/list?startDate=${fromDate}&endDate=${toDate}&branch=${branch}`;
+  const url = `sale/list?startDate=${fromDate}&endDate=${toDate}&branch=${
+    branch ? branch : ""
+  }`;
+  const customOrderAmountUrl = `custom-order/amount?fromDate=${fromDate}&toDate=${toDate}&branchId=${
+    branch ? branch : ""
+  }`;
+  const partialPaymentUrl = `sale/partial-payment/list?startDate=${fromDate}&endDate=${toDate}&branch=${
+    branch ? branch : ""
+  }`;
+  const expensesUrl = `/expense/list?startDate=${fromDate}&endDate=${toDate}&branch=${
+    branch ? branch : ""
+  }`;
 
   console.info(url, customOrderAmountUrl, "jubayerjuhanHello");
 

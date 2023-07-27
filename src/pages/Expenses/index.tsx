@@ -10,7 +10,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import { expenseColumns } from "./expenseColumns";
 import moment from "moment";
 import AddExpense from "../../components/sections/Expenses/AddExpense/AddExpense";
-import { toast } from "react-hot-toast";
 import { CLEAR_ERROR } from "../../constants/reduxActionsNames/user";
 
 const Expenses = () => {
