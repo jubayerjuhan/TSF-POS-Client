@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-import { IMAGE_URL } from "../../../constants/links/imageLink";
 import { CartProduct } from "../../../types/Product/ProductTypes";
 import Button from "../../core/Button/Button";
 import "./horizontalProductCard.scss";

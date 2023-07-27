@@ -20,8 +20,12 @@ export const getExpenses =
     try {
       dispatch({ type: EXPENSES_PENDING });
       const { data }: { data: ExpensesResponse } = await client.get(`${url}`);
+
       if (data.success)
-        dispatch({ type: EXPENSES_SUCCESS, payload: data.expenses });
+        dispatch({
+          type: EXPENSES_SUCCESS,
+          payload: { expenses: data.expenses, totalExpense: data.totalExpense },
+        });
     } catch (error) {
       errorDispatcher(error, EXPENSES_ERROR, dispatch);
     }

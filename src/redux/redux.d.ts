@@ -97,6 +97,7 @@ interface StateType {
     loading: boolean;
     error?: string;
     message?: string;
+    totalExpense: number;
   };
   partialPayment: {
     amountRecived: number;

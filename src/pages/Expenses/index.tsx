@@ -11,6 +11,7 @@ import { expenseColumns } from "./expenseColumns";
 import moment from "moment";
 import AddExpense from "../../components/sections/Expenses/AddExpense/AddExpense";
 import { toast } from "react-hot-toast";
+import { CLEAR_ERROR } from "../../constants/reduxActionsNames/user";
 
 const Expenses = () => {
   const { user } = useSelector((state: StateType) => state.user);
@@ -27,9 +28,8 @@ const Expenses = () => {
   }, [dispatch, branchId, message]);
 
   useEffect(() => {
-    if (error) toast.error(error);
-    if (message) toast.success(message);
-  }, [error, message]);
+    dispatch({ type: CLEAR_ERROR });
+  }, [error, message, dispatch]);
 
   const row: any = [];
 

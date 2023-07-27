@@ -16,7 +16,7 @@ const ProductDetail = ({
 
   useEffect(() => {
     let totalSaleOfProduct = 0;
-    product.sales.map((sale, key) => {
+    product.sales.map((sale) => {
       const matchedProduct = sale.items.find(
         (item) => item.id === product.productId
       );

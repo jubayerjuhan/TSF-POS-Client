@@ -20,7 +20,8 @@ const expensesListReducer = (state = {}, action: ReduxAction) => {
       return {
         ...state,
         loading: false,
-        expenses: action.payload,
+        expenses: action.payload.expenses,
+        totalExpense: action.payload.totalExpense,
       };
     case EXPENSES_ERROR:
       return {

@@ -10,6 +10,7 @@ import {
   getSales,
 } from "../../redux/actions/sales/salesAction";
 import { getCustomOrderAmount } from "../../redux/actions/customOrder/customOrderAction";
+import { getExpenses } from "../../redux/actions/expenses/expenseAction";
 
 const Dashboard = () => {
   const { branch, fromDate, toDate } = useSelector(
@@ -19,6 +20,7 @@ const Dashboard = () => {
   const url = `sale/list?startDate=${fromDate}&endDate=${toDate}&branch=${branch}`;
   const customOrderAmountUrl = `custom-order/amount?fromDate=${fromDate}&toDate=${toDate}&branchId=${branch}`;
   const partialPaymentUrl = `sale/partial-payment/list?startDate=${fromDate}&endDate=${toDate}&branch=${branch}`;
+  const expensesUrl = `/expense/list?startDate=${fromDate}&endDate=${toDate}&branch=${branch}`;
 
   console.info(url, customOrderAmountUrl, "jubayerjuhanHello");
 
@@ -26,7 +28,8 @@ const Dashboard = () => {
     dispatch(getSales(url));
     dispatch(getPartialPaymentInfo(partialPaymentUrl));
     dispatch(getCustomOrderAmount(customOrderAmountUrl));
-  }, [dispatch, url, partialPaymentUrl, customOrderAmountUrl]);
+    dispatch(getExpenses(expensesUrl));
+  }, [dispatch, url, partialPaymentUrl, customOrderAmountUrl, expensesUrl]);
 
   return (
     <Pagewrapper>
