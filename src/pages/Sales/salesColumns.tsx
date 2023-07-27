@@ -19,14 +19,15 @@ export const saleColumns = [
     headerName: "Branch",
     minWidth: 200,
   },
-  {
-    field: "partialPaymentAmount",
-    headerName: "Partial Amount",
-    minWidth: 100,
-  },
+
   {
     field: "total",
     headerName: "Total",
+    minWidth: 100,
+  },
+  {
+    field: "date",
+    headerName: "Date",
     minWidth: 100,
   },
   {

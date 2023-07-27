@@ -7,6 +7,7 @@ import { getSales } from "../../redux/actions/sales/salesAction.js";
 import BranchSelector from "../../components/sections/Branch/BranchSelector/BranchSelector.js";
 import useAdminPermission from "../../hooks/permission/useAdminPermission.js";
 import { StateType } from "../../redux/redux.js";
+import moment from "moment";
 
 const Sales = () => {
   const { sales } = useSelector((state: StateType) => state.sales);
@@ -22,7 +23,12 @@ const Sales = () => {
   const row: any = [];
 
   sales?.sales?.map((sale: any) => {
-    row.push({ ...sale, branch: sale.branch[0].name, id: sale.saleId });
+    row.push({
+      ...sale,
+      branch: sale.branch[0].name,
+      id: sale.saleId,
+      date: moment(sale?.createdAt).format("DD-MM-YYYY"),
+    });
   });
 
   return (

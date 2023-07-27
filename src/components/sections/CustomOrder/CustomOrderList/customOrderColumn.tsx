@@ -32,6 +32,12 @@ export const customOrderColumns = [
     flex: 1,
     minWidth: 150,
   },
+  {
+    field: "date",
+    headerName: "Date",
+    flex: 1,
+    minWidth: 150,
+  },
 
   {
     field: "actions",

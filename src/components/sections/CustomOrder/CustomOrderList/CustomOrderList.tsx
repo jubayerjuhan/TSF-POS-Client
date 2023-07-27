@@ -7,6 +7,7 @@ import { StateType } from "../../../../redux/redux";
 import { CustomOrderFromServer } from "../../../../types/CustomOrder/CustomOrderTypes";
 import BranchSelector from "../../Branch/BranchSelector/BranchSelector";
 import useAdminPermission from "../../../../hooks/permission/useAdminPermission";
+import moment from "moment";
 
 const CustomOrderList = () => {
   const [branchId, setBranchId] = useState("");
@@ -25,7 +26,12 @@ const CustomOrderList = () => {
   const row: any = [];
 
   orders?.map((order: CustomOrderFromServer) => {
-    row.push({ ...order, id: order.orderId, branch: order.branch.name });
+    row.push({
+      ...order,
+      id: order.orderId,
+      branch: order.branch.name,
+      date: moment(order.createdAt).format("DD-MM-YYYY"),
+    });
   });
 
   return (
