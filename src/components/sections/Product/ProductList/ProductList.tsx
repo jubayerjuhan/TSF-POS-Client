@@ -43,6 +43,7 @@ const ProductList = ({ products }: { products: Product[] }) => {
       <div className="product__list">
         {products?.map((product, index) => (
           <ProductCard
+            sales={product.sales}
             product={product}
             showTotalStock
             setDeletingProductId={setDeletingProductId}

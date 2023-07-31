@@ -15,6 +15,12 @@ export const saleColumns = [
     minWidth: 200,
   },
   {
+    field: "productIds",
+    headerName: "Product Id's",
+    flex: 1,
+    minWidth: 100,
+  },
+  {
     field: "branch",
     headerName: "Branch",
     minWidth: 200,

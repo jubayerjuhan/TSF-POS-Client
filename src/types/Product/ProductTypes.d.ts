@@ -14,6 +14,7 @@ export interface Product {
 
   // these attribute only available in all products req route
   totalStock?: number;
+  sales?: number;
   branchStocks?: {
     branchName: string;
     stock: number;
