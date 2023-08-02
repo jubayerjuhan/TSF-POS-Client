@@ -22,8 +22,9 @@ export interface BranchProduct {
 
 export interface BranchProductProps {
   products: BranchProduct[];
+  branchId: string;
 }
-const BranchProducts = ({ products }: BranchProductProps) => {
+const BranchProducts = ({ products, branchId }: BranchProductProps) => {
   const isAdmin = useAdminPermission();
   const { branch } = useSelector((state: StateType) => state.branch);
   const { loading, error, message } = useSelector(
@@ -53,6 +54,7 @@ const BranchProducts = ({ products }: BranchProductProps) => {
   return (
     <div className="">
       <EditProduct
+        branchId={branchId}
         open={editingModelOpen}
         setOpen={setEditingModalOpen}
         editingProduct={editingProduct}

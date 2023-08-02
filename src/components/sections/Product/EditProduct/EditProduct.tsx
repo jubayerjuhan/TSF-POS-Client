@@ -6,15 +6,18 @@ import { Product } from "../../../../types/Product/ProductTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { editProduct } from "../../../../redux/actions/product/productAction";
 import { StateType } from "../../../../redux/redux";
+import { getBranch } from "../../../../redux/actions/branch/branchAction";
 
 const EditProduct = ({
   open,
   setOpen,
   editingProduct,
+  branchId,
 }: {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   editingProduct?: Product;
+  branchId?: string;
 }) => {
   const {
     handleSubmit,
@@ -60,6 +63,7 @@ const EditProduct = ({
       await dispatch(editProduct(editingProduct?._id, formData));
 
     setOpen(false);
+    if (branchId) dispatch(getBranch(branchId));
   };
 
   return (

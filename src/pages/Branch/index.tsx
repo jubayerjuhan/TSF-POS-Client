@@ -17,6 +17,9 @@ const Branch = () => {
     (state: StateType) => state.branch
   );
   const { message } = useSelector((state: StateType) => state.user);
+  const { message: productMessage } = useSelector(
+    (state: StateType) => state.product
+  );
   const { success } = useSelector((state: StateType) => state.promise);
 
   const { id = "" } = useParams<string>();
@@ -25,7 +28,7 @@ const Branch = () => {
   useEffect(() => {
     dispatch({ type: CLEAR_ERROR });
     dispatch(getBranch(id));
-  }, [dispatch, id, success, message]);
+  }, [dispatch, id, success, message, productMessage]);
 
   if (error) {
     return (
@@ -35,11 +38,9 @@ const Branch = () => {
     );
   }
 
-  console.log(branch, "branchinfo");
-
   return (
     <Pagewrapper>
-      {loading && !branch ? (
+      {loading || !branch ? (
         <BigSpaceLoader height={500} />
       ) : (
         <div>
@@ -50,7 +51,7 @@ const Branch = () => {
               branchId={branch?._id}
             />
           )}
-          <BranchProducts products={branch?.products} />
+          <BranchProducts products={branch?.products} branchId={id} />
         </div>
       )}
     </Pagewrapper>

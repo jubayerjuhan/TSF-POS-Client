@@ -24,8 +24,6 @@ const ProductList = ({ products }: { products: Product[] }) => {
     setDeletingProductModal(false);
   };
 
-  console.log(editingProductId);
-
   return (
     <div>
       <AddProduct />
