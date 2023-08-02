@@ -10,7 +10,6 @@ const ProductSaleCard = ({
   product: { id: Product; quantity: number };
   onClick?: () => void;
 }) => {
-  console.log(product, "pd");
   return (
     <Card className="sale-product__card">
       <Card.Img
@@ -24,7 +23,7 @@ const ProductSaleCard = ({
             {product.id?.name}
           </Card.Title>
           <Card.Text>
-            Id: <span className="fw-bold">{product.id.productId}</span>
+            Id: <span className="fw-bold">{product.id?.productId}</span>
           </Card.Text>
 
           <Card.Text>

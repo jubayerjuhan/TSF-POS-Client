@@ -31,14 +31,14 @@ export const deleteProductFromBranch =
   };
 
 export const changeBranchProductQuantity =
-  (branchId: string, productId: string, quantity: string): RootThunk =>
+  (branchId: string, productId: string, productData: string): RootThunk =>
   async (dispatch: AppDispatch) => {
     try {
       dispatch({ type: EDIT_PRODUCT_PENDING });
       const { data }: { data: DeleteProductFromBranchResponse } =
-        await client.put(`/branch/product/${branchId}`, {
+        await client.put(`/branch/product/${branchId}id=${productId}`, {
           product: productId,
-          quantity,
+          productData,
         });
       dispatch({ type: EDIT_PRODUCT_SUCCESS, payload: data.message });
     } catch (error) {

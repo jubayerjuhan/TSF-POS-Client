@@ -8,7 +8,6 @@ import BranchSelector from "../../components/sections/Branch/BranchSelector/Bran
 import useAdminPermission from "../../hooks/permission/useAdminPermission.js";
 import { StateType } from "../../redux/redux.js";
 import moment from "moment";
-import { Sale } from "../../types/Sale/sale.js";
 
 const Sales = () => {
   const { sales } = useSelector((state: StateType) => state.sales);
@@ -23,9 +22,9 @@ const Sales = () => {
 
   const row: any = [];
 
-  sales?.sales?.map((sale: Sale) => {
+  sales?.sales?.map((sale: any) => {
     console.log(sale, "sale");
-    const productIds = sale.items.map((item) => item.id).join(", ");
+    const productIds = sale.items.map((item: any) => item.id).join(", ");
 
     row.push({
       ...sale,

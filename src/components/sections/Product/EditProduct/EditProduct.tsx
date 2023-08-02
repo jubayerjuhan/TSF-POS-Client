@@ -42,10 +42,15 @@ const EditProduct = ({
   }, [defaultValues, setValue]);
 
   const handleEditProduct = async (data: object) => {
+    // return console.log(data, "juhan data");
     const formData = new FormData();
     for (const [key, value] of Object.entries(data)) {
       if (key === "photo") {
-        formData.append(key, value[0]);
+        if (typeof value === "string") {
+          console.log(typeof value, "photo type");
+        } else {
+          formData.append(key, value[0]);
+        }
       } else {
         formData.append(key, value);
       }

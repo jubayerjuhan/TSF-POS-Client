@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import useAdminPermission from "../../../hooks/permission/useAdminPermission";
 
 const ProductCard = ({
-  sales,
   product,
   quantity,
   setDeletingProductId,
@@ -66,20 +65,16 @@ const ProductCard = ({
             <Card.Text className="mb-3">Total Sale: {product?.sales}</Card.Text>
           )}
         </div>
-        {isAdmin && (
-          <div className="button__container">
+        <div className="button__container">
+          {isAdmin && (
             <Button
               title="Delete"
               className="btn-danger"
               onClick={onDeleteClick}
             />
-            <Button
-              title="Edit"
-              className="btn-primary"
-              onClick={onEditClick}
-            />
-          </div>
-        )}
+          )}
+          <Button title="Edit" className="btn-primary" onClick={onEditClick} />
+        </div>
       </Card.Body>
     </Card>
   );

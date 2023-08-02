@@ -1,10 +1,10 @@
 import FormModal from "../../../Modals/FormModal/FormModal";
 import { useForm } from "react-hook-form";
-import EDIT_PRODUCT_QUANTITY from "../../../../constants/InputFields/branch/product";
 import { useDispatch, useSelector } from "react-redux";
 import { changeBranchProductQuantity } from "../../../../redux/actions/product/branch/branchProductAction";
 import { getBranch } from "../../../../redux/actions/branch/branchAction";
 import { StateType } from "../../../../redux/redux";
+import ADD_PRODUCT_FIELDS from "../../../../constants/InputFields/product/addProduct";
 
 const EditBranchProduct = ({
   open,
@@ -20,10 +20,8 @@ const EditBranchProduct = ({
     formState: { errors },
   } = useForm<EditBranchProductQuantityData>();
 
-  const onSubmit = async (data: EditBranchProductQuantityData) => {
-    await dispatch(
-      changeBranchProductQuantity(branchId, productId, data.quantity)
-    );
+  const onSubmit = async (data: any) => {
+    await dispatch(changeBranchProductQuantity(branchId, productId, data));
     setOpen(false);
     await dispatch(getBranch(branchId));
   };
@@ -32,7 +30,7 @@ const EditBranchProduct = ({
     <FormModal
       title="Change Product Quantity"
       errors={errors}
-      fields={EDIT_PRODUCT_QUANTITY}
+      fields={ADD_PRODUCT_FIELDS}
       open={open}
       loading={loading}
       register={register}

@@ -12,6 +12,7 @@ import BranchAddProduct from "../BranchAddProduct/BranchAddProduct";
 import { CLEAR_PRODUCT } from "../../../../constants/reduxActionsNames/product";
 import { getBranch } from "../../../../redux/actions/branch/branchAction";
 import useAdminPermission from "../../../../hooks/permission/useAdminPermission";
+import EditProduct from "../../Product/EditProduct/EditProduct";
 
 export interface BranchProduct {
   id: Product;
@@ -33,6 +34,7 @@ const BranchProducts = ({ products }: BranchProductProps) => {
 
   const [editingProductId, setEditingProductId] = useState<string>("");
   const [editingModelOpen, setEditingModalOpen] = useState<boolean>(false);
+  const [editingProduct, setEditingProduct] = useState<Product>();
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -50,11 +52,10 @@ const BranchProducts = ({ products }: BranchProductProps) => {
 
   return (
     <div className="">
-      <EditBranchProduct
-        branchId={branch?._id}
+      <EditProduct
         open={editingModelOpen}
         setOpen={setEditingModalOpen}
-        productId={editingProductId}
+        editingProduct={editingProduct}
       />
       <AppModal
         open={deletingModelOpen}
@@ -79,6 +80,7 @@ const BranchProducts = ({ products }: BranchProductProps) => {
               <ProductCard
                 setEditingProductId={setEditingProductId}
                 setEditingModelOpen={setEditingModalOpen}
+                setEditingProduct={setEditingProduct}
                 setDeletingProductId={setDeletingProductId}
                 setDeletionModelOpen={setDeletingModalOpen}
                 product={product.id}
