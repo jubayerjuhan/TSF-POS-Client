@@ -13,6 +13,7 @@ const ProductCard = ({
   setEditingModelOpen,
   setEditingProductId,
   setEditingProduct,
+  setQuantityModelOpen,
   hideQty,
   showTotalStock,
 }: ProductCardTypes) => {
@@ -27,6 +28,13 @@ const ProductCard = ({
 
   const onEditClick = () => {
     setEditingModelOpen(true);
+    setEditingProductId(product._id);
+    if (setEditingProduct) setEditingProduct(product);
+  };
+
+  const onQuantityChange = () => {
+    if (!setQuantityModelOpen) return;
+    setQuantityModelOpen(true);
     setEditingProductId(product._id);
     if (setEditingProduct) setEditingProduct(product);
   };
@@ -75,6 +83,13 @@ const ProductCard = ({
           )}
           <Button title="Edit" className="btn-primary" onClick={onEditClick} />
         </div>
+        {setQuantityModelOpen && isAdmin && (
+          <Button
+            title="Change Quantity"
+            className="btn-info mt-2"
+            onClick={onQuantityChange}
+          />
+        )}
       </Card.Body>
     </Card>
   );

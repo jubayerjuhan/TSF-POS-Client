@@ -5,6 +5,7 @@ interface ProductCardTypes {
   sales?: number;
   quantity?: number;
   setEditingModelOpen: React.Dispatch<SetStateAction<boolean>>;
+  setQuantityModelOpen?: React.Dispatch<SetStateAction<boolean>>;
   setEditingProductId: React.Dispatch<SetStateAction<string>>;
   setDeletingProductId: React.Dispatch<SetStateAction<string>>;
   setDeletionModelOpen: React.Dispatch<SetStateAction<boolean>>;

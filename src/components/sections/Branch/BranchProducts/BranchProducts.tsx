@@ -7,12 +7,12 @@ import { deleteProductFromBranch } from "../../../../redux/actions/product/branc
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, StateType } from "../../../../redux/redux";
 import { toast } from "react-hot-toast";
-import EditBranchProduct from "../EditBranchProduct/EditBranchProduct";
 import BranchAddProduct from "../BranchAddProduct/BranchAddProduct";
 import { CLEAR_PRODUCT } from "../../../../constants/reduxActionsNames/product";
 import { getBranch } from "../../../../redux/actions/branch/branchAction";
 import useAdminPermission from "../../../../hooks/permission/useAdminPermission";
 import EditProduct from "../../Product/EditProduct/EditProduct";
+import EditBranchProduct from "../EditBranchProduct/EditBranchProduct";
 
 export interface BranchProduct {
   id: Product;
@@ -35,6 +35,7 @@ const BranchProducts = ({ products, branchId }: BranchProductProps) => {
 
   const [editingProductId, setEditingProductId] = useState<string>("");
   const [editingModelOpen, setEditingModalOpen] = useState<boolean>(false);
+  const [quantityModelOpen, setQuantityModelOpen] = useState<boolean>(false);
   const [editingProduct, setEditingProduct] = useState<Product>();
 
   const dispatch: AppDispatch = useDispatch();
@@ -45,6 +46,7 @@ const BranchProducts = ({ products, branchId }: BranchProductProps) => {
     dispatch(getBranch(branch._id));
   };
 
+  console.log(editingProductId);
   useEffect(() => {
     if (error) toast.error(error);
     if (message) toast.success(message);
@@ -58,6 +60,13 @@ const BranchProducts = ({ products, branchId }: BranchProductProps) => {
         open={editingModelOpen}
         setOpen={setEditingModalOpen}
         editingProduct={editingProduct}
+      />
+
+      <EditBranchProduct
+        branchId={branch?._id}
+        open={quantityModelOpen}
+        setOpen={setQuantityModelOpen}
+        productId={editingProductId}
       />
       <AppModal
         open={deletingModelOpen}
@@ -76,10 +85,11 @@ const BranchProducts = ({ products, branchId }: BranchProductProps) => {
 
       <div className="product__list">
         {products?.map((product, key) => {
-          if (!product.id) return <p>This Product Has Removed</p>;
+          if (!product.id) return <p key={key}>This Product Has Removed</p>;
           return (
             <>
               <ProductCard
+                setQuantityModelOpen={setQuantityModelOpen}
                 setEditingProductId={setEditingProductId}
                 setEditingModelOpen={setEditingModalOpen}
                 setEditingProduct={setEditingProduct}
