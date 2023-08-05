@@ -2,8 +2,8 @@ import axios from "axios";
 
 // Create Axios instance with default headers
 const client = axios.create({
-  // baseURL: "https://oyster-app-upr7i.ondigitalocean.app",
-  baseURL: "http://localhost:8000",
+  baseURL: "https://oyster-app-upr7i.ondigitalocean.app",
+  // baseURL: "http://localhost:8000",
 });
 
 // getting token from localstorage
