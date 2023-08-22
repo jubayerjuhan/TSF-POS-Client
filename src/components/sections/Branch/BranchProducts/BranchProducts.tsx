@@ -53,6 +53,8 @@ const BranchProducts = ({ products, branchId }: BranchProductProps) => {
     dispatch({ type: CLEAR_PRODUCT });
   }, [dispatch, error, message]);
 
+  const reversedProducts = products.slice().reverse(); // Create a copy of the array and reverse it
+
   return (
     <div className="">
       <EditProduct
@@ -84,9 +86,9 @@ const BranchProducts = ({ products, branchId }: BranchProductProps) => {
       </div>
 
       <div className="product__list">
-        {products?.map((product, key) => {
+        {reversedProducts?.map((product, key) => {
           if (!product.id) return <p key={key}>This Product Has Removed</p>;
-          if (product.quantity === 0) return <div key={key}></div>;
+          if (product.quantity === 0) return <></>;
           return (
             <>
               <ProductCard

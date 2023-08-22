@@ -22,18 +22,21 @@ const Sales = () => {
 
   const row: any = [];
 
-  sales?.sales?.map((sale: any) => {
-    console.log(sale, "sale");
-    const productIds = sale.items.map((item: any) => item.id).join(", ");
+  sales?.sales
+    ?.slice()
+    .reverse()
+    .map((sale: any) => {
+      console.log(sale, "sale");
+      const productIds = sale.items.map((item: any) => item.id).join(", ");
 
-    row.push({
-      ...sale,
-      productIds,
-      branch: sale?.branch[0]?.name,
-      id: sale.saleId,
-      date: moment(sale?.createdAt).format("DD-MM-YYYY"),
+      row.push({
+        ...sale,
+        productIds,
+        branch: sale?.branch[0]?.name,
+        id: sale.saleId,
+        date: moment(sale?.createdAt).format("DD-MM-YYYY"),
+      });
     });
-  });
 
   return (
     <Pagewrapper title="Sales">

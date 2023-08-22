@@ -30,7 +30,7 @@ const ProductSection = () => {
   };
 
   useEffect(() => {
-    setProducts(branch?.products);
+    setProducts(branch?.products.slice().reverse());
   }, [branch]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
