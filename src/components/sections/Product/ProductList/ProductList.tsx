@@ -64,7 +64,7 @@ const ProductList = ({ products }: { products: Product[] }) => {
                 totalStock += branch.stock;
               });
 
-              if (totalStock === 0) return <div key={index}></div>;
+              if (totalStock === 0) return <></>;
             }
             return (
               <ProductCard

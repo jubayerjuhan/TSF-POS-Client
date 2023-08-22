@@ -79,13 +79,16 @@ const ProductSection = () => {
         </button>
       </div>
       <div className="sale-product__list">
-        {products?.map((product, key) => (
-          <ProductSaleCard
-            product={product}
-            key={key}
-            onClick={() => handleAddToCart(product)}
-          />
-        ))}
+        {products?.map((product, key) => {
+          if (product.quantity === 0) return <></>;
+          return (
+            <ProductSaleCard
+              product={product}
+              key={key}
+              onClick={() => handleAddToCart(product)}
+            />
+          );
+        })}
       </div>
     </div>
   );
