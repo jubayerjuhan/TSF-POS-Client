@@ -39,7 +39,6 @@ const ProductCard = ({
     if (setEditingProduct) setEditingProduct(product);
   };
 
-  console.log(product, "productjuhan");
   return (
     <Card className="product__card">
       <Card.Img

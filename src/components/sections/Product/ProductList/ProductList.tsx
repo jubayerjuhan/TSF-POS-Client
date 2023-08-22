@@ -27,8 +27,6 @@ const ProductList = ({ products }: { products: Product[] }) => {
     setDeletingProductModal(false);
   };
 
-  console.log(editingProductId);
-
   return (
     <div>
       <AddProduct />
@@ -59,20 +57,30 @@ const ProductList = ({ products }: { products: Product[] }) => {
         <ProductListView products={products} />
       ) : (
         <div className="product__list">
-          {products?.map((product, index) => (
-            <ProductCard
-              sales={product.sales}
-              product={product}
-              showTotalStock
-              setDeletingProductId={setDeletingProductId}
-              setDeletionModelOpen={setDeletingProductModal}
-              setEditingModelOpen={setEditingModelOpen}
-              setEditingProductId={setEditingProductId}
-              setEditingProduct={setEditingProduct}
-              key={index}
-              hideQty
-            />
-          ))}
+          {products?.map((product, index) => {
+            if (product.branchStocks?.length !== 0) {
+              let totalStock = 0;
+              product.branchStocks?.forEach((branch) => {
+                totalStock += branch.stock;
+              });
+
+              if (totalStock === 0) return <div key={index}></div>;
+            }
+            return (
+              <ProductCard
+                sales={product.sales}
+                product={product}
+                showTotalStock
+                setDeletingProductId={setDeletingProductId}
+                setDeletionModelOpen={setDeletingProductModal}
+                setEditingModelOpen={setEditingModelOpen}
+                setEditingProductId={setEditingProductId}
+                setEditingProduct={setEditingProduct}
+                key={index}
+                hideQty
+              />
+            );
+          })}
         </div>
       )}
     </div>
