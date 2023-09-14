@@ -18,6 +18,7 @@ const ProductList = ({ products }: { products: Product[] }) => {
     useState<boolean>(false);
   const [editingModalOpen, setEditingModelOpen] = useState<boolean>(false);
   const [editingProductId, setEditingProductId] = useState<string>("");
+  console.log(editingProductId);
   const [editingProduct, setEditingProduct] = useState<Product>();
   const [listView, setListView] = useState<boolean>(false);
   const dispatch: AppDispatch = useDispatch();
