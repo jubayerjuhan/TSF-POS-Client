@@ -88,7 +88,6 @@ const BranchProducts = ({ products, branchId }: BranchProductProps) => {
       <div className="product__list">
         {reversedProducts?.map((product, key) => {
           if (!product.id) return <p key={key}>This Product Has Removed</p>;
-          if (product.quantity === 0) return <></>;
           return (
             <>
               <ProductCard
