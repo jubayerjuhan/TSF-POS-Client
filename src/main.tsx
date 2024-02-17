@@ -8,14 +8,14 @@ import { PersistGate } from "redux-persist/integration/react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./index.css";
-import PaymentDue from "./pages/PaymentDue/PaymentDue.tsx";
+// import PaymentDue from "./pages/PaymentDue/PaymentDue.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
     <Toaster />
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <PaymentDue />
+        <App />
       </PersistGate>
     </Provider>
   </>

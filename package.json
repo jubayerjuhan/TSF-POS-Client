@@ -7,8 +7,7 @@
     "dev": "vite --port 3001 --host 0.0.0.0",
     "build": "tsc --noEmitOnError && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "deploy": "yarn build && scp -r dist/* root@128.199.30.106:/var/www/html/"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",

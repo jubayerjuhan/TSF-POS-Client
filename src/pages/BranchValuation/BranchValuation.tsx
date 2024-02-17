@@ -39,7 +39,8 @@ const BranchValuation = () => {
   let productValue = 0;
 
   branch?.products?.forEach((product) => {
-    productValue += product.id.costPrice * product.quantity;
+    if (!product) productValue = 0;
+    productValue += product.id?.costPrice * product.quantity;
   });
 
   return (
@@ -56,11 +57,7 @@ const BranchValuation = () => {
             Product Value : {productValue}
           </h6>
           <h6 className="mt-4 font-weight-bold">Others : {totalAmount}</h6>
-          <DataGrid
-            columns={branchValuationColumns}
-            rows={row}
-            sx={{ height: "80vh", mt: 3 }}
-          />
+          
         </>
       )}
     </Pagewrapper>

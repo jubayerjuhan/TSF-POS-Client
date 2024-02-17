@@ -1,11 +1,13 @@
 import { TextField } from "@mui/material";
-import InputField from "../../components/core/InputField/InputField";
 import "./paymentDue.scss";
 import { Button } from "react-bootstrap";
 
 const PaymentDue = () => {
   return (
-    <div className="payment__due-page">
+    <div
+      className="payment__due-page"
+      style={{ padding: "50px", textAlign: "center" }}
+    >
       <img
         className="image"
         src="https://media.istockphoto.com/id/1410750503/vector/fail-payment-in-hand-illustration-in-flat-style-declined-money-vector-illustration-on.jpg?s=612x612&w=0&k=20&c=LgL7lHs-W6Nt39M33xzlkSE07Q9-rY6zM5_OXCldzWI="
@@ -19,7 +21,7 @@ const PaymentDue = () => {
       <p>
         আপনার বকেয়া ইনভয়েস দেখতে এখানে{" "}
         <a
-          href="https://i.ibb.co/CQt4ZXr/White-Simple-Invoice.png"
+          href="https://i.ibb.co/wwB86Vh/White-Simple-Invoice-1.png"
           target="_blank"
         >
           {" "}
