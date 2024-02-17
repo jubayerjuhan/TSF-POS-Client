@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create Axios instance with default headers
 const client = axios.create({
-  baseURL: "https://lobster-app-4hmrm.ondigitalocean.app",
+  baseURL: "https://sisters-furniture-server-yyi56.ondigitalocean.app",
   // baseURL: "http://localhost:8000",
 });
 
