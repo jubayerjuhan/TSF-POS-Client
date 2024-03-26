@@ -39,9 +39,19 @@ const CustomOrder = () => {
   }, [error, message, dispatch]);
 
   const onSubmit: SubmitHandler<CustomOrderType> = async (
-    value: CustomOrderType
+    submittedValues: CustomOrderType
   ) => {
-    await dispatch(addCustomOrder(value));
+    const formData = new FormData();
+
+    for (const [key, value] of Object.entries(submittedValues)) {
+      if (key !== "photos") formData.append(key, value);
+    }
+
+    for (let i = 0; i < submittedValues.photos.length; i++) {
+      formData.append("photos", submittedValues.photos[i]);
+    }
+
+    await dispatch(addCustomOrder(formData));
     setOpen(false);
   };
 

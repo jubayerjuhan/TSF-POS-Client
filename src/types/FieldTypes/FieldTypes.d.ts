@@ -11,7 +11,8 @@ export interface FieldTypes {
     | "email"
     | "password"
     | "file"
-    | "checkbox";
+    | "checkbox"
+    | "files";
   accept?: string;
   placeholder: string;
   options?: SelectOptionType[];

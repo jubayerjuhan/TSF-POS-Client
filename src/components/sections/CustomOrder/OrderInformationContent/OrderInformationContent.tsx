@@ -70,6 +70,12 @@ const OrderInformationContent = ({
         </div>
       </div>
 
+      <div className="d-flex gap-2 flex-wrap">
+        {order.photos.map((photo, index) => (
+          <img src={photo} alt="" key={index} style={{width: "300px", objectFit: "contain"}}/>
+        ))}
+      </div>
+
       {order.products.length > 0 && (
         <div className="card-body">
           <table className="table table-bordered mb-0">

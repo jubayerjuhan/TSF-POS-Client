@@ -10,6 +10,7 @@ export interface CustomOrderType {
   totalPrice: number;
   wood: string;
   branch: string;
+  photos: FileList
 }
 
 export interface CustomOrderFromServer {
@@ -29,6 +30,7 @@ export interface CustomOrderFromServer {
     quantity: number;
     _id: string;
   }[];
+  photos: string[];
   createdAt: string;
   updatedAt: string;
   __v: number;

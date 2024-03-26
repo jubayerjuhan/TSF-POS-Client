@@ -33,7 +33,11 @@ export const addCustomOrder: RootThunk =
     try {
       dispatch({ type: ADD_CUSTOM_ORDER_PENDING });
 
-      await client.post("custom-order/create", customOrderData);
+      await client.post("custom-order/create", customOrderData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
 
       dispatch({ type: ADD_CUSTOM_ORDER_SUCCESS });
     } catch (error) {

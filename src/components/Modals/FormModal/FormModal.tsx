@@ -72,6 +72,19 @@ const FormModal = ({
                     </span>
                   </div>
                 );
+              } else if (field.type === "files") {
+                return (
+                  <div key={index}>
+                    <Form.Group controlId="formFile" className="mb-3">
+                      <Form.Label>{field.label}</Form.Label>
+                      <Form.Control multiple type="file" {...register(field.name)} />
+                    </Form.Group>
+
+                    <span className="text-danger">
+                      <> {errors[field.name]?.message}</>
+                    </span>
+                  </div>
+                );
               }
               return (
                 <InputField
