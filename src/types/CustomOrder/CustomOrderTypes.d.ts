@@ -10,7 +10,7 @@ export interface CustomOrderType {
   totalPrice: number;
   wood: string;
   branch: string;
-  photos: FileList
+  photos: FileList | any
 }
 
 export interface CustomOrderFromServer {

@@ -51,7 +51,11 @@ export const editCustomOrder: RootThunk =
     try {
       dispatch({ type: FETCH_CUSTOM_ORDERS_PENDING });
 
-      await client.put(`custom-order/edit/${orderId}`, customOrderData);
+      await client.post(`custom-order/edit/${orderId}`, customOrderData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       dispatch({ type: FETCH_CUSTOM_ORDERS_SUCCESS });
     } catch (error) {

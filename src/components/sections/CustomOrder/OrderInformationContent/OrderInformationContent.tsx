@@ -29,8 +29,19 @@ const OrderInformationContent = ({
   } = useForm();
 
   const onSubmit: any = async (submittedValues: CustomOrderType) => {
+    console.log(submittedValues, "submitted values")
+    const formData = new FormData();
+
+    for (const [key, value] of Object.entries(submittedValues)) {
+      if (key !== "photos") formData.append(key, value);
+    }
+
+    for (let i = 0; i < submittedValues.photos.length; i++) {
+      formData.append("photos", submittedValues.photos[i]);
+    }
+
     setLoading(true);
-    await dispatch(editCustomOrder(submittedValues, order._id));
+    await dispatch(editCustomOrder(formData, order._id));
     setLoading(false);
     setOpen(false);
     await dispatch(fetchSingleOrder(order._id));

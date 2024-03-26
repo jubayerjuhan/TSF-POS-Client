@@ -43,6 +43,12 @@ const ORDER_EDIT_FIELDS: FieldTypes[] = [
     type: "number",
     placeholder: "Enter Advance Amount",
   },
+  {
+    name: "photos",
+    label: "Photos",
+    type: "files",
+    placeholder: "Select Photos",
+  },
 ];
 
 export default ORDER_EDIT_FIELDS;
