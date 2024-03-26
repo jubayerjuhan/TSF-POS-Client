@@ -31,18 +31,18 @@ const ORDER_EDIT_FIELDS: FieldTypes[] = [
     type: "text",
     placeholder: "Product Wood",
   },
-  // {
-  //   name: "totalPrice",
-  //   label: "Total Price",
-  //   type: "number",
-  //   placeholder: "Estimated Product Price",
-  // },
-  // {
-  //   name: "advancePayment",
-  //   label: "Advance Amount",
-  //   type: "number",
-  //   placeholder: "Enter Advance Amount",
-  // },
+  {
+    name: "totalPrice",
+    label: "Total Price",
+    type: "number",
+    placeholder: "Estimated Product Price",
+  },
+  {
+    name: "advancePayment",
+    label: "Advance Amount",
+    type: "number",
+    placeholder: "Enter Advance Amount",
+  },
 ];
 
 export default ORDER_EDIT_FIELDS;
