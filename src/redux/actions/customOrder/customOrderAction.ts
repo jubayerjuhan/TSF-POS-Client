@@ -35,13 +35,27 @@ export const addCustomOrder: RootThunk =
 
       await client.post("custom-order/create", customOrderData, {
         headers: {
-          "Content-Type": "multipart/form-data"
-        }
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       dispatch({ type: ADD_CUSTOM_ORDER_SUCCESS });
     } catch (error) {
       errorDispatcher(error, ADD_CUSTOM_ORDER_ERROR, dispatch);
+    }
+  };
+
+export const editCustomOrder: RootThunk =
+  (customOrderData: CustomOrderType, orderId: string) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: FETCH_CUSTOM_ORDERS_PENDING });
+
+      await client.put(`custom-order/edit/${orderId}`, customOrderData);
+
+      dispatch({ type: FETCH_CUSTOM_ORDERS_SUCCESS });
+    } catch (error) {
+      errorDispatcher(error, FETCH_CUSTOM_ORDERS_ERROR, dispatch);
     }
   };
 

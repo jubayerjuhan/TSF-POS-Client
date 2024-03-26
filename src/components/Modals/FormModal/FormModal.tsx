@@ -31,6 +31,8 @@ const FormModal = ({
     if (setValue && branchSelector) setValue("branch", branchId);
   }, [branchId, setValue, branchSelector]);
 
+  console.log(defaultValues, "defaultValues");
+
   return (
     <Modal show={open} onHide={handleClose} style={{ paddingTop: 80 }}>
       <Modal.Header closeButton>
