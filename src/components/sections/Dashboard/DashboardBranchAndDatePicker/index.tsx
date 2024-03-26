@@ -1,5 +1,5 @@
 import BranchSelector from "../../Branch/BranchSelector/BranchSelector";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useEffect, useState } from "react";
@@ -38,7 +38,7 @@ const DashboardBranchAndDatePicker = () => {
         </div>
       )}
 
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <LocalizationProvider dateAdapter={AdapterMoment}>
         <div>
           <p className="mb-2">From Date:</p>
           <DatePicker

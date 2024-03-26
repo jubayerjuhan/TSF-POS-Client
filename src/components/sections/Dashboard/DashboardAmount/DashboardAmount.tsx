@@ -7,6 +7,7 @@ const DashboardAmount = () => {
   const { sales } = useSelector((state: StateType) => state.sales);
   const { amount } = useSelector((state: StateType) => state.customOrder);
   const { totalExpense } = useSelector((state: StateType) => state.expenses);
+  
   return (
     <>
       <StatsCard

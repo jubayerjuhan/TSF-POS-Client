@@ -17,13 +17,12 @@ const Dashboard = () => {
     (state: StateType) => state.dashboard
   );
 
-  console.log(fromDate, toDate, "from and to date");
-
+  console.log(branch, "branch...");
   const dispatch = useDispatch();
   const url = `sale/list?startDate=${fromDate}&endDate=${toDate}&branch=${
     branch ? branch : ""
   }`;
-  const customOrderAmountUrl = `custom-order/amount?fromDate=${fromDate}&toDate=${toDate}&branchId=${
+  const customOrderAmountUrl = `custom-order/amount?fromDate=${fromDate}&endDate=${toDate}&branchId=${
     branch ? branch : ""
   }`;
   const partialPaymentUrl = `sale/partial-payment/list?startDate=${fromDate}&endDate=${toDate}&branch=${
