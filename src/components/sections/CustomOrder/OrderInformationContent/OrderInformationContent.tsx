@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import ORDER_EDIT_FIELDS from "./OrderEditFields";
 import { useDispatch } from "react-redux";
 import {
-  addCustomOrder,
   editCustomOrder,
   fetchSingleOrder,
 } from "../../../../redux/actions/customOrder/customOrderAction";
@@ -22,7 +21,7 @@ const OrderInformationContent = ({
 }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const {
     handleSubmit,
     register,
@@ -30,7 +29,9 @@ const OrderInformationContent = ({
   } = useForm();
 
   const onSubmit: any = async (submittedValues: CustomOrderType) => {
+    setLoading(true);
     await dispatch(editCustomOrder(submittedValues, order._id));
+    setLoading(false);
     setOpen(false);
     await dispatch(fetchSingleOrder(order._id));
   };
